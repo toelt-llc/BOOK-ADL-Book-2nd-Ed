@@ -35,3 +35,5 @@ class set_style():
         mpl.rcParams['legend.framealpha'] = None
         mpl.rcParams['legend.scatterpoints'] = 3
         mpl.rcParams['legend.edgecolor'] = 'inherit'
+
+        return self.f
