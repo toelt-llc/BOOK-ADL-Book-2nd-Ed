@@ -6,7 +6,7 @@ class set_style():
 
     def __init__(self):
         # fonts' path
-        self.f = 'ADL-Book-2nd-Ed/modules/Fonts/Montserrat-Light.ttf'
+        self.f = 'ADL-Book-2nd-Ed/modules/Fonts/Montserrat-Medium.ttf'
 
     def set_general_style_parameters(self):
         """Set some general style parameters for matplotlib
