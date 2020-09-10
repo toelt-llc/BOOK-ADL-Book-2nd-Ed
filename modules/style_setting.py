@@ -14,7 +14,7 @@ class set_style():
         notebooks."""
 
         mpl.rcParams['figure.figsize'] = [8, 5]
-        mpl.rcParams['figure.dpi'] = 300
+        mpl.rcParams['figure.dpi'] = 80
 
         mpl.rcParams['font.size'] = 18
         mpl.rcParams['legend.fontsize'] = 'large'
