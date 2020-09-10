@@ -1,5 +1,4 @@
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 
 
@@ -21,7 +20,7 @@ class set_style():
         mpl.rcParams['legend.fontsize'] = 'large'
         mpl.rcParams['figure.titlesize'] = 'medium'
 
-        mpl.rcParam['lines.markersize'] = np.sqrt(20)
+        mpl.rcParams['lines.markersize'] = np.sqrt(20)
 
         mpl.rcParams['lines.linewidth'] = 2
         mpl.rcParams['lines.dashed_pattern'] = [6, 6]
