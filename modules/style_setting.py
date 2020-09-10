@@ -13,25 +13,15 @@ class set_style():
         plots so that they can be uniform throughout all the
         notebooks."""
 
-        mpl.rcParams['figure.figsize'] = [8, 5]
-        mpl.rcParams['figure.dpi'] = 80
+        mpl.rcParams['figure.figsize'] = [8, 5] # dimensions
+        mpl.rcParams['figure.dpi'] = 80 # resolution
+        mpl.rcParams['figure.titlesize'] = 'medium' # title dimension
 
-        mpl.rcParams['font.size'] = 18
-        mpl.rcParams['figure.titlesize'] = 'medium'
+        mpl.rcParams['font.size'] = 18 # font
 
-        #mpl.rcParams['lines.markersize'] = np.sqrt(20)
-        mpl.rcParams['lines.linewidth'] = 2
-        #mpl.rcParams['lines.dashed_pattern'] = [6, 6]
-        #mpl.rcParams['lines.dashdot_pattern'] = [3, 5, 1, 5]
-        #mpl.rcParams['lines.dotted_pattern'] = [1, 3]
-        #mpl.rcParams['lines.scale_dashes'] = False
+        mpl.rcParams['lines.linewidth'] = 2 # line width
 
-        mpl.rcParams['legend.fancybox'] = False
-        mpl.rcParams['legend.loc'] = 'best'
-        mpl.rcParams['legend.numpoints'] = 2
-        mpl.rcParams['legend.fontsize'] = 'medium'
-        mpl.rcParams['legend.framealpha'] = None
-        mpl.rcParams['legend.scatterpoints'] = 3
-        mpl.rcParams['legend.edgecolor'] = 'inherit'
+        mpl.rcParams['legend.loc'] = 'best' # legend position inside plot
+        mpl.rcParams['legend.fontsize'] = 'medium' # legend font
 
         return self.f
