@@ -1,5 +1,4 @@
 import matplotlib as mpl
-import matplotlib.pyplot as plt
 import numpy as np
 
 
@@ -14,7 +13,7 @@ class set_style():
         plots so that they can be uniform throughout all the
         notebooks."""
 
-        mpl.rcParams['figure.figsize'] = [10, 7]
+        mpl.rcParams['figure.figsize'] = [8, 5]
         mpl.rcParams['figure.dpi'] = 300
 
         mpl.rcParams['font.size'] = 18
@@ -36,9 +35,3 @@ class set_style():
         mpl.rcParams['legend.framealpha'] = None
         mpl.rcParams['legend.scatterpoints'] = 3
         mpl.rcParams['legend.edgecolor'] = 'inherit'
-
-        fig = plt.figure()
-        ax = fig.add_subplot(111)
-        ax.set_facecolor((241/255.0, 247/255.0, 240/255.0))
-
-        return fig, ax
