@@ -1,18 +1,55 @@
-import seaborn as sns
+import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib
 
-# style settings
-x_size = 10
-y_size = 7
-x_grid = 5
-y_grid = 2
-fs_lab = 16
-ls = 'solid'
-color = 'black'
-lw = 2
-fs_tick = 12
 
 class set_style():
+
+    def __init__(self):
+        # fonts' path
+        self.f = './Fonts/Montserrat-Semi<bold.ttf'
+
+    def set_general_style_parameters(self):
+        """Set some general style parameters for matplotlib
+        plots so that they can be uniform throughout all the
+        notebooks."""
+
+        plt.figure(figsize = (10, 7))
+        ax = fig.add_subplot(111)
+        plt.text(fontproperties = fm.FontProperties(fname = self.f), fontsize = 18)
+        plt.xticks(fontsize = 18)
+        plt.yticks(fontsize = 18)
+        plt.ylabel(fontproperties = fm.FontProperties(fname = self.f), fontsize = 18, labelpad = 18)
+        plt.xlabel(fontproperties = fm.FontProperties(fname = self.f), fontsize = 18, labelpad = 18)
+        plt.axis(True)
+        ax.set_facecolor((241/255.0, 247/255.0, 240/255.0))
+
+        return plt, ax
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def __init__(self, x, y, x_label, y_label, xlim, ylim, plot_type):
       self.x = x # x axis
