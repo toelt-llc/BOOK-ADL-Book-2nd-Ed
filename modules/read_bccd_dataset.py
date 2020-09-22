@@ -27,7 +27,6 @@ class read_data():
         df = []
         cnt = 0
         for file in self.annotations:
-            f = self.cache_or_download_file(self.CACHE_DIR, self.url_base, file)
             filename = file.split('/')[-1]
             filename = filename.split('.')[0] + '.jpg'
             row = []
