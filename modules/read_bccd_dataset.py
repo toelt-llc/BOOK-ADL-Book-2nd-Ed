@@ -3,11 +3,28 @@ import xml.etree.ElementTree as ET
 from glob import glob
 import pandas as pd
 from shutil import copyfile
+from six.moves import urllib
 
 class read_data():
 
-    def __init__(self):
+    def __init__(self, CACHE_DIR, url_base):
+        # We'll use the following directory to store files we download as well as our
+        # preprocessed dataset.
+        self.CACHE_DIR = CACHE_DIR
+        self.url_base = url_base
         self.annotations = glob('BCCD/Annotations/*.xml')
+
+    def cache_or_download_file(self, cache_dir, url_base, filename):
+        """Read a cached file or download it."""
+        filepath = os.path.join(cache_dir, filename)
+        if tf.io.gfile.exists(filepath):
+          return filepath
+        if not tf.io.gfile.exists(cache_dir):
+          tf.io.gfile.makedirs(cache_dir)
+        url = os.path.join(url_base, filename)
+        print('Downloading {url} to {filepath}.'.format(url = url, filepath = filepath))
+        urllib.request.urlretrieve(url, filepath)
+        return filepath
 
     def preprocess_bccd_dataset(self):
         """Download and preprocess the bccd dataset, generating a csv file.
@@ -26,9 +43,12 @@ class read_data():
         """
         df = []
         cnt = 0
+        folderpath = 'BCCD_Dataset/BCCD/Annotations/*.xml'
+
         for file in self.annotations:
-            filename = file.split('\\')[-1]
-            filename =filename.split('.')[0] + '.jpg'
+            f = self.cache_or_download_file(self.CACHE_DIR, self.url_base, file)
+            filename = file.split('/')[-1]
+            filename = filename.split('.')[0] + '.jpg'
             row = []
             parsedXML = ET.parse(file)
             for node in parsedXML.getroot().iter('object'):
@@ -42,6 +62,6 @@ class read_data():
                 df.append(row)
                 cnt += 1
 
-        data = pd.DataFrame(df, columns=['filename', 'cell_type', 'xmin', 'xmax', 'ymin', 'ymax'])
+        data = pd.DataFrame(df, columns = ['filename', 'cell_type', 'xmin', 'xmax', 'ymin', 'ymax'])
 
         return data
