@@ -12,7 +12,7 @@ class read_data():
         # preprocessed dataset.
         self.CACHE_DIR = CACHE_DIR
         self.url_base = url_base
-        self.annotations = glob('BCCD/Annotations/*.xml')
+        self.annotations = glob('BCCD_Dataset/BCCD/Annotations/*.xml')
 
     def cache_or_download_file(self, cache_dir, url_base, filename):
         """Read a cached file or download it."""
@@ -43,9 +43,7 @@ class read_data():
         """
         df = []
         cnt = 0
-        folderpath = 'BCCD_Dataset/BCCD/Annotations/*.xml'
-
-        for file in self.annotations:
+        for file in self.url_base + self.annotations:
             f = self.cache_or_download_file(self.CACHE_DIR, self.url_base, file)
             filename = file.split('/')[-1]
             filename = filename.split('.')[0] + '.jpg'
