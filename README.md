@@ -1,4 +1,4 @@
-# 2nd Edition of _Applied Deep Learning - A case based approach__
+# 2nd Edition of _Applied Deep Learning - A case based approach_
 Github repository for the second edition of the ADL Book.
 
 ## Introduction
