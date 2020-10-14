@@ -31,4 +31,4 @@ Now you should clone this repository
 
     git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
     
-At the moment there is no automatic way of rebuilding the book. Is a manual process that not everyone should do. But if you want to chekc the book you will find it under the folder ```jupyterbook/_build/html/landingpage.html```.
+At the moment there is no automatic way of rebuilding the book. Is a manual process that not everyone should do. But if you want to check the book you will find it under the folder ```jupyterbook/_build/html/landingpage.html```.
