@@ -11,6 +11,8 @@ On the top right of each page you will always find several icons that will allow
 
 ## Using Jupyter Notebook (for authors of the book)
 
+### Installation
+
 If you are contributing to the book and in particular to the online version you need to install jupyter notebook. I suggest the following steps
 
     virtualenv juypter-book
@@ -18,3 +20,11 @@ If you are contributing to the book and in particular to the online version you 
     pip install -U jupyter-book
     
 **Note:** when you create the jupyter-book environment do it somewhere since the command will create a directory that you don't want to have around. But you should know that. In case you are new to this please study the [official documentation on virtualenv on the official python website](https://docs.python.org/3/tutorial/venv.html).
+
+### Cloning of the repository
+
+Now you should clone this repository
+
+    git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
+    
+At the moment there is no automatic way of rebuilding the book. Is a manual process that not everyone should do. But if you want to chekc the book you will find it under the folder ```jupyterbook/_build/html/landingpage.html```.
