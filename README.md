@@ -1,6 +1,10 @@
 # 2nd Edition of _Applied Deep Learning - A case based approach__
 Github repository for the second edition of the ADL Book.
 
+## Introduction
+
+This repository is not the one that final readers will see. This contains only material that will be used to create the final online book that will be available to the readers. If you are contributing to the book the only thing you need to do is to create a notebook with google colab and upload it (when finished and approved) in the right folder. At the moment the folders contains also the word files of the chapters.
+
 ## Jupyter Book
 
 To get all notebooks together in an easy online version we use [Jupyter Book](https://jupyterbook.org/intro.html). In this way the entire set of notebooks will become a browasable online book that will be accessible to everyone.
