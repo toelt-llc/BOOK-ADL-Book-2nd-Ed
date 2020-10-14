@@ -1,0 +1,20 @@
+# Book settings
+title: Modern Theory of Machine Learning
+author: Umberto Michelucci
+copyright: "2020"
+logo: TOELT_Graphic_small_square.png
+
+repository:
+  url                       : https://github.com/michelucci/TensorFlow-Roadshow-Zurich  # Online location of your book
+  path_to_book              : path/to/book  # Optional path to your book, relative to the repository root
+  branch                    : master  # Which branch of the repository should be used when creating links (optional)
+
+launch_buttons:
+  colab_url: "https://colab.research.google.com"
+
+html:
+    home_page_in_navbar: false
+
+latex:
+  latex_documents:
+    targetname: book.tex

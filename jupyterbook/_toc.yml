@@ -1,0 +1,12 @@
+- file: landingpage.md
+- part: Get started
+  chapters:
+  - file: start/overview
+    sections:
+      #- file: content
+      #- file: intro
+      #
+      - file: introduction
+      - file: notebooks
+  
+  - file: start/build
