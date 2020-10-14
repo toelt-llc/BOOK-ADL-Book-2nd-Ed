@@ -7,4 +7,4 @@ To get all notebooks together in an easy online version we use [Jupyter Book](ht
 
 On the top right of each page you will always find several icons that will allow you to download all the files, access the github repository or open a notebook in colab.
 
-![jupyter book icons][https://github.com/toelt-llc/ADL-Book-2nd-Ed/blob/master/images/jupyterbook-icon1.png]
+![jupyter book icons](https://github.com/toelt-llc/ADL-Book-2nd-Ed/blob/master/images/jupyterbook-icon1.png)
