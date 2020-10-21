@@ -8,5 +8,9 @@
       #
       - file: introduction
       - file: notebooks
-  
+
   - file: start/build
+
+  - file: autoencoders/introduction
+    sections:
+        - file: autoencoders/Your first autoencoder with Keras.ipynb
