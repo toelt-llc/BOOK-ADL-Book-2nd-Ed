@@ -1,16 +1,19 @@
 - file: landingpage.md
 - part: Get started
   chapters:
-  - file: start/overview
-    sections:
-      #- file: content
+  - file: start/introduction
+  - file: start/faq  
+    # sections:
+    # #- file: content
       #- file: intro
       #
-      - file: introduction
-      - file: notebooks
+      # - file: start/introduction.md
+      #
 
-  - file: start/build
+- part: Chapter 14 - Single Neuron
+  chapters:
+  - file: Chapter14/Introduction
+  - file: Chapter14/Linear_regression_with_one_neuron.ipynb
+  - file: Chapter14/Linear_regression_with_numpy.ipynb 
+  - file: Chapter14/Logistic_regression_with_one_neuron.ipynb
 
-  - file: autoencoders/introduction
-    sections:
-        - file: autoencoders/Your first autoencoder with Keras.ipynb

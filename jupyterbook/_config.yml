@@ -1,8 +1,8 @@
 # Book settings
-title: Modern Theory of Machine Learning
-author: Umberto Michelucci
-copyright: "2020"
-logo: TOELT_Graphic_small_square.png
+title: Applied Deep Learning 2nd Edition - Online Companion
+author: Umberto Michelucci and Michela Sperti
+copyright: "2020-2021"
+logo: ""
 
 repository:
   url                       : https://github.com/michelucci/TensorFlow-Roadshow-Zurich  # Online location of your book

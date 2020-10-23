@@ -1,55 +1,87 @@
-# Modern Theory of Machine Learning
+# Applied Deep Learning 2nd Edition - Online Book
+
+This is the online verion of the _Applied Deep Learning 2nd Edition_ book
+published by APRESS by [Umberto Michelucci](mailto:umberto.michelucci@toelt.ai) and 
+[Michela Sperti](mailto:michela.sperti@toelt.ai).
+
+The book will be published in 2022 by APRESS and will be available as a printed version 
+and in an online form (PDF without any limitations) from the APRESS website. As
+soon as available the link will be posted here.
+
+## How does this work?
+
+This book is built using 
+the [jupyter-book wonderful open source project](https://jupyterbook.org/intro.html).
+You can read this book using any modern browser (chrome and safari have been tested extensively 
+but other browser should work too).
+
+## Download the material
+
+You can read this book without dowloading any material. But if you prefer, you can
+download the material locally or open the code parts 
+in [Google Colab](https://colab.research.google.com).
+
+You may notenice that on the top right of the page you will see 
+typically four icons (they may be less in some cases)
+
+![icons](images/jb-icons.png)
+
+- The small rocket will allow you to open the code parts in an external environment
+(typically google colab)
+- The square symbol will make the page full screen
+- the GitHub logo will open the repository where the files are (in case you want to
+    download all the notebooks directly)
+- the download symbol will allow you to download the page you are reading in various 
+formats.
+
+### Last Build
+
+This book has been built last time on 
+Fri Oct 23 08:23:16 CEST 2020
 
 
 
-## Adding a citation
-
-You can also cite references that are stored in a `bibtex` file. For example,
-the following syntax: `` {cite}`holdgraf_evidence_2014` `` will render like
-this: {cite}`holdgraf_evidence_2014`.
-
-Moreoever, you can insert a bibliography into your page with this syntax:
-The `{bibliography}` directive must be used for all the `{cite}` roles to
-render properly.
-For example, if the references for your book are stored in `references.bib`,
-then the bibliography is inserted with:
-
-````
-```{bibliography} references.bib
-```
-````
-
-Resulting in a rendered bibliography that looks like:
-
-```{bibliography} references.bib
-```
 
 
-## Executing code in your markdown files
 
-If you'd like to include computational content inside these markdown files,
-you can use MyST Markdown to define cells that will be executed when your
-book is built. Jupyter Book uses *jupytext* to do this.
 
-First, add Jupytext metadata to the file. For example, to add Jupytext metadata
-to this markdown page, run this command:
 
-```
-jupyter-book myst init markdown.md
-```
 
-Once a markdown file has Jupytext metadata in it, you can add the following
-directive to run the code at build time:
 
-````
-```{code-cell}
-print("Here is some code to execute")
-```
-````
 
-When your book is built, the contents of any `{code-cell}` blocks will be
-executed with your default Jupyter kernel, and their outputs will be displayed
-in-line with the rest of your content.
 
-For more information about executing computational content with Jupyter Book,
-see [The MyST-NB documentation](https://myst-nb.readthedocs.io/).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
