@@ -7,7 +7,7 @@ logo: TOELT_ADL_2nd.png
 repository:
   url                       : https://github.com/toelt-llc/ADL-Book-2nd-Ed
   path_to_book              : docs
-  branch                    : master  # Which branch of the repository should be used when creating links (optional)
+  branch                    : master  
 
 launch_buttons:
   colab_url: "https://colab.research.google.com"
