@@ -10,10 +10,15 @@
       # - file: start/introduction.md
       #
 
+- part: Chapter 11 - An Introduction to TensorFlow 2.x and 1.x
+  chapters:
+  - file: Chapter11/Computational_graphs_with_TF1.X.ipynb
+
 - part: Chapter 14 - Single Neuron
   chapters:
   - file: Chapter14/Introduction
   - file: Chapter14/Linear_regression_with_one_neuron.ipynb
   - file: Chapter14/Linear_regression_with_numpy.ipynb 
   - file: Chapter14/Logistic_regression_with_one_neuron.ipynb
+
 
