@@ -6,7 +6,7 @@ class display_image():
         # images' path
         self.img_path = 'ADL-Book-2nd-Ed/images/chapter11/'
 
-    def display_img(self,img):
+    def display_img(self, img):
         """Display an image present in the GitHub repository."""
         pil_img = Image(filename = self.img_path + img)
         display(pil_img)
