@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Eager Execution &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+    <link href="../_static/css/index.css" rel="stylesheet">
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/mystnb.js"></script>
+    <script src="../_static/sphinx-book-theme.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Operator Overloading in TensorFlow" href="Overloading of operators in Tensorflow.html" />
+    <link rel="prev" title="Computational Graphs - Exercises" href="Computational Graphs Exercises.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="docsearch:language" content="en">
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/TOELT_ADL_2nd.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Applied Deep Learning 2nd Edition - Online Companion</h1>
+  
+</a>
+</div>
+
+<form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <p class="caption">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Chapter 11 - An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Computational Graphs Exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Overloading of operators in Tensorflow.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Chapter 14 - Single Neuron
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Chapter 25 - Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Your first autoencoder with Keras.html">
+   Your first autoencoder
+  </a>
+ </li>
+</ul>
+
+</nav>
+
+ <!-- To handle the deprecated key -->
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        <div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Chapter11/Eager_execution_with_TF2.X.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+    
+</div>
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/Chapter11/Eager_execution_with_TF2.X.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensorflow-setup">
+   TensorFlow Setup
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-does-eager-execution-mean">
+   What does Eager Execution mean?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tensorflow-basic-usage">
+   TensorFlow Basic Usage
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#tensors">
+     Tensors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variables">
+     Variables
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-control-flow-in-tensorflow-solving-sudoku">
+   Dynamic Control Flow in TensorFlow: Solving Sudoku
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#eager-gradients-computation">
+   Eager Gradients Computation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-readings-a-name-fr-a">
+   Further Readings
+   <a name="fr">
+   </a>
+  </a>
+ </li>
+</ul>
+
+        </nav>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="eager-execution">
+<h1>Eager Execution<a class="headerlink" href="#eager-execution" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.0</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the notebook you are going to know how to address a computational problem using TensorFlow 2.X. You are going to know the most important feature of TensorFlow 2.X: Eager Execution and to become familiar with TensorFlow environment.</p>
+</div>
+<div class="section" id="tensorflow-setup">
+<h2>TensorFlow Setup<a class="headerlink" href="#tensorflow-setup" title="Permalink to this headline">¶</a></h2>
+<p>TensorFlow 2.X can be treated as a Python library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># general libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># tensorflow libraries</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The default version of TensorFlow is 2.X and eager execution is enabled by default.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># check tensorflow version</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>2.3.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># check eager execution</span>
+<span class="n">tf</span><span class="o">.</span><span class="n">executing_eagerly</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="what-does-eager-execution-mean">
+<h2>What does Eager Execution mean?<a class="headerlink" href="#what-does-eager-execution-mean" title="Permalink to this headline">¶</a></h2>
+<p>Eager execution is the most evident change between TensorFlow 1.X and TensorFlow 2.X.</p>
+<p>TensorFlow 1.X was designed with a <strong>static computational graph</strong> approach, meaning that, if you have to perform an operation, you must first describe <em>what</em> your model should do and only after that you can execute the program (inside a <strong>session</strong>, separated from the graph’s definition). TensorFlow 2.X is instead based on an <strong>imperative programming</strong> approach, meaning that you describe <em>how</em> your model has to obtain the result and all operations are executed immediately, returning concrete values as output.</p>
+<p>This change made TensorFlow more pythonic, easier to understand and to use. In particular, as stated in its official documentation, eager execution provides:</p>
+<ul class="simple">
+<li><p>an <strong>intuitive interface</strong>: you can structure your code naturally and use Python data structures;</p></li>
+<li><p><strong>easier debugging</strong>: you can use standard Python debugging tools for immediate error reporting;</p></li>
+<li><p><strong>natural control flow</strong>: you can use Python control flow instead of graph control flow, simplifying the specification of dynamic models.</p></li>
+</ul>
+<p>Before giving an example on eager execution, let’s begin with a quick overview of TensorFlow basics.</p>
+</div>
+<div class="section" id="tensorflow-basic-usage">
+<h2>TensorFlow Basic Usage<a class="headerlink" href="#tensorflow-basic-usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="tensors">
+<h3>Tensors<a class="headerlink" href="#tensors" title="Permalink to this headline">¶</a></h3>
+<p>If you are familiar with NumPy, you know that its basic units are arrays. TensorFlow basic units are tensors. A tensor is a multi-dimensional array, therefore it is a generalization of vectors.</p>
+<p>Each tensor in tensorflow is characterized by a static type (<code class="docutils literal notranslate"><span class="pre">dtype</span></code>) and a dynamic dimension (<code class="docutils literal notranslate"><span class="pre">shape</span></code>). This means that, once a tensor has been defined, you cannot change its type, but you can dynamically change its dimensions before evaluating it.</p>
+<p>Usually, the dimension of a tensor is called <strong>rank</strong>. For example, the simplest tensor (of rank 0) is a scalar. An array has rank 1 and a bidimensional matrix has rank 2. Rank can be calculated as the length of a tensor’s <code class="docutils literal notranslate"><span class="pre">shape</span></code>.</p>
+<p>Let’s create some basic tensors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SCALAR TENSOR</span>
+<span class="c1"># This will be an int32 tensor by default; see &quot;dtypes&quot; below.</span>
+<span class="c1"># A scalar is a tensor without shape (rank is 0 in this case).</span>
+<span class="c1"># When printing the tensor, you see its value, its shape and its type.</span>
+<span class="n">rank_0_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rank_0_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>tf.Tensor(4, shape=(), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ARRAY TENSOR</span>
+<span class="c1"># Let&#39;s make this a float tensor.</span>
+<span class="c1"># An array (a list of elements) is a tensor of rank 1.</span>
+<span class="n">rank_1_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rank_1_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>tf.Tensor([2. 3. 4.], shape=(3,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># MATRIX TENSOR</span>
+<span class="c1"># If we want to be specific, we can set the dtype (see below) at creation time.</span>
+<span class="c1"># A bidimensional matrix is a tensor of rank 2.</span>
+<span class="n">rank_2_tensor</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+                             <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">float16</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rank_2_tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>tf.Tensor(
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]], shape=(3, 2), dtype=float16)
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can go on and create n-dimensional tensors.</p>
+<p>Moreover, you can perform all basic mathematical operations with tensors.</p>
+</div>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<p>The three most important types of tensors are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tf.constant</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tf.placeholder</span></code></p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">tf.constant</span></code> and the <code class="docutils literal notranslate"><span class="pre">tf.placeholder</span></code> values are, during a single-session run, immutable. Once they have a value, they will not change.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> contains values that are going to change during
+running, because, for example, they must be optimized for a specific problem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a variable</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">])</span>
+<span class="c1"># create another variable b based on the value of a</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">assign</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span> <span class="c1"># this command changes a values</span>
+<span class="c1"># Two variables will not share the same memory.</span>
+
+<span class="c1"># a and b are different</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+
+<span class="c1"># There are other versions of assign</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">assign_add</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>  <span class="c1"># [7. 9.]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">assign_sub</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span><span class="mi">9</span><span class="p">])</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>  <span class="c1"># [0. 0.]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[5. 6.]
+[2. 3.]
+[7. 9.]
+[0. 0.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>With eager execution, TensorFlow operations are immediately evaluated and return their values to you.</p>
+<p><code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> objects reference concrete values instead of symbolic handles to nodes in a computational graph. Therefore, it’s easy to inspect results using <code class="docutils literal notranslate"><span class="pre">print()</span></code> or a debugger.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s define a constant tensor and print it</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>tf.Tensor(
+[[1 2]
+ [3 4]], shape=(2, 2), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>A striking example of the useful integration of TensorFlow 2.X inside Python is represented by its compatibility with <strong>NumPy</strong> library. NumPy operations accept <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> arguments. The TensorFlow <code class="docutils literal notranslate"><span class="pre">tf.math</span></code> operations convert
+Python objects and NumPy arrays to <code class="docutils literal notranslate"><span class="pre">tf.Tensor</span></code> objects. The <code class="docutils literal notranslate"><span class="pre">tf.Tensor.numpy</span></code> method returns the object’s value as a NumPy <code class="docutils literal notranslate"><span class="pre">ndarray</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># broadcasting is supported</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># numpy is easily integrated</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[[ 2  6]
+ [12 20]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you don’t know what broadcasting means, have a look at the <a class="reference external" href="#fr">Further Readings</a> section.</p>
+<p>A major benefit of eager execution is that all the functionality of the host language is available while your model is executing. Let’s see an example of how you can perform a dynamic control flow (i.e. to dynamically execute algorithm’s instructions step by step).</p>
+</div>
+</div>
+<div class="section" id="dynamic-control-flow-in-tensorflow-solving-sudoku">
+<h2>Dynamic Control Flow in TensorFlow: Solving Sudoku<a class="headerlink" href="#dynamic-control-flow-in-tensorflow-solving-sudoku" title="Permalink to this headline">¶</a></h2>
+<p>To practice a bit with simple operations between tensors using TensorFlow, we will write a recursive program to solve the famous logic game Sudoku. This is possible thanks to eager execution, that give the possibility to integrate TensorFlow code inside Python environment and execute operations immediately. Notice that the same problem could be solve using NumPy, for example.</p>
+<p><strong>Sudoku Problem</strong></p>
+<p>Given a partially filled tensor of shape (9, 9), the goal is to assign digits (from 1 to 9) to the empty cells so that every row, column, and sub-tensor of shape (3, 3) contains exactly one instance of the digits from 1 to 9.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># input tensor (this is a possible example, you can change values for others)</span>
+<span class="nb">input</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">([[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The simplest approach is to generate all possible sets of numbers between 1 and 9 to fill all empty cells and test them (checking if the final tensor meets the required constraints).</p>
+<p>Instead, we will solve the problem using another approach: <strong>backtracking</strong> (this technique is used to solve problems in which different constraints must be met, trying several possibilities, coming back if the solution has not been reached and trying again until end).</p>
+<p>We define a function to print a tensor (<code class="docutils literal notranslate"><span class="pre">print_tensor</span></code>), a function to check if there are empty cells left inside the tensor (<code class="docutils literal notranslate"><span class="pre">find_empty_cell</span></code>), a function to check if the current assigned number meets the Sudoku’s constraints (<code class="docutils literal notranslate"><span class="pre">check_validity</span></code>) and finally the recursive function that takes an input tensor and try to fill it (<code class="docutils literal notranslate"><span class="pre">generate_elements</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_tensor</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Prints the tensor given as input (i.e. the sudoku grid).&quot;&quot;&quot;</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_empty_cell</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Find an empty cell inside a tensor, if it exists,</span>
+<span class="sd">  otherwise returns False.&quot;&quot;&quot;</span>
+  <span class="n">pos0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tensor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="c1"># find every 0 present inside tensor</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos0</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># an empty cell has been found</span>
+    <span class="k">return</span> <span class="kc">True</span>
+  <span class="k">else</span><span class="p">:</span> <span class="c1"># no left empty cells</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_validity</span><span class="p">(</span><span class="n">tensor</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Checks, after assigning the current digit, if the tensor </span>
+<span class="sd">  meets constraints or not.&quot;&quot;&quot;</span>
+  <span class="c1"># a list of all initial and final indeces of the sub-tensors,</span>
+  <span class="c1"># to be quickly identified inside the function</span>
+  <span class="n">subtensors</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">]]</span>
+  <span class="c1"># check if the current number is already present</span>
+  <span class="n">pos_row</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tensor</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">==</span> <span class="n">d</span><span class="p">)</span> 
+  <span class="n">pos_col</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tensor</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">d</span><span class="p">)</span> 
+  <span class="c1"># check for every row and column</span>
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_row</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_col</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+  <span class="c1"># check for every sub-tensor</span>
+  <span class="k">for</span> <span class="n">st</span> <span class="ow">in</span> <span class="n">subtensors</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">and</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">st</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span>
+      <span class="n">pos_sub</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tensor</span><span class="p">[</span><span class="n">st</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">st</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">st</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">st</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span> <span class="o">==</span> <span class="n">d</span><span class="p">)</span>
+      <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pos_sub</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+  <span class="k">return</span> <span class="kc">True</span> <span class="c1"># all constraints are satisfied!</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_elements</span><span class="p">(</span><span class="n">tensor</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Takes an input tensor and recursively try to insert an element</span>
+<span class="sd">  and check tensor&#39;s validity.&quot;&quot;&quot;</span>
+  <span class="n">tensor_tmp</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tensor</span><span class="p">)</span>
+  <span class="c1"># find an empty cell</span>
+  <span class="k">if</span> <span class="ow">not</span> <span class="n">find_empty_cell</span><span class="p">(</span><span class="n">tensor_tmp</span><span class="p">):</span>
+    <span class="c1"># if no empty cells are left, you have successfully filled the Sudoku!</span>
+    <span class="n">print_tensor</span><span class="p">(</span><span class="n">tensor_tmp</span><span class="p">)</span> 
+    <span class="k">return</span> <span class="kc">True</span>
+  <span class="c1"># take the first empty cell and try to fill it</span>
+  <span class="n">pos0</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">tensor_tmp</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">pos0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos0</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+  <span class="c1"># try to fill the empty cell with a number from 1 to 9, checking validity</span>
+  <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># check tensor&#39;s validity</span>
+    <span class="k">if</span> <span class="n">check_validity</span><span class="p">(</span><span class="n">tensor_tmp</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+      <span class="c1"># if all constraints are satisfied, assigned the current element to</span>
+      <span class="c1"># the current position</span>
+      <span class="n">tensor_tmp</span> <span class="o">=</span> <span class="n">tensor_tmp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+      <span class="c1"># backtracking (recursion): repeat X times the function itself</span>
+      <span class="k">if</span> <span class="n">generate_elements</span><span class="p">(</span><span class="n">tensor_tmp</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+      <span class="c1"># if constraints are not satisfied (failure), assign a zero to the</span>
+      <span class="c1"># current position</span>
+      <span class="n">tensor_tmp</span> <span class="o">=</span> <span class="n">tensor_tmp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="k">return</span> <span class="kc">False</span> <span class="c1"># continue with backtracking </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">generate_elements</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;tf.Variable &#39;Variable:0&#39; shape=(9, 9) dtype=int32, numpy=
+array([[3, 1, 6, 5, 7, 8, 4, 9, 2],
+       [5, 2, 9, 1, 3, 4, 7, 6, 8],
+       [4, 8, 7, 6, 2, 9, 5, 3, 1],
+       [2, 6, 3, 4, 1, 5, 9, 8, 7],
+       [9, 7, 4, 8, 6, 3, 1, 2, 5],
+       [8, 5, 1, 7, 9, 2, 6, 4, 3],
+       [1, 3, 8, 9, 4, 7, 2, 5, 6],
+       [6, 9, 2, 3, 5, 1, 8, 7, 4],
+       [7, 4, 5, 2, 8, 6, 3, 1, 9]], dtype=int32)&gt;
+</pre></div>
+</div>
+<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="eager-gradients-computation">
+<h2>Eager Gradients Computation<a class="headerlink" href="#eager-gradients-computation" title="Permalink to this headline">¶</a></h2>
+<p>One of the most important step to train a neural network is weight optimization, done by finding the minimum of a loss function. The way to do this is through <strong>backpropagation</strong> algorithm (see <a class="reference external" href="#fr">Further Readings</a> section for additional material). To calculate the minimum of any function you need to be able to <strong>compute gradients</strong>.</p>
+<p>Now, we will discuss ways you can compute gradients with TensorFlow, especially in eager execution. This is an example of <strong>automatic differentiation</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># During eager execution, use tf.GradientTape to trace operations </span>
+<span class="c1"># for computing gradients later</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mf">3.0</span><span class="p">)</span> <span class="c1"># define a tf variable and assign it the value 3</span>
+<span class="c1"># define a function using tf.GradientTape</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">GradientTape</span><span class="p">()</span> <span class="k">as</span> <span class="n">tape</span><span class="p">:</span>
+  <span class="n">loss</span> <span class="o">=</span> <span class="n">w</span> <span class="o">*</span> <span class="n">w</span> <span class="o">*</span> <span class="n">w</span> 
+<span class="c1"># calculate gradient with respect to a specific variable (w in this case)</span>
+<span class="n">grad</span> <span class="o">=</span> <span class="n">tape</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">grad</span><span class="p">)</span>  <span class="c1"># =&gt; tf.Tensor(27., shape=(), dtype=float32)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>tf.Tensor(27.0, shape=(), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Even if TensorFlow 1.X presents some disadvantages (it has a steep learning curve, it is difficult to debug, it has a counter-intuitive semantics and it is not well inegrated with Python), it is still a powerful and highly expressive tool. Therefore, it is recommended to have a deep understanding of computational graphs and the logic behind TensorFlow 1.X, since this helps to better understand TensorFlow 2.X.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>[<em>Easy Difficulty</em>] Create a tensor of rank 5.</p></li>
+<li><p>[<em>Easy Difficulty</em>] Calculate the derivative of <span class="math notranslate nohighlight">\(y=x^2+y-z^2\)</span> with respect to <span class="math notranslate nohighlight">\(z\)</span> and evaluated in <span class="math notranslate nohighlight">\(z=2\)</span>.</p></li>
+</ol>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>https://www.tensorflow.org/guide/eager (eager execution official documentation)</p></li>
+</ol>
+</div>
+<div class="section" id="further-readings-a-name-fr-a">
+<h2>Further Readings <a name = "fr"></a><a class="headerlink" href="#further-readings-a-name-fr-a" title="Permalink to this headline">¶</a></h2>
+<p><strong>NumPy package</strong></p>
+<ol class="simple">
+<li><p>All documentation (with lots of tutorial and examples already implemented): https://numpy.org/doc/stable/</p></li>
+<li><p>Broadcasting in NumPy (https://numpy.org/doc/stable/user/basics.broadcasting.html)</p></li>
+</ol>
+<p><strong>Backpropagation algorithm in neural networks</strong></p>
+<ol class="simple">
+<li><p>Section 6.5 of “Deep Learning” book by Ian Goodfellow, Yoshua Bengio and Aaron Courville (https://www.deeplearningbook.org/contents/mlp.html), freely available online</p></li>
+</ol>
+<p><strong>Automatic differentiation</strong></p>
+<ol class="simple">
+<li><p>Baydin, Atılım Günes, et al. “Automatic differentiation in machine learning: a survey.” The Journal of Machine Learning Research 18.1 (2017): 5595-5637.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Chapter11"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="Computational Graphs Exercises.html" title="previous page">Computational Graphs - Exercises</a>
+    <a class='right-next' id="next-link" href="Overloading of operators in Tensorflow.html" title="next page">Operator Overloading in TensorFlow</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci and Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2021).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    <script src="../_static/js/index.js"></script>
+    
+  </body>
+</html>

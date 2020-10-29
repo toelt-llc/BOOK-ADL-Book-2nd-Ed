@@ -13,6 +13,9 @@
 - part: Chapter 11 - An Introduction to TensorFlow 2.x and 1.x
   chapters:
   - file: Chapter11/Computational_graphs_with_TF1.X.ipynb
+  - file: Chapter11/Computational Graphs Exercises.ipynb
+  - file: Chapter11/Eager_execution_with_TF2.X.ipynb
+  - file: Chapter11/Overloading of operators in Tensorflow.ipynb
 
 - part: Chapter 14 - Single Neuron
   chapters:
@@ -21,4 +24,6 @@
   - file: Chapter14/Linear_regression_with_numpy.ipynb 
   - file: Chapter14/Logistic_regression_with_one_neuron.ipynb
 
-
+- part: Chapter 25 - Autoencoders
+  chapters:
+  - file: Chapter25/Your first autoencoder with Keras.ipynb
