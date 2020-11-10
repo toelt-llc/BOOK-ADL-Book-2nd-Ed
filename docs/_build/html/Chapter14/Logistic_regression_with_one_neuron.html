@@ -1,22 +1,42 @@
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Logistic Regression with One Neuron &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -24,12 +44,10 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/mystnb.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -39,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Your first autoencoder" href="../Chapter25/Your first autoencoder with Keras.html" />
+    <link rel="next" title="Your first autoencoder" href="../Chapter25/Your%20first%20autoencoder%20with%20Keras.html" />
     <link rel="prev" title="Linear Regression with NumPy" href="Linear_regression_with_numpy.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -102,7 +120,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Computational Graphs Exercises.html">
+  <a class="reference internal" href="../Chapter11/Computational%20Graphs%20Exercises.html">
    Computational Graphs - Exercises
   </a>
  </li>
@@ -112,7 +130,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Overloading of operators in Tensorflow.html">
+  <a class="reference internal" href="../Chapter11/Overloading%20of%20operators%20in%20Tensorflow.html">
    Operator Overloading in TensorFlow
   </a>
  </li>
@@ -151,8 +169,13 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter25/Your first autoencoder with Keras.html">
+  <a class="reference internal" href="../Chapter25/Your%20first%20autoencoder%20with%20Keras.html">
    Your first autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
   </a>
  </li>
 </ul>
@@ -160,6 +183,10 @@
 </nav>
 
  <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
 
 </div>
 
@@ -207,7 +234,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -216,6 +244,12 @@
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/Chapter14/Logistic_regression_with_one_neuron.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
         
         
         
@@ -232,6 +266,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -302,6 +337,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -353,7 +389,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
   Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-yf9sq2hw
   Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-yf9sq2hw
 Requirement already satisfied (use --upgrade to upgrade): tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c- from git+https://github.com/tensorflow/docs in /usr/local/lib/python3.6/dist-packages
@@ -364,7 +400,7 @@ Requirement already satisfied: pyyaml in /usr/local/lib/python3.6/dist-packages 
 Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from absl-py-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (1.15.0)
 Requirement already satisfied: setuptools in /usr/local/lib/python3.6/dist-packages (from protobuf-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (50.3.0)
 Building wheels for collected packages: tensorflow-docs
-  Building wheel for tensorflow-docs (setup.py) ... [?25l[?25hdone
+  Building wheel for tensorflow-docs (setup.py) ... ?25l?25hdone
   Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.0146903589e869081cce7006f160331ea5837418c_-cp36-none-any.whl size=143892 sha256=67956e182f5f16d1ce2b58b731b3a6805a2b48796e99028f60b8874bcb7c3cfc
   Stored in directory: /tmp/pip-ephem-wheel-cache-_8egr7zh/wheels/eb/1b/35/fce87697be00d2fc63e0b4b395b0d9c7e391a10e98d9a0d97f
 Successfully built tensorflow-docs
@@ -382,8 +418,8 @@ Successfully built tensorflow-docs
 
 <span class="c1"># tensorflow libraries</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="k">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="k">import</span> <span class="n">layers</span>
 <span class="kn">import</span> <span class="nn">tensorflow_docs</span> <span class="k">as</span> <span class="nn">tfdocs</span>
 <span class="kn">import</span> <span class="nn">tensorflow_docs.modeling</span>
 
@@ -426,11 +462,11 @@ Successfully built tensorflow-docs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
-remote: Enumerating objects: 161, done.[K
-remote: Counting objects: 100% (161/161), done.[K
-remote: Compressing objects: 100% (112/112), done.[K
-remote: Total 161 (delta 86), reused 120 (delta 48), pack-reused 0[K
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
+remote: Enumerating objects: 161, done.
+remote: Counting objects: 100% (161/161), done.
+remote: Compressing objects: 100% (112/112), done.
+remote: Total 161 (delta 86), reused 120 (delta 48), pack-reused 0
 Receiving objects: 100% (161/161), 11.04 MiB | 33.56 MiB/s, done.
 Resolving deltas: 100% (86/86), done.
 </pre></div>
@@ -446,9 +482,9 @@ Resolving deltas: 100% (86/86), done.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;BCCD_Dataset&#39;...
-remote: Enumerating objects: 800, done.[K
-remote: Total 800 (delta 0), reused 0 (delta 0), pack-reused 800[K
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;BCCD_Dataset&#39;...
+remote: Enumerating objects: 800, done.
+remote: Total 800 (delta 0), reused 0 (delta 0), pack-reused 800
 Receiving objects: 100% (800/800), 7.39 MiB | 30.87 MiB/s, done.
 Resolving deltas: 100% (378/378), done.
 </pre></div>
@@ -466,8 +502,8 @@ Resolving deltas: 100% (378/378), done.
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ADL-Book-2nd-Ed/modules/&#39;</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">read_bccd_dataset</span> <span class="kn">import</span> <span class="n">read_data</span>
-<span class="kn">from</span> <span class="nn">style_setting</span> <span class="kn">import</span> <span class="n">set_style</span>
+<span class="kn">from</span> <span class="nn">read_bccd_dataset</span> <span class="k">import</span> <span class="n">read_data</span>
+<span class="kn">from</span> <span class="nn">style_setting</span> <span class="k">import</span> <span class="n">set_style</span>
 </pre></div>
 </div>
 </div>
@@ -501,7 +537,7 @@ Resolving deltas: 100% (378/378), done.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Number of total samples:  4527
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of total samples:  4527
 </pre></div>
 </div>
 </div>
@@ -604,7 +640,7 @@ Resolving deltas: 100% (378/378), done.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f35604d5908&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f35604d5908&gt;
 </pre></div>
 </div>
 <img alt="../_images/Logistic_regression_with_one_neuron_26_1.png" src="../_images/Logistic_regression_with_one_neuron_26_1.png" />
@@ -632,7 +668,7 @@ Resolving deltas: 100% (378/378), done.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>The training dataset dimensions are:  (3631, 4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The training dataset dimensions are:  (3631, 4)
 The testing dataset dimensions are:  (896, 4)
 </pre></div>
 </div>
@@ -717,7 +753,7 @@ J({\bf w},b)=\frac{1}{m}\sum_{i=1}^{m}{L(\hat{y}^{(i)},y^{(i)})}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
@@ -750,8 +786,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
-Epoch: 0, binary_accuracy:0.9124,  binary_crossentropy:29.1332,  loss:29.1332,  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, binary_accuracy:0.9124,  binary_crossentropy:29.1332,  loss:29.1332,  
 ....................................................................................................
 Epoch: 100, binary_accuracy:0.9515,  binary_crossentropy:0.1867,  loss:0.1867,  
 ....................................................................................................
@@ -904,7 +939,7 @@ accuracy=\frac{\text{number of cases correctly identified}}{\text{total number o
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>The accuracy on the test set is equal to:  98 %.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the test set is equal to:  98 %.
 </pre></div>
 </div>
 </div>
@@ -974,7 +1009,7 @@ accuracy=\frac{\text{number of cases correctly identified}}{\text{total number o
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="Linear_regression_with_numpy.html" title="previous page">Linear Regression with NumPy</a>
-    <a class='right-next' id="next-link" href="../Chapter25/Your first autoencoder with Keras.html" title="next page">Your first autoencoder</a>
+    <a class='right-next' id="next-link" href="../Chapter25/Your%20first%20autoencoder%20with%20Keras.html" title="next page">Your first autoencoder</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
@@ -993,7 +1028,10 @@ accuracy=\frac{\text{number of cases correctly identified}}{\text{total number o
       </div>
     </div>
 
-    <script src="../_static/js/index.js"></script>
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>

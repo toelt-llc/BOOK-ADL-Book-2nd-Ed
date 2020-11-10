@@ -27,3 +27,4 @@
 - part: Chapter 25 - Autoencoders
   chapters:
   - file: Chapter25/Your first autoencoder with Keras.ipynb
+  - file: Chapter25/Anomaly_detection_with_autoencoders.ipynb

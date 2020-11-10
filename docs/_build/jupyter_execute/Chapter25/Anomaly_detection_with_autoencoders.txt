@@ -1,0 +1,109 @@
+
+import numpy as np
+import tensorflow.keras as keras
+import pandas as pd
+import time
+import sys
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+from tensorflow.keras.layers import Input, Dense
+from tensorflow.keras.models import Model
+
+import tensorflow as tf
+
+from keras.datasets import mnist
+import numpy as np
+(mnist_x_train, mnist_y_train), (mnist_x_test, mnist_y_test) = mnist.load_data()
+
+mnist_x_train = mnist_x_train.astype('float32') / 255.
+mnist_x_test = mnist_x_test.astype('float32') / 255.
+mnist_x_train = mnist_x_train.reshape((len(mnist_x_train), np.prod(mnist_x_train.shape[1:])))
+mnist_x_test = mnist_x_test.reshape((len(mnist_x_test), np.prod(mnist_x_test.shape[1:])))
+
+from keras.datasets import fashion_mnist
+import numpy as np
+(fashion_x_train, fashion_y_train), (fashion_x_test, fashion_y_test) = fashion_mnist.load_data()
+
+fashion_x_train = fashion_x_train.astype('float32') / 255.
+fashion_x_test = fashion_x_test.astype('float32') / 255.
+fashion_x_train = fashion_x_train.reshape((len(fashion_x_train), np.prod(fashion_x_train.shape[1:])))
+fashion_x_test = fashion_x_test.reshape((len(fashion_x_test), np.prod(fashion_x_test.shape[1:])))
+
+x_test = np.concatenate((mnist_x_test, fashion_x_test[0].reshape(1,784)))
+print(x_test.shape)
+
+plt.imshow(mnist_x_test[10].reshape(28,28))
+
+plt.imshow(fashion_x_test[0].reshape(28,28))
+
+def create_autoencoders (feature_layer_dim = 16):
+  input_img = Input(shape = (784,), name = 'Input_Layer')
+  # The layer encoded has a dimension equal to feature_layer_dim and contains
+  # the encoded input (therefore the name)
+  encoded = Dense(feature_layer_dim, activation = 'relu', name = 'Encoded_Features')(input_img)
+  decoded = Dense(784, activation = 'sigmoid', name = 'Decoded_Input')(encoded)
+
+  autoencoder = Model(input_img, decoded)
+  encoder = Model(input_img, encoded)
+
+  encoded_input = Input(shape = (feature_layer_dim,))
+  decoder = autoencoder.layers[-1]
+  decoder = Model(encoded_input, decoder(encoded_input))
+
+  return autoencoder, encoder, decoder
+
+autoencoder, encoder, decoder = create_autoencoders (64)
+
+keras.utils.plot_model(autoencoder, show_shapes=True)
+
+autoencoder.compile(optimizer='adam', loss='binary_crossentropy')
+
+history = autoencoder.fit(mnist_x_train, mnist_x_train,
+                epochs=30,
+                batch_size=256,
+                shuffle=True,
+                validation_data=(mnist_x_test, mnist_x_test),
+                verbose = 0)
+
+encoded_imgs = encoder.predict(x_test)
+decoded_imgs = decoder.predict(encoded_imgs)
+
+RE = ((x_test - decoded_imgs)**2).mean(axis=1)
+
+RE[-1]
+
+RE.sort()
+print(RE[9990:])
+
+fig = plt.figure(figsize = (14,7))
+
+ax = fig.add_subplot(1, 2, 1)
+plt.title("Original Image", fontsize = 16)
+plt.imshow(x_test[10000].reshape(28,28))
+
+ax = fig.add_subplot(1, 2, 2)
+plt.title("Reconstructed Image", fontsize = 16)
+plt.imshow(decoded_imgs[10000].reshape(28,28))
+
+fig = plt.figure(figsize = (14,7))
+
+ax = fig.add_subplot(1, 2, 1)
+plt.title("Original Image", fontsize = 16)
+plt.imshow(x_test[500].reshape(28,28))
+
+ax = fig.add_subplot(1, 2, 2)
+plt.title("Reconstructed Image", fontsize = 16)
+plt.imshow(decoded_imgs[500].reshape(28,28))
+
+fig = plt.figure(figsize = (14,7))
+
+ax = fig.add_subplot(1, 2, 1)
+plt.title("Original Image", fontsize = 16)
+plt.imshow(x_test[2836].reshape(28,28))
+
+ax = fig.add_subplot(1, 2, 2)
+plt.title("Reconstructed Image", fontsize = 16)
+plt.imshow(decoded_imgs[2836].reshape(28,28))
+
+

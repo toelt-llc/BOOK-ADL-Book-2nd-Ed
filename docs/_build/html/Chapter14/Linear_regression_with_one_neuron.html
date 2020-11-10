@@ -1,22 +1,42 @@
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Linear Regression with One Neuron &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
-    <link href="../_static/css/index.css" rel="stylesheet">
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.2d2078699c18a0efb88233928e1cf6ed.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
@@ -24,12 +44,10 @@
     <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/mystnb.js"></script>
-    <script src="../_static/sphinx-book-theme.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.18.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/sphinx-book-theme.be0a4a0c39cd630af62a2fcf693f3f06.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
     <script >
         const thebe_selector = ".thebe"
@@ -42,8 +60,8 @@
     <link rel="next" title="Linear Regression with NumPy" href="Linear_regression_with_numpy.html" />
     <link rel="prev" title="Introduction" href="Introduction.html" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="docsearch:language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
 
 
 
@@ -102,7 +120,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Computational Graphs Exercises.html">
+  <a class="reference internal" href="../Chapter11/Computational%20Graphs%20Exercises.html">
    Computational Graphs - Exercises
   </a>
  </li>
@@ -112,7 +130,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Overloading of operators in Tensorflow.html">
+  <a class="reference internal" href="../Chapter11/Overloading%20of%20operators%20in%20Tensorflow.html">
    Operator Overloading in TensorFlow
   </a>
  </li>
@@ -151,8 +169,13 @@
 </p>
 <ul class="nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter25/Your first autoencoder with Keras.html">
+  <a class="reference internal" href="../Chapter25/Your%20first%20autoencoder%20with%20Keras.html">
    Your first autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
   </a>
  </li>
 </ul>
@@ -160,6 +183,10 @@
 </nav>
 
  <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
 
 </div>
 
@@ -207,7 +234,8 @@
 
         <!-- Full screen (wrap in <a> to have style consistency -->
         <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-                data-placement="bottom" onclick="toggleFullScreen()" title="Fullscreen mode"><i
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
                     class="fas fa-expand"></i></button></a>
 
         <!-- Launch buttons -->
@@ -216,6 +244,12 @@
     <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/Chapter14/Linear_regression_with_one_neuron.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
         
         
         
@@ -232,6 +266,7 @@
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
         <div class="tocsection onthispage pt-5 pb-3">
             <i class="fas fa-list"></i> Contents
         </div>
@@ -302,6 +337,7 @@
 </ul>
 
         </nav>
+        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -346,7 +382,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
   Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-0_qrg12m
   Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-0_qrg12m
 Requirement already satisfied (use --upgrade to upgrade): tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c- from git+https://github.com/tensorflow/docs in /usr/local/lib/python3.6/dist-packages
@@ -357,7 +393,7 @@ Requirement already satisfied: pyyaml in /usr/local/lib/python3.6/dist-packages 
 Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from absl-py-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (1.15.0)
 Requirement already satisfied: setuptools in /usr/local/lib/python3.6/dist-packages (from protobuf-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (50.3.0)
 Building wheels for collected packages: tensorflow-docs
-  Building wheel for tensorflow-docs (setup.py) ... [?25l[?25hdone
+  Building wheel for tensorflow-docs (setup.py) ... ?25l?25hdone
   Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.0146903589e869081cce7006f160331ea5837418c_-cp36-none-any.whl size=143892 sha256=8c20e34b4bfc6e2c07fdb56c9f0d7cf7f4f36f7593610ec657d8b25be210481c
   Stored in directory: /tmp/pip-ephem-wheel-cache-n680b6k2/wheels/eb/1b/35/fce87697be00d2fc63e0b4b395b0d9c7e391a10e98d9a0d97f
 Successfully built tensorflow-docs
@@ -377,8 +413,8 @@ Successfully built tensorflow-docs
 
 <span class="c1"># tensorflow libraries</span>
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
-<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
-<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="k">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="k">import</span> <span class="n">layers</span>
 <span class="kn">import</span> <span class="nn">tensorflow_docs</span> <span class="k">as</span> <span class="nn">tfdocs</span>
 <span class="kn">import</span> <span class="nn">tensorflow_docs.modeling</span>
 
@@ -422,7 +458,7 @@ Successfully built tensorflow-docs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
 </pre></div>
 </div>
 </div>
@@ -438,8 +474,8 @@ Successfully built tensorflow-docs
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ADL-Book-2nd-Ed/modules/&#39;</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">read_radon_dataset</span> <span class="kn">import</span> <span class="n">read_data</span>
-<span class="kn">from</span> <span class="nn">style_setting</span> <span class="kn">import</span> <span class="n">set_style</span>
+<span class="kn">from</span> <span class="nn">read_radon_dataset</span> <span class="k">import</span> <span class="n">read_data</span>
+<span class="kn">from</span> <span class="nn">style_setting</span> <span class="k">import</span> <span class="n">set_style</span>
 </pre></div>
 </div>
 </div>
@@ -480,7 +516,7 @@ Successfully built tensorflow-docs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Number of counties included in the dataset:  85
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of counties included in the dataset:  85
 Number of total samples:  919
 </pre></div>
 </div>
@@ -579,7 +615,7 @@ Number of total samples:  919
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>The training dataset dimensions are:  (733, 4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The training dataset dimensions are:  (733, 4)
 The testing dataset dimensions are:  (186, 4)
 </pre></div>
 </div>
@@ -642,7 +678,7 @@ The testing dataset dimensions are:  (186, 4)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
@@ -675,8 +711,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>
-Epoch: 0, loss:2543.7136,  mse:2543.7136,  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, loss:2543.7136,  mse:2543.7136,  
 ....................................................................................................
 Epoch: 100, loss:19.7100,  mse:19.7100,  
 ....................................................................................................
@@ -818,7 +853,7 @@ Epoch: 900, loss:15.9663,  mse:15.9663,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-none notranslate"><div class="highlight"><pre><span></span>[array([[-6.6795307e-01],
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[-6.6795307e-01],
        [ 2.7279984e-03],
        [ 2.8733387e+00],
        [-2.0828046e-01]], dtype=float32), array([4.2394686], dtype=float32)]
@@ -939,7 +974,10 @@ Epoch: 900, loss:15.9663,  mse:15.9663,
       </div>
     </div>
 
-    <script src="../_static/js/index.js"></script>
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>
