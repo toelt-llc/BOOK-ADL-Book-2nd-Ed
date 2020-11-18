@@ -24,4 +24,6 @@ class set_style():
         mpl.rcParams['legend.loc'] = 'best' # legend position inside plot
         mpl.rcParams['legend.fontsize'] = 'medium' # legend font
 
+        ax.set_facecolor((241 / 255.0, 247 / 255.0, 240 / 255.0))
+
         return self.f
