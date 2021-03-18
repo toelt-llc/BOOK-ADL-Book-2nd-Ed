@@ -1,0 +1,741 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Gradient Descent &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Your First Autoencoder" href="../Chapter25/Your_first_autoencoder_with_Keras.html" />
+    <link rel="prev" title="Overfitting Example" href="../Chapter15/Overfitting_example.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  <img src="../_static/TOELT_ADL_2nd.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Applied Deep Learning 2nd Edition - Online Companion</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 11 - An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter11/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter11/Computational Graphs Exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter11/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter11/Overloading of operators in Tensorflow.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 14 - Single Neuron
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 15 - Fully Connected Networks
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter15/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter15/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 18 - Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 25 - Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 26 - Variational Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter26/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Chapter18/Gradient_descent_developed_from_scratch.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/Chapter18/Gradient_descent_developed_from_scratch.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/Chapter18/Gradient_descent_developed_from_scratch.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theory-behind-gradient-descent">
+   Theory behind Gradient Descent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent-implementation-with-a-simulated-dataset">
+   Gradient Descent Implementation with a Simulated Dataset
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#libraries-import">
+     Libraries Import
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataset-generation-a-name-dg-a">
+     Dataset Generation
+     <a name="dg">
+     </a>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#cost-function-implementation">
+     Cost Function Implementation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gradient-descent-application">
+     Gradient Descent Application
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="gradient-descent">
+<h1>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.21</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>A the end of this notebook you are going to know how to implement the famous minimization method called <strong>gradient descent</strong> from scratch. This is a useful exercise to prepare yourself to understand more complex neural networks algorithms.</p>
+</div>
+<div class="section" id="theory-behind-gradient-descent">
+<h2>Theory behind Gradient Descent<a class="headerlink" href="#theory-behind-gradient-descent" title="Permalink to this headline">¶</a></h2>
+<p>The objective of gradient descent is to numerically find the minimum of any given function. It is suited for those problems for which an analytical solution is not available, such as in the case of neural networks (big number of weights).</p>
+<p>Given a generic function <span class="math notranslate nohighlight">\(J(\mathbf{w})\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> is a vector of weights, the minimum location in weight space (meaning the value for <span class="math notranslate nohighlight">\(\mathbf{w}\)</span> for which <span class="math notranslate nohighlight">\(J(\mathbf{w})\)</span> has a minimum) can be found with an algorithm based on the following steps:</p>
+<ol class="simple">
+<li><p><em>Iteration 0</em>: Choose a random initial guess <span class="math notranslate nohighlight">\(\mathbf{w_0}\)</span></p></li>
+<li><p><em>Iteration <span class="math notranslate nohighlight">\(n+1\)</span></em> (with <span class="math notranslate nohighlight">\(n\)</span> starting from 0): The weights at iteration <span class="math notranslate nohighlight">\(n+1\)</span> (<span class="math notranslate nohighlight">\(\mathbf{w}_{n+1}\)</span>) will be updated from the previous values at iteration <span class="math notranslate nohighlight">\(n\)</span> (<span class="math notranslate nohighlight">\(\mathbf{w}_{n}\)</span>) using the formula</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w}_{n+1}=\mathbf{w}_{n}-\gamma\nabla J(\mathbf{w}_{n}) \tag{1}
+\]</div>
+<p>With <span class="math notranslate nohighlight">\(J(\mathbf{w}_{n})\)</span>, we have indicated the gradient of the cost function, which is a vector whose components are the partial derivatives of the cost function with respect to all the components of the weight vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+J(\mathbf{w}_{n})=\displaystyle
+\begin{pmatrix}
+\partial J(\mathbf{w})/\partial w_1\\
+\vdots\\
+\partial J(\mathbf{w})/\partial w_{n_x}
+\end{pmatrix} \tag{2}
+\end{split}\]</div>
+<p>Let’s suppose now that we want to fit some data to a generic function <span class="math notranslate nohighlight">\(f({\bf x}^{(i)})\)</span> where <span class="math notranslate nohighlight">\({\bf x}^{(i)}\)</span> is the <span class="math notranslate nohighlight">\(i^th\)</span> observation of an input dataset. In general we will have <span class="math notranslate nohighlight">\({\bf x}^{(i)}\in \mathbb{R}^n\)</span> with <span class="math notranslate nohighlight">\(n\in \mathbb{N}\)</span>, but for this example let’s suppose that
+<span class="math notranslate nohighlight">\({\bf x}^{(i)}=x^{(i)}\in \mathbb{R}\)</span>.</p>
+<p>As a cost function, let’s choose the  <strong>mean squared error</strong> (MSE):</p>
+<div class="math notranslate nohighlight">
+\[
+J(w_o,w_1)=\frac{1}{m} \sum_{i=1}^{m} (y_i-f(x^{(i)}))^2 \tag{3}
+\]</div>
+<p>where we have indicated with the subscript <span class="math notranslate nohighlight">\(i\)</span> the <span class="math notranslate nohighlight">\(i^{th}\)</span> observation. In this example we will try to fit a linear function</p>
+<div class="math notranslate nohighlight">
+\[
+f(x^{(i)}) = w_0 + w_1 x^{(i)} \tag{4}
+\]</div>
+<p>to some artificially generated data. Note that in this case the function <span class="math notranslate nohighlight">\(f(x^{(i)})\)</span> will depend on the weights <span class="math notranslate nohighlight">\(w_0\)</span> and <span class="math notranslate nohighlight">\(w_1\)</span>, therefore to make this particularly clear, we will indicate our <span class="math notranslate nohighlight">\(f\)</span> function as <span class="math notranslate nohighlight">\(f(w_0, w_1, x^{(i)})\)</span>.</p>
+</div>
+<div class="section" id="gradient-descent-implementation-with-a-simulated-dataset">
+<h2>Gradient Descent Implementation with a Simulated Dataset<a class="headerlink" href="#gradient-descent-implementation-with-a-simulated-dataset" title="Permalink to this headline">¶</a></h2>
+<p>For this example, we will use a simulated dataset made of 1 feature and 30 samples. As cost function we will consider MSE and we will apply a linear regression model as hypothesis.</p>
+<div class="section" id="libraries-import">
+<h3>Libraries Import<a class="headerlink" href="#libraries-import" title="Permalink to this headline">¶</a></h3>
+<p>This section contains the necessary libraries (such as numpy or matplotlib) you need to import to execute the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># general libraries</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="k">as</span> <span class="nn">fm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Referring to the following cell, if you want to re-clone a repository</span>
+<span class="c1"># inside the google colab instance, you need to delete it first. </span>
+<span class="c1"># You can delete the repositories contained in this instance executing </span>
+<span class="c1"># the following two lines of code (deleting the # comment symbol).</span>
+
+<span class="c1"># !rm -rf ADL-Book-2nd-Ed </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># This command actually clone the repository of the book in the google colab
+# instance. In this way this notebook will have access to the modules
+# we have written for this book.
+
+# Please note that in case you have already run this cell, and you run it again
+# you may get the error message:
+#
+# fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
+# 
+# In this case you can safely ignore the error message.
+
+!git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell imports some custom written functions that we have created to </span>
+<span class="c1"># make the plotting easier. You don&#39;t need to undertsand the details and </span>
+<span class="c1"># you can simply ignore this cell.</span>
+<span class="c1"># Simply run it with CMD+Enter (on Mac) or CTRL+Enter (Windows or Ubuntu) to</span>
+<span class="c1"># import the necessary functions.</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ADL-Book-2nd-Ed/modules/&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">style_setting</span> <span class="kn">import</span> <span class="n">set_style</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataset-generation-a-name-dg-a">
+<h3>Dataset Generation <a name = "dg"></a><a class="headerlink" href="#dataset-generation-a-name-dg-a" title="Permalink to this headline">¶</a></h3>
+<p>Let’s consider the dataset formed by <span class="math notranslate nohighlight">\(m = 30\)</span> observations y generated by the code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">w0</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">m</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">w0</span> <span class="o">+</span> <span class="n">w1</span> <span class="o">*</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note how we are generating our data with Equation (4) that in Python can be written as <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">w0</span> <span class="pre">+</span> <span class="pre">w1</span> <span class="pre">*</span> <span class="pre">x</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following line contains the path to fonts that are used to plot result in</span>
+<span class="c1"># a uniform way.</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">set_style</span><span class="p">()</span><span class="o">.</span><span class="n">set_general_style_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the data we are going to use</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Gradient_descent_developed_from_scratch_19_0.png" src="../_images/Gradient_descent_developed_from_scratch_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="cost-function-implementation">
+<h3>Cost Function Implementation<a class="headerlink" href="#cost-function-implementation" title="Permalink to this headline">¶</a></h3>
+<p>As a cost function we consider the MSE as we discussed in the theory section. We need to implement Equations (3) and (4).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Equation (4)</span>
+<span class="k">def</span> <span class="nf">hypothesis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">w0</span> <span class="o">+</span> <span class="n">w1</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Equation (3)</span>
+<span class="k">def</span> <span class="nf">cost_function_mse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">hypothesis</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gradient-descent-application">
+<h3>Gradient Descent Application<a class="headerlink" href="#gradient-descent-application" title="Permalink to this headline">¶</a></h3>
+<p>Our goal is to find the values for <span class="math notranslate nohighlight">\(w_0\)</span> and <span class="math notranslate nohighlight">\(w_1\)</span> that minimize <span class="math notranslate nohighlight">\(J(w_0,w_1)\)</span>.</p>
+<p>To apply the gradient descent method, we must calculate the series for <span class="math notranslate nohighlight">\(w_{0,n}\)</span> and <span class="math notranslate nohighlight">\(w_{1,n}\)</span> from Equation (1). We obtain the following results (where the sum is over all the <span class="math notranslate nohighlight">\(m\)</span> training dataset observations):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+w_{0,n+1}=w_{0,n}-\gamma\displaystyle \frac{\partial{J(w_{0,n},w_{1,n})}}{\partial{w_0}}=w_{0,n}+\gamma\frac{1}{m} \sum_{i=1}^{m} 2(y_i-f(w_{0,n},w_{1,n},x_i))\frac{\partial{f(w_0,w_1,x_i)}}{\partial{w_0}}\\
+w_{1,n+1}=w_{1,n}-\gamma\displaystyle \frac{\partial{J(w_{0,n},w_{1,n})}}{\partial{w_1}}=w_{1,n}+\gamma\frac{1}{m} \sum_{i=1}^{m} 2(y_i-f(w_{0,n},w_{1,n},x_i))\frac{\partial{f(w_0,w_1,x_i)}}{\partial{w_1}}
+\end{cases} \tag{5}
+\end{split}\]</div>
+<p>Simplifying the equations by calculating the partial derivatives gives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{cases}
+w_{0,n+1}=w_{0,n}+\displaystyle\frac{2\gamma}{m} \sum_{i=1}^{m} (y_i-f(w_{0,n},w_{1,n},x_i))=w_{0,n}(1-\gamma)+\frac{2\gamma}{m}\sum_{i=1}^{m} (y_i-w_{1,n}x_i)\\
+w_{1,n+1}=w_{1,n}+\displaystyle \frac{2\gamma}{m}\sum_{i=1}^{m} (y_i-f(w_{0,n},w_{1,n},x_i))x_i=w_{1,n}+\frac{2\gamma}{m}\sum_{i=1}^{m} (y_i-w_{0,n}-w_{1,n}x_i)x_i
+\end{cases} \tag{6}
+\end{split}\]</div>
+<p>Since
+$<span class="math notranslate nohighlight">\(\frac{\partial{f(w_0,w_1,x_i)}}{\partial{w_0}}=1\)</span>$</p>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial{f(w_0,w_1,x_i)}}{\partial{w_1}}=x_i\]</div>
+<p>Equations (6) are the ones that must be implemented in Python.</p>
+<p>Remember that <span class="math notranslate nohighlight">\(\gamma\)</span> is called the learning rate and must be chosen carefully. But how can we choose the correct learning rate? Or the correct number of iterations? There are no fixed rules, but a good rule of thumb is to start with <span class="math notranslate nohighlight">\(\gamma=0.05\)</span> and then see how the cost function behaves. It is rather common to plot <span class="math notranslate nohighlight">\(J({\mathbf w})\)</span> versus the number of iterations, to check that it decreases and the speed at which it is decreasing.</p>
+<p>Remember that you are trying to minimize the cost function <span class="math notranslate nohighlight">\(J\)</span>, and that means that <span class="math notranslate nohighlight">\(J\)</span> should decrease with increasing number of iterations. If that does not happen you should stop and see if there are any mistake in the code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gradient_descent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">gamma</span><span class="p">,</span><span class="n">epochs</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  Returns w0 and w1 that minimizes J(w) [the cost function] and the cost </span>
+<span class="sd">  function at each epoch. </span>
+<span class="sd">  Inputs:</span>
+<span class="sd">  - x: samples (array)</span>
+<span class="sd">  - y: output (array)</span>
+<span class="sd">  - gamma: learning rate</span>
+<span class="sd">  - epochs: number of epochs to be performed</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+  <span class="n">w0</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="c1"># randomly initialize w0</span>
+  <span class="n">w1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="c1"># randomly initialize w1</span>
+  <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># number of samples</span>
+  <span class="n">cf</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span> <span class="c1"># repeat n times (n: number of epochs)</span>
+    <span class="n">w0</span> <span class="o">=</span> <span class="n">w0</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">gamma</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">w1</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="c1"># update w0</span>
+    <span class="n">w1</span> <span class="o">=</span> <span class="n">w1</span> <span class="o">+</span> <span class="p">(</span><span class="n">gamma</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">w0</span> <span class="o">-</span> <span class="n">w1</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="p">)</span> <span class="c1"># update w1</span>
+    <span class="n">cf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cost_function_mse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">))</span>
+
+  <span class="k">return</span> <span class="n">w0</span><span class="p">,</span><span class="n">w1</span><span class="p">,</span><span class="n">cf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will try and compare three different values for the learning rate <span class="math notranslate nohighlight">\(\gamma\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\gamma = 0.05\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma = 0.8\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma = 2.0\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">epochs</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">w01</span><span class="p">,</span><span class="n">w11</span><span class="p">,</span><span class="n">cf1</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mf">0.05</span><span class="p">,</span><span class="n">epochs</span><span class="p">)</span>
+<span class="n">w02</span><span class="p">,</span><span class="n">w12</span><span class="p">,</span><span class="n">cf2</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="n">epochs</span><span class="p">)</span>
+<span class="n">w03</span><span class="p">,</span><span class="n">w13</span><span class="p">,</span><span class="n">cf3</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="n">epochs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cost function vs Iterations plot</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">)),</span> <span class="n">cf1</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;γ = 0.05&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">)),</span> <span class="n">cf2</span><span class="p">,</span> <span class="s1">&#39;k:&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;γ = 0.8&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">)),</span> <span class="n">cf3</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;γ = 2.0&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cost Function J&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Iterations&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">20</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">epochs</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">legend</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Gradient_descent_developed_from_scratch_31_0.png" src="../_images/Gradient_descent_developed_from_scratch_31_0.png" />
+</div>
+</div>
+<p>Looking at the Cost function vs Number of epochs plot, we decide the best learning rate is <span class="math notranslate nohighlight">\(\gamma=0.8\)</span>. Why? Let’s comment the above plot. We tried three different learning rates: a <em>small</em>, a <em>medium</em> and a <em>big</em> one. As we can notice from the three blue curves, <span class="math notranslate nohighlight">\(\gamma=0.05\)</span> is too small, while <span class="math notranslate nohighlight">\(\gamma=2\)</span> is too big: in both cases, the cost function cannot reach the <span class="math notranslate nohighlight">\(0\)</span> (i.e. the minimum). In the first case, the update’s rate of the cost function is too small, therefore a bigger number of iterations is required to reach the <span class="math notranslate nohighlight">\(0\)</span>. In the second case, since the update’s rate of the cost function is too big, <span class="math notranslate nohighlight">\(J\)</span> will continue to jump around the minimum even if for a bigger number of iterations and will never reach it.</p>
+<p>Finally, our linear regression result in this case is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;w0 = </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w02</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;w1 = </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w12</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>w0 = 2.00
+w1 = 0.50
+</pre></div>
+</div>
+</div>
+</div>
+<p>They are the values we were expecting, since we have built this dataset using Equation (4) and choosing <span class="math notranslate nohighlight">\(w_0 = 2\)</span> and <span class="math notranslate nohighlight">\(w_1 = 0.5\)</span> (if you have forgotten this, see again <a class="reference external" href="#dg">Dataset Generation</a> section).</p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Michelucci, Umberto. “Applied Deep Learning.” A Case-Based Approach to Understanding Deep Neural Networks 1st Edition, APRESS/Springer (2018) (mathematical details behind gradient descent minimization method)</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Chapter18"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../Chapter15/Overfitting_example.html" title="previous page">Overfitting Example</a>
+    <a class='right-next' id="next-link" href="../Chapter25/Your_first_autoencoder_with_Keras.html" title="next page">Your First Autoencoder</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci and Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2021).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

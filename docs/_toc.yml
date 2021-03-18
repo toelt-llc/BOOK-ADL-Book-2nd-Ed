@@ -17,6 +17,7 @@
   - file: Chapter11/Eager_execution_with_TF2.X.ipynb
   - file: Chapter11/Overloading of operators in Tensorflow.ipynb
 
+
 - part: Chapter 14 - Single Neuron
   chapters:
   - file: Chapter14/Introduction
@@ -24,7 +25,22 @@
   - file: Chapter14/Linear_regression_with_numpy.ipynb 
   - file: Chapter14/Logistic_regression_with_one_neuron.ipynb
 
+- part: Chapter 15 - Fully Connected Networks
+  chapters:
+  - file: Chapter15/Multiclass_classification_with_fully_connected_networks.ipynb
+  - file: Chapter15/Overfitting_example.ipynb
+
+- part: Chapter 18 - Gradient Descent Optimizer
+  chapters:
+  - file: Chapter18/Gradient_descent_developed_from_scratch.ipynb
+
 - part: Chapter 25 - Autoencoders
   chapters:
-  - file: Chapter25/Your first autoencoder with Keras.ipynb
+  - file: Chapter25/Your_first_autoencoder_with_Keras.ipynb
   - file: Chapter25/Anomaly_detection_with_autoencoders.ipynb
+  - file: Chapter25/Denoising_autoencoders_with_FFNN.ipynb
+  - file: Chapter25/Denoising_autoencoders_with_CNN.ipynb
+
+- part: Chapter 26 - Variational Autoencoders
+  chapters:
+  - file: Chapter26/Variational_Autoencoders.ipynb
