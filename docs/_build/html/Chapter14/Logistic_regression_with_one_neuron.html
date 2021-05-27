@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Logistic Regression with One Neuron &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
+    <title>Logistic Regression with One Neuron &#8212; Neural networks and deep learning: theory and applications</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -76,10 +76,8 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/TOELT_ADL_2nd.png" class="logo" alt="logo">
   
-  
-  <h1 class="site-logo" id="site-title">Applied Deep Learning 2nd Edition - Online Companion</h1>
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -116,7 +114,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Computational Graphs Exercises.html">
+  <a class="reference internal" href="../Chapter11/Computational_graphs_exercises.html">
    Computational Graphs - Exercises
   </a>
  </li>
@@ -126,7 +124,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Overloading of operators in Tensorflow.html">
+  <a class="reference internal" href="../Chapter11/Overloading_of_operators_in_TF.html">
    Operator Overloading in TensorFlow
   </a>
  </li>
@@ -172,6 +170,23 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter15/Overfitting_example.html">
    Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 16 - Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
   </a>
  </li>
 </ul>
@@ -318,6 +333,11 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#real-case-example-blood-cells-detection">
    Real Case Example:
    <strong>
@@ -392,11 +412,14 @@
                 
   <div class="section" id="logistic-regression-with-one-neuron">
 <h1>Logistic Regression with One Neuron<a class="headerlink" href="#logistic-regression-with-one-neuron" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.04</p>
 <p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
 <p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
 <p>The purpose of this notebook is to give an example of an application of Logistic Regression performed with One Neuron to a dataset taken from real world.</p>
-<p><strong>Notebook Learning Goals</strong></p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
 <p>At the end of the notebook you are going to have a clear idea of what logistic regression is, seen through a practical example. It is very instructive to compare this notebook with <em>Linear_Regression_with_one_neuron.ipynb</em> one, since they both are applications of the One Neuron model, used to solve different problems. Along this notebook you will be provided with information about this model to notice similarities and differences with the Linear Regression one. You are going to see how simple is using Keras and how, changing a few parameters, you can easily obtain a different model that can solve a different problem.</p>
+</div>
 <div class="section" id="real-case-example-blood-cells-detection">
 <h2>Real Case Example: <strong>Blood Cells Detection</strong><a class="headerlink" href="#real-case-example-blood-cells-detection" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="dataset-overview">
@@ -435,19 +458,19 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
-  Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-yf9sq2hw
-  Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-yf9sq2hw
-Requirement already satisfied (use --upgrade to upgrade): tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c- from git+https://github.com/tensorflow/docs in /usr/local/lib/python3.6/dist-packages
-Requirement already satisfied: astor in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (0.8.1)
-Requirement already satisfied: absl-py in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (0.10.0)
-Requirement already satisfied: protobuf in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (3.12.4)
-Requirement already satisfied: pyyaml in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (3.13)
-Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from absl-py-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (1.15.0)
-Requirement already satisfied: setuptools in /usr/local/lib/python3.6/dist-packages (from protobuf-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (50.3.0)
+  Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-u6l28m4v
+  Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-u6l28m4v
+Requirement already satisfied (use --upgrade to upgrade): tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499- from git+https://github.com/tensorflow/docs in /usr/local/lib/python3.6/dist-packages
+Requirement already satisfied: astor in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (0.8.1)
+Requirement already satisfied: absl-py in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (0.10.0)
+Requirement already satisfied: protobuf&gt;=3.14 in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (3.14.0)
+Requirement already satisfied: pyyaml in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (3.13)
+Requirement already satisfied: dataclasses in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (0.8)
+Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from absl-py-&gt;tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (1.15.0)
 Building wheels for collected packages: tensorflow-docs
   Building wheel for tensorflow-docs (setup.py) ... ?25l?25hdone
-  Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.0146903589e869081cce7006f160331ea5837418c_-cp36-none-any.whl size=143892 sha256=67956e182f5f16d1ce2b58b731b3a6805a2b48796e99028f60b8874bcb7c3cfc
-  Stored in directory: /tmp/pip-ephem-wheel-cache-_8egr7zh/wheels/eb/1b/35/fce87697be00d2fc63e0b4b395b0d9c7e391a10e98d9a0d97f
+  Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499_-cp36-none-any.whl size=146696 sha256=408592b6da363168157ef889afa05405fcbef6e2e74a54a4acd891cb5ceebac4
+  Stored in directory: /tmp/pip-ephem-wheel-cache-6e3wnocm/wheels/eb/1b/35/fce87697be00d2fc63e0b4b395b0d9c7e391a10e98d9a0d97f
 Successfully built tensorflow-docs
 </pre></div>
 </div>
@@ -507,13 +530,7 @@ Successfully built tensorflow-docs
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
-remote: Enumerating objects: 161, done.
-remote: Counting objects: 100% (161/161), done.
-remote: Compressing objects: 100% (112/112), done.
-remote: Total 161 (delta 86), reused 120 (delta 48), pack-reused 0
-Receiving objects: 100% (161/161), 11.04 MiB | 33.56 MiB/s, done.
-Resolving deltas: 100% (86/86), done.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
 </pre></div>
 </div>
 </div>
@@ -527,11 +544,7 @@ Resolving deltas: 100% (86/86), done.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;BCCD_Dataset&#39;...
-remote: Enumerating objects: 800, done.
-remote: Total 800 (delta 0), reused 0 (delta 0), pack-reused 800
-Receiving objects: 100% (800/800), 7.39 MiB | 30.87 MiB/s, done.
-Resolving deltas: 100% (378/378), done.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: destination path &#39;BCCD_Dataset&#39; already exists and is not an empty directory.
 </pre></div>
 </div>
 </div>
@@ -621,38 +634,38 @@ Resolving deltas: 100% (378/378), done.
   <tbody>
     <tr>
       <th>0</th>
-      <td>192</td>
-      <td>292</td>
-      <td>376</td>
-      <td>473</td>
+      <td>349</td>
+      <td>499</td>
+      <td>120</td>
+      <td>206</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>301</td>
-      <td>419</td>
-      <td>320</td>
-      <td>424</td>
+      <td>343</td>
+      <td>437</td>
+      <td>272</td>
+      <td>357</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>433</td>
-      <td>510</td>
-      <td>273</td>
-      <td>358</td>
+      <td>184</td>
+      <td>283</td>
+      <td>292</td>
+      <td>378</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>434</td>
-      <td>528</td>
-      <td>368</td>
-      <td>454</td>
+      <td>253</td>
+      <td>352</td>
+      <td>240</td>
+      <td>326</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>507</td>
-      <td>574</td>
-      <td>381</td>
-      <td>454</td>
+      <td>408</td>
+      <td>505</td>
+      <td>282</td>
+      <td>393</td>
     </tr>
   </tbody>
 </table>
@@ -685,7 +698,7 @@ Resolving deltas: 100% (378/378), done.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f35604d5908&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fa988e054a8&gt;
 </pre></div>
 </div>
 <img alt="../_images/Logistic_regression_with_one_neuron_26_1.png" src="../_images/Logistic_regression_with_one_neuron_26_1.png" />
@@ -723,7 +736,7 @@ The testing dataset dimensions are:  (896, 4)
 <div class="section" id="logistic-regression-the-model">
 <h3>Logistic Regression: the Model<a class="headerlink" href="#logistic-regression-the-model" title="Permalink to this headline">¶</a></h3>
 <p>Logistic Regression is a classic classification algorithm. Our model will be made of <strong>one neuron</strong> and its goal will be to recognize two classes (labeled as 0 or 1, referring to RBC or WBC inside a cell image). This is an example of a <em>binary classification problem</em>.</p>
-<p>Differently from Linear Regression, the activation function will be a <strong>sigmoid function</strong> (leading to a different neuron’s output) and the cost function will be the <strong>cross-entropy</strong>. In the case of Linear Regression a identity activation function and a MSE cost function were used.</p>
+<p>Differently from Linear Regression, the activation function will be a <strong>sigmoid function</strong> (leading to a different neuron’s output) and the cost function will be the <strong>cross-entropy</strong>. In the case of Linear Regression an identity activation function and a MSE cost function were used.</p>
 <p>The formula of the cross-entropy for one observation is the following:</p>
 <p>\begin{equation}
 L(\hat{y}^{(i)},y^{(i)})=-(y^{(i)}\log{\hat{y}^{(i)}}+(1-y^{(i)})\log({1-\hat{y}^{(i)}}))
@@ -798,11 +811,11 @@ J({\bf w},b)=\frac{1}{m}\sum_{i=1}^{m}{L(\hat{y}^{(i)},y^{(i)})}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-dense (Dense)                (None, 1)                 5         
+dense_1 (Dense)              (None, 1)                 5         
 =================================================================
 Total params: 5
 Trainable params: 5
@@ -816,8 +829,8 @@ _________________________________________________________________
 </div>
 <div class="section" id="training-phase-model-s-learning-phase">
 <h3>Training Phase (Model’s Learning Phase)<a class="headerlink" href="#training-phase-model-s-learning-phase" title="Permalink to this headline">¶</a></h3>
-<p>Training our neuron means finding the weights and biases that minimize a chosen function (usually called the <strong>cost function</strong> and typically indicated by <span class="math notranslate nohighlight">\(J\)</span>). The cost function we chose to minimize in our logistic regression task is the <strong>cross-entropy</strong>. The most famous numerical method to find the minimum of a given function is the <strong>gradient descent</strong> (it is suited for cases in which the solution can not be found analytically, such as all neural network applications).</p>
-<p>The minimization process based on gradient descent is iterative, therefore it is necessary to decide when to stop it. The simplest way is to set a number of repetitions (called <strong>epochs</strong>) and to run the algorithm that fixed number of times. Then, results are checked to see if an optimal point has been reached. If not, the number of epochs is increased.</p>
+<p>Training our neuron means finding the weights and biases that minimize a chosen function (usually called the <strong>cost function</strong> and typically indicated by <span class="math notranslate nohighlight">\(J\)</span>). The cost function we chose to minimize in our logistic regression task is the <strong>cross-entropy</strong>. The most famous numerical method to find the minimum of a given function is the <strong>gradient descent</strong> (it is suited for cases in which the solution can not be found analytically, such as all neural network applications). In our example we used the RMSprop algorithm as optimizer.</p>
+<p>The minimization process is iterative, therefore it is necessary to decide when to stop it. The simplest way is to set a number of repetitions (called <strong>epochs</strong>) and to run the algorithm that fixed number of times. Then, results are checked to see if an optimal point has been reached. If not, the number of epochs is increased.</p>
 <p>We start training our model for <strong>500</strong> epochs and we look at the summary in terms of performances (accuracy).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -831,15 +844,15 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, binary_accuracy:0.9124,  binary_crossentropy:29.1332,  loss:29.1332,  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, binary_accuracy:0.3451,  binary_crossentropy:37.0837,  loss:37.0837,  
 ....................................................................................................
-Epoch: 100, binary_accuracy:0.9515,  binary_crossentropy:0.1867,  loss:0.1867,  
+Epoch: 100, binary_accuracy:0.9581,  binary_crossentropy:0.1588,  loss:0.1588,  
 ....................................................................................................
-Epoch: 200, binary_accuracy:0.9694,  binary_crossentropy:0.1167,  loss:0.1167,  
+Epoch: 200, binary_accuracy:0.9733,  binary_crossentropy:0.1039,  loss:0.1039,  
 ....................................................................................................
-Epoch: 300, binary_accuracy:0.9733,  binary_crossentropy:0.0937,  loss:0.0937,  
+Epoch: 300, binary_accuracy:0.9780,  binary_crossentropy:0.0808,  loss:0.0808,  
 ....................................................................................................
-Epoch: 400, binary_accuracy:0.9771,  binary_crossentropy:0.0842,  loss:0.0842,  
+Epoch: 400, binary_accuracy:0.9793,  binary_crossentropy:0.0763,  loss:0.0763,  
 ....................................................................................................
 </pre></div>
 </div>
@@ -881,37 +894,37 @@ Epoch: 400, binary_accuracy:0.9771,  binary_crossentropy:0.0842,  loss:0.0842,
   <tbody>
     <tr>
       <th>495</th>
-      <td>0.078585</td>
-      <td>0.078585</td>
-      <td>0.978794</td>
+      <td>0.070310</td>
+      <td>0.070310</td>
+      <td>0.979069</td>
       <td>495</td>
     </tr>
     <tr>
       <th>496</th>
-      <td>0.074950</td>
-      <td>0.074950</td>
-      <td>0.978243</td>
+      <td>0.068867</td>
+      <td>0.068867</td>
+      <td>0.979069</td>
       <td>496</td>
     </tr>
     <tr>
       <th>497</th>
-      <td>0.079886</td>
-      <td>0.079886</td>
-      <td>0.978794</td>
+      <td>0.070882</td>
+      <td>0.070882</td>
+      <td>0.979895</td>
       <td>497</td>
     </tr>
     <tr>
       <th>498</th>
-      <td>0.076351</td>
-      <td>0.076351</td>
-      <td>0.978518</td>
+      <td>0.072805</td>
+      <td>0.072805</td>
+      <td>0.980446</td>
       <td>498</td>
     </tr>
     <tr>
       <th>499</th>
-      <td>0.077930</td>
-      <td>0.077930</td>
-      <td>0.978518</td>
+      <td>0.069172</td>
+      <td>0.069172</td>
+      <td>0.981272</td>
       <td>499</td>
     </tr>
   </tbody>
@@ -946,7 +959,6 @@ Epoch: 400, binary_accuracy:0.9771,  binary_crossentropy:0.0842,  loss:0.0842,
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">((</span><span class="mi">241</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">247</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">240</span><span class="o">/</span><span class="mf">255.0</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -984,7 +996,7 @@ accuracy=\frac{\text{number of cases correctly identified}}{\text{total number o
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the test set is equal to:  98 %.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the test set is equal to:  96 %.
 </pre></div>
 </div>
 </div>

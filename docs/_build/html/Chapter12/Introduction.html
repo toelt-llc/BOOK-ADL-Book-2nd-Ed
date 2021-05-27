@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Introduction &#8212; Neural networks and deep learning: theory and applications</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Linear Regression with One Neuron" href="Linear_regression_with_one_neuron.html" />
+    <link rel="prev" title="Operator Overloading in TensorFlow" href="../Chapter10/Overloading_of_operators_in_TF.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 10 - An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Computational_graphs_exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 12 - Single Neuron
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 13 - Fully Connected Networks
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter13/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter13/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 14 - Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 17 - Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter17/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 25 - Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 26 - Variational Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter26/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Chapter12/Introduction.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computational-graph">
+   Computational Graph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#building-one-neuron-in-keras">
+   Building one neuron in Keras
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Deep learning is based on large and complex networks made of
+large number of simple computational units. Companies on the fore front of
+research are dealing with networks with 160 billion of parameters.
+To put things in perspective this number is half of the number of the stars in our galaxy,
+or 1.5 times the number of people that ever lived. On a basic level, neural networks are
+a large set of differently interconnected units each performing a
+specific (and usually relatively easy) computation. They remind of the game LEGO where
+you can build very complex things using very simple and basic units. Neural networks are
+similar. Using relatively simple computational units you can build very complex systems.
+We can vary the basic units changing how they compute the result, how they are connected
+to each other, how they use the input values and so on.
+Roughly formulated all those aspects define what is known as the network architecture.
+Changing it, will change how the network learn, how good the predictions are and so on.</p>
+<p>Those basic units are known, due to a biological parallel with the brain, as
+neurons. Each neuron does basically a very simple thing: take a certain number of
+inputs (real numbers) and calculates an output (also a real number). Our inputs will be
+indicated in this book with <span class="math notranslate nohighlight">\(x_i\)</span> (real numbers) with <span class="math notranslate nohighlight">\(i=1,2,…,n_x\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> is an
+integer and <span class="math notranslate nohighlight">\(n_x\)</span> is the number of input attributes (often called features).
+As an example of input features, you can imagine the age and weight of person
+(so we would have <span class="math notranslate nohighlight">\(n_x=2\)</span>). <span class="math notranslate nohighlight">\(x_1\)</span> could be the age and <span class="math notranslate nohighlight">\(x_2\)</span> could be the weight.
+In real life the number of features can be easily very big.</p>
+<p>In a more mathematical form, given <span class="math notranslate nohighlight">\(n_x\)</span> real parameters <span class="math notranslate nohighlight">\(w_i\)</span> (with <span class="math notranslate nohighlight">\(i=1,2,…,n_x\)</span>) and
+a constant <span class="math notranslate nohighlight">\(b\)</span> (usually called bias), the neuron will calculate first what is
+usually indicated in literature and in books with <span class="math notranslate nohighlight">\(z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+z=w_1 x_1+w_2 x_2+...+w_{n_x} x_{n_x} +b
+\]</div>
+<p>it will then apply a function <span class="math notranslate nohighlight">\(f\)</span> to  <span class="math notranslate nohighlight">\(z\)</span>, giving the output <span class="math notranslate nohighlight">\(\hat y\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\hat y=f(z)=f(w_1 x_1+w_2 x_2+...+w_{n_x} x_{n_x}+b)
+\]</div>
+<div class="section" id="computational-graph">
+<h2>Computational Graph<a class="headerlink" href="#computational-graph" title="Permalink to this headline">¶</a></h2>
+<p>One single neuron can be depicted as a computational graph. You can check
+the book for more details on this. But in general one neuron can be
+visualised as in <a class="reference internal" href="#one-cg"><span class="std std-numref">Fig. 1</span></a></p>
+<div class="figure align-default" id="one-cg">
+<a class="reference internal image-reference" href="../_images/oneneuron_graph.png"><img alt="../_images/oneneuron_graph.png" src="../_images/oneneuron_graph.png" style="height: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">one neuron computational Graph.</span><a class="headerlink" href="#one-cg" title="Permalink to this image">¶</a></p>
+</div>
+<p>In <a class="reference internal" href="#one-cg"><span class="std std-numref">Fig. 1</span></a> we have the following notation</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span> are the weights</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> are the inputs (for example the pixel values of an image)</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span> is the so called bias</p></li>
+<li><p><span class="math notranslate nohighlight">\(f()\)</span> is the activation functions</p></li>
+</ul>
+<p>This is a very general way of building the computational graph for one
+single neuron. In general in books and blogs you will find this more compact
+form</p>
+<div class="figure align-default" id="one-cg2">
+<a class="reference internal image-reference" href="../_images/oneneuron_graph2.png"><img alt="../_images/oneneuron_graph2.png" src="../_images/oneneuron_graph2.png" style="height: 400px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">one neuron computational Graph. This form is more compact and is typically
+found in blogs and books.</span><a class="headerlink" href="#one-cg2" title="Permalink to this image">¶</a></p>
+</div>
+<p>Or in an even more simple form</p>
+<div class="figure align-default" id="one-cg3">
+<a class="reference internal image-reference" href="../_images/oneneuron_graph3.png"><img alt="../_images/oneneuron_graph3.png" src="../_images/oneneuron_graph3.png" style="height: 300px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">the following representation is a simplified version of <a class="reference internal" href="#one-cg"><span class="std std-numref">Fig. 1</span></a>.
+Unless otherwise stated it is usually understood that the output is
+<span class="math notranslate nohighlight">\(\hat y=f(z)=f(w_1 x_1+w_2 x_2+...+w_{n_x} x_{n_x}+b)\)</span>.
+The weights are often not explicitly reported in the neuron representation</span><a class="headerlink" href="#one-cg3" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="building-one-neuron-in-keras">
+<h2>Building one neuron in Keras<a class="headerlink" href="#building-one-neuron-in-keras" title="Permalink to this headline">¶</a></h2>
+<p>In the next chapters you will see many examples on how you can choose the activation
+function and the loss function to solve different problems, namely <em>linear regression</em>
+and <em>logistic regression</em>. In Keras to build a network with one single neuron
+is really simple and can be done with</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>model = keras.Sequential([ 
+   layers.Dense(1, input_shape = [...])
+])
+</pre></div>
+</div>
+<p>In the next chapters you will see many complete examples on how to do that.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Chapter12"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../Chapter10/Overloading_of_operators_in_TF.html" title="previous page">Operator Overloading in TensorFlow</a>
+    <a class='right-next' id="next-link" href="Linear_regression_with_one_neuron.html" title="next page">Linear Regression with One Neuron</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci and Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2021).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

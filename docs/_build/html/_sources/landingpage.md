@@ -1,4 +1,4 @@
-# Applied Deep Learning 2nd Edition - Online Book
+# Neural Networks and deep learning: theory and applications
 
 This is the online verion of the _Applied Deep Learning 2nd Edition_ book
 published by APRESS by [Umberto Michelucci](mailto:umberto.michelucci@toelt.ai) and 

@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Computational Graphs &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
+    <title>Computational Graphs &#8212; Neural networks and deep learning: theory and applications</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -56,7 +56,7 @@
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Computational Graphs - Exercises" href="Computational Graphs Exercises.html" />
+    <link rel="next" title="Computational Graphs - Exercises" href="Computational_graphs_exercises.html" />
     <link rel="prev" title="Frequently Asked Questions" href="../start/faq.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -76,10 +76,8 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/TOELT_ADL_2nd.png" class="logo" alt="logo">
   
-  
-  <h1 class="site-logo" id="site-title">Applied Deep Learning 2nd Edition - Online Companion</h1>
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -116,7 +114,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Computational Graphs Exercises.html">
+  <a class="reference internal" href="Computational_graphs_exercises.html">
    Computational Graphs - Exercises
   </a>
  </li>
@@ -126,7 +124,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Overloading of operators in Tensorflow.html">
+  <a class="reference internal" href="Overloading_of_operators_in_TF.html">
    Operator Overloading in TensorFlow
   </a>
  </li>
@@ -172,6 +170,23 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter15/Overfitting_example.html">
    Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 16 - Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
   </a>
  </li>
 </ul>
@@ -389,7 +404,7 @@
                 
   <div class="section" id="computational-graphs">
 <h1>Computational Graphs<a class="headerlink" href="#computational-graphs" title="Permalink to this headline">¶</a></h1>
-<p>Version 1.0</p>
+<p>Version 1.02</p>
 <p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
 <p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
 <div class="section" id="notebook-learning-goals">
@@ -448,12 +463,12 @@
 <p>Now we clone the repository for the book to be able to access the modules that we have written for all the juypter notebooks.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Referring to the following cell, if you want to re-clone a repository
-# inside the google colab instance, you need to delete it first. 
-# You can delete the repositories contained in this instance executing 
-# the following two lines of code (deleting the # comment symbol).
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Referring to the following cell, if you want to re-clone a repository</span>
+<span class="c1"># inside the google colab instance, you need to delete it first. </span>
+<span class="c1"># You can delete the repositories contained in this instance executing </span>
+<span class="c1"># the following two lines of code (deleting the # comment symbol).</span>
 
-!rm -rf ADL-Book-2nd-Ed 
+<span class="c1"># !rm -rf ADL-Book-2nd-Ed </span>
 </pre></div>
 </div>
 </div>
@@ -477,12 +492,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
-remote: Enumerating objects: 619, done.
-remote: Counting objects: 100% (619/619), done.
-remote: Compressing objects: 100% (452/452), done.
-remote: Total 619 (delta 260), reused 487 (delta 147), pack-reused 0
-Receiving objects: 100% (619/619), 37.44 MiB | 23.35 MiB/s, done.
-Resolving deltas: 100% (260/260), done.
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 849 (delta 9), reused 13 (delta 6), pack-reused 833
+Receiving objects: 100% (849/849), 60.20 MiB | 39.98 MiB/s, done.
+Resolving deltas: 100% (403/403), done.
 </pre></div>
 </div>
 </div>
@@ -691,7 +706,6 @@ m \frac{d^2x}{dt^2}+kx=0
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">((</span><span class="mi">241</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">247</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">240</span><span class="o">/</span><span class="mf">255.0</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -712,7 +726,6 @@ m \frac{d^2x}{dt^2}+kx=0
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">((</span><span class="mi">241</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">247</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">240</span><span class="o">/</span><span class="mf">255.0</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -775,7 +788,7 @@ m \frac{d^2x}{dt^2}+kx=0
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="../start/faq.html" title="previous page">Frequently Asked Questions</a>
-    <a class='right-next' id="next-link" href="Computational Graphs Exercises.html" title="next page">Computational Graphs - Exercises</a>
+    <a class='right-next' id="next-link" href="Computational_graphs_exercises.html" title="next page">Computational Graphs - Exercises</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

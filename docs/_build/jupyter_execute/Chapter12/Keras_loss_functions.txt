@@ -1,0 +1,29 @@
+# Keras Loss Functions
+
+Version 1.0
+
+(C) 2020 - Umberto Michelucci, Michela Sperti
+
+This notebook is part of the book _Applied Deep Learning: a case based approach, **2nd edition**_ from APRESS by [U. Michelucci](mailto:umberto.michelucci@toelt.ai) and [M. Sperti](mailto:michela.sperti@toelt.ai).
+
+The purpose of this notebook is ... .
+
+## Notebook Learning Goals
+
+At the end of the notebook you are going to ... . Moreover, you will have learnt ... .
+
+## Exercises
+
+1. [*Easy Difficulty*] ...
+2. [*Medium Difficulty*]
+3. [*Hard Difficulty*]
+
+## References
+
+1. ...
+2. ...
+
+## Further Readings
+
+
+

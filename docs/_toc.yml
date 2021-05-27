@@ -10,29 +10,34 @@
       # - file: start/introduction.md
       #
 
-- part: Chapter 11 - An Introduction to TensorFlow 2.x and 1.x
+- part: Chapter 10 - An Introduction to TensorFlow 2.x and 1.x
   chapters:
-  - file: Chapter11/Computational_graphs_with_TF1.X.ipynb
-  - file: Chapter11/Computational Graphs Exercises.ipynb
-  - file: Chapter11/Eager_execution_with_TF2.X.ipynb
-  - file: Chapter11/Overloading of operators in Tensorflow.ipynb
+  - file: Chapter10/Computational_graphs_with_TF1.X.ipynb
+  - file: Chapter10/Computational_graphs_exercises.ipynb
+  - file: Chapter10/Eager_execution_with_TF2.X.ipynb
+  - file: Chapter10/Overloading_of_operators_in_TF.ipynb
 
 
-- part: Chapter 14 - Single Neuron
+- part: Chapter 12 - Single Neuron
   chapters:
-  - file: Chapter14/Introduction
-  - file: Chapter14/Linear_regression_with_one_neuron.ipynb
-  - file: Chapter14/Linear_regression_with_numpy.ipynb 
-  - file: Chapter14/Logistic_regression_with_one_neuron.ipynb
+  - file: Chapter12/Introduction
+  - file: Chapter12/Linear_regression_with_one_neuron.ipynb
+  - file: Chapter12/Linear_regression_with_numpy.ipynb 
+  - file: Chapter12/Logistic_regression_with_one_neuron.ipynb
 
-- part: Chapter 15 - Fully Connected Networks
+- part: Chapter 13 - Fully Connected Networks
   chapters:
-  - file: Chapter15/Multiclass_classification_with_fully_connected_networks.ipynb
-  - file: Chapter15/Overfitting_example.ipynb
+  - file: Chapter13/Multiclass_classification_with_fully_connected_networks.ipynb
+  - file: Chapter13/Overfitting_example.ipynb
 
-- part: Chapter 18 - Gradient Descent Optimizer
+- part: Chapter 14 - Regularization Techniques
   chapters:
-  - file: Chapter18/Gradient_descent_developed_from_scratch.ipynb
+  - file: Chapter14/Regularization_techniques.ipynb
+  - file: Chapter14/Regularization_decision_boundaries.ipynb
+
+- part: Chapter 17 - Gradient Descent Optimizer
+  chapters:
+  - file: Chapter17/Gradient_descent_developed_from_scratch.ipynb
 
 - part: Chapter 25 - Autoencoders
   chapters:

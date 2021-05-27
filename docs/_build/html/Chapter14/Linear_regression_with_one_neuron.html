@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Linear Regression with One Neuron &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
+    <title>Linear Regression with One Neuron &#8212; Neural networks and deep learning: theory and applications</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -76,10 +76,8 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/TOELT_ADL_2nd.png" class="logo" alt="logo">
   
-  
-  <h1 class="site-logo" id="site-title">Applied Deep Learning 2nd Edition - Online Companion</h1>
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -116,7 +114,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Computational Graphs Exercises.html">
+  <a class="reference internal" href="../Chapter11/Computational_graphs_exercises.html">
    Computational Graphs - Exercises
   </a>
  </li>
@@ -126,7 +124,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Overloading of operators in Tensorflow.html">
+  <a class="reference internal" href="../Chapter11/Overloading_of_operators_in_TF.html">
    Operator Overloading in TensorFlow
   </a>
  </li>
@@ -172,6 +170,23 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter15/Overfitting_example.html">
    Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 16 - Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
   </a>
  </li>
 </ul>
@@ -318,6 +333,11 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#real-case-example-radon-contamination">
    Real Case Example:
    <strong>
@@ -392,11 +412,14 @@
                 
   <div class="section" id="linear-regression-with-one-neuron">
 <h1>Linear Regression with One Neuron<a class="headerlink" href="#linear-regression-with-one-neuron" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.03</p>
 <p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
 <p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
 <p>The purpose of this notebook is to give an example of an application of Linear Regression performed with One Neuron to a dataset taken from real world.</p>
-<p><strong>Notebook Learning Goals</strong></p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
 <p>At the end of the notebook you are going to have a clear idea of what linear regression is, seen through a practical example. Moreover, you will have learnt what is one of the simplest tasks that Neural Networks can solve. You can of course perform linear regression easily by applying traditional math formulas or using dedicated functions such as those found in scikit-learn. However, it is very instructive to follow this example, since it gives a practical grasp of how the building blocks of Deep Learning architectures (i.e. neurons) work.</p>
+</div>
 <div class="section" id="real-case-example-radon-contamination">
 <h2>Real Case Example: <strong>Radon Contamination</strong><a class="headerlink" href="#real-case-example-radon-contamination" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="dataset-overview">
@@ -407,7 +430,7 @@
 <li><p><em>county</em> (the U.S. county in which the house is located), and</p></li>
 <li><p><em>uppm</em> (a measurement of uranium level of the soil by county).</p></li>
 </ul>
-<p>This dataset fits well a classical regression problem, since it contains a continuous variable (radon activity) which is interesting to be predicted. The model which will be built is made of one neuron and will fit a linear function to floor, county and uppm variables.</p>
+<p>This dataset fits well a classical regression problem, since it contains a continuous variable (radon activity) which is interesting to be predicted. The model which will be built is made of one neuron and will fit a linear function to floor, county, uppm and pcterr variables.</p>
 </div>
 <div class="section" id="libraries-and-dataset-import">
 <h3>Libraries and Dataset Import<a class="headerlink" href="#libraries-and-dataset-import" title="Permalink to this headline">¶</a></h3>
@@ -428,19 +451,19 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
-  Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-0_qrg12m
-  Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-0_qrg12m
-Requirement already satisfied (use --upgrade to upgrade): tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c- from git+https://github.com/tensorflow/docs in /usr/local/lib/python3.6/dist-packages
-Requirement already satisfied: astor in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (0.8.1)
-Requirement already satisfied: absl-py in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (0.10.0)
-Requirement already satisfied: protobuf in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (3.12.4)
-Requirement already satisfied: pyyaml in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (3.13)
-Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from absl-py-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (1.15.0)
-Requirement already satisfied: setuptools in /usr/local/lib/python3.6/dist-packages (from protobuf-&gt;tensorflow-docs===0.0.0146903589e869081cce7006f160331ea5837418c-) (50.3.0)
+  Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-i6fpletq
+  Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-i6fpletq
+Requirement already satisfied (use --upgrade to upgrade): tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499- from git+https://github.com/tensorflow/docs in /usr/local/lib/python3.6/dist-packages
+Requirement already satisfied: astor in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (0.8.1)
+Requirement already satisfied: absl-py in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (0.10.0)
+Requirement already satisfied: protobuf&gt;=3.14 in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (3.14.0)
+Requirement already satisfied: pyyaml in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (3.13)
+Requirement already satisfied: dataclasses in /usr/local/lib/python3.6/dist-packages (from tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (0.8)
+Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from absl-py-&gt;tensorflow-docs===0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499-) (1.15.0)
 Building wheels for collected packages: tensorflow-docs
   Building wheel for tensorflow-docs (setup.py) ... ?25l?25hdone
-  Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.0146903589e869081cce7006f160331ea5837418c_-cp36-none-any.whl size=143892 sha256=8c20e34b4bfc6e2c07fdb56c9f0d7cf7f4f36f7593610ec657d8b25be210481c
-  Stored in directory: /tmp/pip-ephem-wheel-cache-n680b6k2/wheels/eb/1b/35/fce87697be00d2fc63e0b4b395b0d9c7e391a10e98d9a0d97f
+  Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.0d7cf3b307cf13e5aadea359db22a77a1cb04f499_-cp36-none-any.whl size=146696 sha256=66a2dc47b5db36fffdcf797cf2ddcac23ff1e0b0f03d721cbed1bbab77e1ca68
+  Stored in directory: /tmp/pip-ephem-wheel-cache-efk_dabh/wheels/eb/1b/35/fce87697be00d2fc63e0b4b395b0d9c7e391a10e98d9a0d97f
 Successfully built tensorflow-docs
 </pre></div>
 </div>
@@ -723,11 +746,11 @@ The testing dataset dimensions are:  (186, 4)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential_1&quot;
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
-dense (Dense)                (None, 1)                 5         
+dense_1 (Dense)              (None, 1)                 5         
 =================================================================
 Total params: 5
 Trainable params: 5
@@ -741,9 +764,9 @@ _________________________________________________________________
 </div>
 <div class="section" id="training-phase-model-s-learning-phase">
 <h3>Training Phase (Model’s Learning Phase)<a class="headerlink" href="#training-phase-model-s-learning-phase" title="Permalink to this headline">¶</a></h3>
-<p>Training our neuron means finding the weights and biases that minimize a chosen function (usually called the <strong>cost function</strong> and typically indicated by <span class="math notranslate nohighlight">\(J\)</span>). The cost function to be minimized in the case of a linear regression task is the <strong>mean square error</strong>. The most famous numerical method to find the minimum of a given function is the <strong>gradient descent</strong> (it is suited for cases in which the solution can not be found analytically, such as all neural network applications).</p>
-<p>The minimization process based on gradient descent is iterative, therefore it is necessary to decide when to stop it. The simplest way is to set a number of repetitions (called <strong>epochs</strong>) and to run the algorithm that fixed number of times. Then, results are checked to see if an optimal point has been reached. If not, the number of epochs is increased.</p>
-<p>We start training our model for <strong>1000</strong> epochs and we look at the summary in terms of performances (MAE and MSE).</p>
+<p>Training our neuron means finding the weights and biases that minimize a chosen function (usually called the <strong>cost function</strong> and typically indicated by <span class="math notranslate nohighlight">\(J\)</span>). The cost function to be minimized in the case of a linear regression task is the <strong>mean square error</strong>. The most famous numerical method to find the minimum of a given function is the <strong>gradient descent</strong> (it is suited for cases in which the solution can not be found analytically, such as all neural network applications). In our example we used the <strong>RMSprop algorithm</strong> as optimizer.</p>
+<p>The minimization process is iterative, therefore it is necessary to decide when to stop it. The simplest way is to set a number of repetitions (called <strong>epochs</strong>) and to run the algorithm that fixed number of times. Then, results are checked to see if an optimal point has been reached. If not, the number of epochs is increased.</p>
+<p>We start training our model for <strong>1000</strong> epochs and we look at the summary in terms of performances (MSE).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">1000</span>
@@ -756,25 +779,25 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, loss:2543.7136,  mse:2543.7136,  
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, loss:1784.2560,  mse:1784.2560,  
 ....................................................................................................
-Epoch: 100, loss:19.7100,  mse:19.7100,  
+Epoch: 100, loss:20.8368,  mse:20.8368,  
 ....................................................................................................
-Epoch: 200, loss:16.4799,  mse:16.4799,  
+Epoch: 200, loss:16.8424,  mse:16.8424,  
 ....................................................................................................
-Epoch: 300, loss:16.0523,  mse:16.0523,  
+Epoch: 300, loss:16.1779,  mse:16.1779,  
 ....................................................................................................
-Epoch: 400, loss:16.0160,  mse:16.0160,  
+Epoch: 400, loss:16.0776,  mse:16.0776,  
 ....................................................................................................
-Epoch: 500, loss:15.9984,  mse:15.9984,  
+Epoch: 500, loss:16.0403,  mse:16.0403,  
 ....................................................................................................
-Epoch: 600, loss:15.9890,  mse:15.9890,  
+Epoch: 600, loss:16.0212,  mse:16.0212,  
 ....................................................................................................
-Epoch: 700, loss:15.9610,  mse:15.9610,  
+Epoch: 700, loss:16.0089,  mse:16.0089,  
 ....................................................................................................
-Epoch: 800, loss:15.9715,  mse:15.9715,  
+Epoch: 800, loss:15.9947,  mse:15.9947,  
 ....................................................................................................
-Epoch: 900, loss:15.9663,  mse:15.9663,  
+Epoch: 900, loss:15.9936,  mse:15.9936,  
 ....................................................................................................
 </pre></div>
 </div>
@@ -815,32 +838,32 @@ Epoch: 900, loss:15.9663,  mse:15.9663,
   <tbody>
     <tr>
       <th>995</th>
-      <td>15.955948</td>
-      <td>15.955948</td>
+      <td>15.992101</td>
+      <td>15.992101</td>
       <td>995</td>
     </tr>
     <tr>
       <th>996</th>
-      <td>15.957788</td>
-      <td>15.957788</td>
+      <td>15.979033</td>
+      <td>15.979033</td>
       <td>996</td>
     </tr>
     <tr>
       <th>997</th>
-      <td>15.975211</td>
-      <td>15.975211</td>
+      <td>15.987959</td>
+      <td>15.987959</td>
       <td>997</td>
     </tr>
     <tr>
       <th>998</th>
-      <td>15.973335</td>
-      <td>15.973335</td>
+      <td>15.970425</td>
+      <td>15.970425</td>
       <td>998</td>
     </tr>
     <tr>
       <th>999</th>
-      <td>15.961553</td>
-      <td>15.961553</td>
+      <td>15.969935</td>
+      <td>15.969935</td>
       <td>999</td>
     </tr>
   </tbody>
@@ -875,7 +898,6 @@ Epoch: 900, loss:15.9663,  mse:15.9663,
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">((</span><span class="mi">241</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">247</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">240</span><span class="o">/</span><span class="mf">255.0</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -898,10 +920,10 @@ Epoch: 900, loss:15.9663,  mse:15.9663,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[-6.6795307e-01],
-       [ 2.7279984e-03],
-       [ 2.8733387e+00],
-       [-2.0828046e-01]], dtype=float32), array([4.2394686], dtype=float32)]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[-6.8692839e-01],
+       [ 1.4542415e-03],
+       [ 3.0431905e+00],
+       [-2.0223841e-01]], dtype=float32), array([4.0284123], dtype=float32)]
 </pre></div>
 </div>
 </div>
@@ -909,7 +931,7 @@ Epoch: 900, loss:15.9663,  mse:15.9663,
 </div>
 <div class="section" id="testing-phase-model-s-performances-evaluation">
 <h3>Testing Phase (Model’s Performances Evaluation)<a class="headerlink" href="#testing-phase-model-s-performances-evaluation" title="Permalink to this headline">¶</a></h3>
-<p>Now, to know if the model you have just built is suited to be applied to unseen data, you have to check its performances over the test set. In the following cell the linear model is applied to the test set to make predictions (<code class="docutils literal notranslate"><span class="pre">test_predictions</span></code>). Then, predicted radon activity values are compared with real values (<code class="docutils literal notranslate"><span class="pre">test_y</span></code>) by simply plotting <strong>Predictions vs. True Values</strong>. An optimal model shows points distributed over the black solid line present in the plot.</p>
+<p>Now, to know if the model you have just built is suited to be applied to unseen data, you have to check its performances over the test set. In the following cell the linear model is applied to the test set to make predictions (<code class="docutils literal notranslate"><span class="pre">test_predictions</span></code>). Then, predicted radon activity values are compared with real values (<code class="docutils literal notranslate"><span class="pre">test_y</span></code>) by simply plotting <strong>predictions vs. true values</strong>. An optimal model shows points distributed over the black solid line present in the plot.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test_x</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="c1"># predict radon activities with the built linear regression model</span>
@@ -930,7 +952,6 @@ Epoch: 900, loss:15.9663,  mse:15.9663,
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">((</span><span class="mi">241</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">247</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">240</span><span class="o">/</span><span class="mf">255.0</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>

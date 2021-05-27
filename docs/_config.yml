@@ -1,8 +1,8 @@
 # Book settings
-title: Applied Deep Learning 2nd Edition - Online Companion
+title: "Neural networks and deep learning: theory and applications"
 author: Umberto Michelucci and Michela Sperti
 copyright: "TOELT LLC (2020-2021)"
-logo: TOELT_ADL_2nd.png
+# logo: TOELT_ADL_2nd.png
 
 repository:
   url                       : https://github.com/toelt-llc/ADL-Book-2nd-Ed

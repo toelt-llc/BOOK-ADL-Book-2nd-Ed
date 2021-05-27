@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Linear Regression with NumPy &#8212; Applied Deep Learning 2nd Edition - Online Companion</title>
+    <title>Linear Regression with NumPy &#8212; Neural networks and deep learning: theory and applications</title>
     
   <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
@@ -76,10 +76,8 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="../index.html">
   
-  <img src="../_static/TOELT_ADL_2nd.png" class="logo" alt="logo">
   
-  
-  <h1 class="site-logo" id="site-title">Applied Deep Learning 2nd Edition - Online Companion</h1>
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
   
 </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -116,7 +114,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Computational Graphs Exercises.html">
+  <a class="reference internal" href="../Chapter11/Computational_graphs_exercises.html">
    Computational Graphs - Exercises
   </a>
  </li>
@@ -126,7 +124,7 @@
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter11/Overloading of operators in Tensorflow.html">
+  <a class="reference internal" href="../Chapter11/Overloading_of_operators_in_TF.html">
    Operator Overloading in TensorFlow
   </a>
  </li>
@@ -172,6 +170,23 @@
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter15/Overfitting_example.html">
    Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 16 - Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter16/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
   </a>
  </li>
 </ul>
@@ -380,6 +395,7 @@
                 
   <div class="section" id="linear-regression-with-numpy">
 <h1>Linear Regression with NumPy<a class="headerlink" href="#linear-regression-with-numpy" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.02</p>
 <p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
 <p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
 <p>The purpose of this notebook (that is intended to be analyzed in parallel with <em>Linear_Regression_with_One_Neuron.ipynb</em>) is to show a Linear Regression example performed with traditional math formulas and implemented with NumPy Python library.</p>
@@ -557,7 +573,13 @@ Y^T Y = y_1^2 + ... + y_n^2
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 849 (delta 9), reused 13 (delta 6), pack-reused 833
+Receiving objects: 100% (849/849), 60.20 MiB | 38.58 MiB/s, done.
+Resolving deltas: 100% (403/403), done.
 </pre></div>
 </div>
 </div>
@@ -600,6 +622,12 @@ Y^T Y = y_1^2 + ... + y_n^2
 
 <span class="n">rd</span> <span class="o">=</span> <span class="n">read_data</span><span class="p">(</span><span class="n">CACHE_DIR</span><span class="p">,</span> <span class="n">url_base</span><span class="p">)</span>
 <span class="n">radon_features</span><span class="p">,</span> <span class="n">radon_labels</span><span class="p">,</span> <span class="n">county_name</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading http://www.stat.columbia.edu/~gelman/arm/examples/radon/srrs2.dat to /tmp/radon/srrs2.dat.
+Downloading http://www.stat.columbia.edu/~gelman/arm/examples/radon/cty.dat to /tmp/radon/cty.dat.
 </pre></div>
 </div>
 </div>
@@ -712,7 +740,6 @@ The testing dataset dimensions are:  (186, 4)
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">((</span><span class="mi">241</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">247</span><span class="o">/</span><span class="mf">255.0</span><span class="p">,</span> <span class="mi">240</span><span class="o">/</span><span class="mf">255.0</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>

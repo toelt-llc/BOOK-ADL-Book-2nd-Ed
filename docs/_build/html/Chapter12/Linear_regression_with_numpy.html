@@ -1,0 +1,816 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Linear Regression with NumPy &#8212; Neural networks and deep learning: theory and applications</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Logistic Regression with One Neuron" href="Logistic_regression_with_one_neuron.html" />
+    <link rel="prev" title="Linear Regression with One Neuron" href="Linear_regression_with_one_neuron.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 10 - An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Computational_graphs_exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter10/Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 12 - Single Neuron
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 13 - Fully Connected Networks
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter13/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter13/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 14 - Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter14/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 17 - Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter17/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 25 - Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter25/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Chapter 26 - Variational Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter26/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Chapter12/Linear_regression_with_numpy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/Chapter12/Linear_regression_with_numpy.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/Chapter12/Linear_regression_with_numpy.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#real-case-example-radon-contamination">
+   Real Case Example:
+   <strong>
+    Radon Contamination
+   </strong>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theory-behind-linear-regression">
+   Theory behind Linear Regression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numpy-implementation">
+   Numpy Implementation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#libraries-and-dataset-import">
+     Libraries and Dataset Import
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dataset-splitting">
+     Dataset Splitting
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regression-coefficients-computation">
+     Regression Coefficients Computation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#model-s-performances-evaluation">
+     Model’s Performances Evaluation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-readings">
+   Further Readings
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="linear-regression-with-numpy">
+<h1>Linear Regression with NumPy<a class="headerlink" href="#linear-regression-with-numpy" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.02</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<p>The purpose of this notebook (that is intended to be analyzed in parallel with <em>Linear_Regression_with_One_Neuron.ipynb</em>) is to show a Linear Regression example performed with traditional math formulas and implemented with NumPy Python library.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the notebook you are going to know every math detail behind linear regression. Moreover, you will have see an example of <strong>matrix operations</strong> in Python, performed with NumPy library. It is very useful to know this library, since it is the most famous and used package for scientific computing in Python.</p>
+</div>
+<div class="section" id="real-case-example-radon-contamination">
+<h2>Real Case Example: <strong>Radon Contamination</strong><a class="headerlink" href="#real-case-example-radon-contamination" title="Permalink to this headline">¶</a></h2>
+<p>For this tutorial, we will use the same dataset already present in <em>Linear_Regression_with_One_Neuron.ipynb</em> notebook. The reason is to compare the two final results in order to demonstrate that neural networks can easily solve a traditional linear regression problem, with a very simple architecture. Therefore, keep in mind what you have learnt in <em>Linear_Regression_with_One_Neuron.ipynb</em>.</p>
+</div>
+<div class="section" id="theory-behind-linear-regression">
+<h2>Theory behind Linear Regression<a class="headerlink" href="#theory-behind-linear-regression" title="Permalink to this headline">¶</a></h2>
+<p>The formula to be implemented is the following:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{p} = (X^T X)^{-1} X^T Y
+\]</div>
+<p>where in our radon contamination regression problem, <span class="math notranslate nohighlight">\(X\)</span> is the matrix of features and <span class="math notranslate nohighlight">\(Y\)</span> is the column of corresponding labels.</p>
+<p><strong>Derivation</strong></p>
+<p>Let’s now derive the formula analytically. Since this is a linear regression problem, the function we want to minimize is defined as the Mean Square Error (MSE):</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (p_0 + p_1 x_i -y_i  )  
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_i\)</span> are the measurements and <span class="math notranslate nohighlight">\(y_i\)</span> are the correspondent target measurements. <span class="math notranslate nohighlight">\(n\)</span> is the total number of observations at our disposal and <span class="math notranslate nohighlight">\(p_i\)</span> are the coefficients we want to determine.</p>
+<p>We will show the derivation in one dimension for simplicity, but the process is very easily expanded to many dimensions.</p>
+<p>Let’s define:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+Y = \left(
+\begin{eqnarray}
+y_1 \\
+... \\
+y_n \\
+\end {eqnarray}
+\right)
+\end{split}\]</div>
+<p>To minimize the MSE we need to find the best <span class="math notranslate nohighlight">\(\mathbf{p} = (p_0, p_1)\)</span> that solve the equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left\{
+\begin{eqnarray}
+\frac{\partial \ \text{MSE}}{\partial p_0} &amp; = &amp; 0 \\
+\frac{\partial \ \text{MSE}}{\partial p_1} &amp; = &amp; 0 \\
+\end{eqnarray}
+\right.
+\end{split}\]</div>
+<p>Let’s also define</p>
+<div class="math notranslate nohighlight">
+\[
+\hat Y = X\mathbf{p}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X = \left(
+\begin{eqnarray}
+1 &amp; \ &amp;x_1 \\
+... &amp; \ &amp;... \\
+1 &amp; \ &amp;x_n \\
+\end {eqnarray}
+\right)
+\end{split}\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat Y = \left(
+\begin{eqnarray}
+p_0+p_1x_1 \\
+... \\
+p_0+p_1x_n \\
+\end {eqnarray}
+\right)
+\end{split}\]</div>
+<p>With this notation we can write</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (\hat Y_i - Y_i  )  
+\]</div>
+<p>Note that the following is valid (you can easily check)</p>
+<div class="math notranslate nohighlight">
+\[
+Y^T Y = y_1^2 + ... + y_n^2
+\]</div>
+<p>So we can write the MSE in matrix form as</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{n}(\hat Y - Y)^T (\hat Y - Y) 
+\]</div>
+<p>and therefore</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \frac{1}{n}(X\mathbf{p} - Y)^T (X\mathbf{p} - Y) =  \frac{1}{n}(\mathbf{p}^TX - Y^T) (X\mathbf{p} - Y)
+\]</div>
+<p>To find the best parameters we can neglect the <span class="math notranslate nohighlight">\(1/n\)</span> factor. Performing the multiplication of the matrices we find (you must be careful when multiplying them)</p>
+<div class="math notranslate nohighlight">
+\[
+\text{MSE} = \mathbf{p}^T X^T X \mathbf{p}-\mathbf{p}^TX^TY-Y^TX\mathbf{p} -Y^T Y =  \mathbf{p}^T X^T X \mathbf{p} - 2Y^TX\mathbf{p}-Y^TY
+\]</div>
+<p>since is easy to verify that</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{p}^TX^TY = Y^TX\mathbf{p} = \sum_{i=1}^n y_i \hat y_i
+\]</div>
+<p>At this point, using rules to evaluate derivatives of matrices we have</p>
+<div class="math notranslate nohighlight">
+\[
+\nabla \text{MSE}_\mathbf{p} = 2(\mathbf{p} X ^T X-Y^TX) = 0
+\]</div>
+<p>and solving for <span class="math notranslate nohighlight">\(\mathbf{p}\)</span> we get</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{p}^T = Y^TX (X^T X)^{-1}
+\]</div>
+<p>and taking the transpose of both sides</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{p} = \left[
+(X^TX)^{-1}
+\right
+]^T X^T Y 
+\]</div>
+<p>note that <span class="math notranslate nohighlight">\((A^{-1})^T = (A^T)^{-1}\)</span> and therefore</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{p} = (X^TX)^{-1} X^T Y 
+\]</div>
+<p>since <span class="math notranslate nohighlight">\((X^TX)^{-1} = X^TX\)</span>.</p>
+</div>
+<div class="section" id="numpy-implementation">
+<h2>Numpy Implementation<a class="headerlink" href="#numpy-implementation" title="Permalink to this headline">¶</a></h2>
+<p>Now the idea is to calculate the previously derived formula using NumPy operations between matrices.</p>
+<div class="section" id="libraries-and-dataset-import">
+<h3>Libraries and Dataset Import<a class="headerlink" href="#libraries-and-dataset-import" title="Permalink to this headline">¶</a></h3>
+<p>The following lines will produce as ouput the radon dataset to which we will apply the regression model. You can just execute them, since we have already analyzed the details in <em>Linear_Regression_with_One_Neuron.ipynb</em> notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># general libraries</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="k">as</span> <span class="nn">fm</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Referring to the following cell, if you want to re-clone a repository</span>
+<span class="c1"># inside the google colab instance, you need to delete it first. </span>
+<span class="c1"># You can delete the repositories contained in this instance executing </span>
+<span class="c1"># the following two lines of code (deleting the # comment symbol).</span>
+
+<span class="c1"># !rm -rf ADL-Book-2nd-Ed </span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># This command actually clone the repository of the book in the google colab
+# instance. In this way this notebook will have access to the modules
+# we have written for this book.
+
+# Please note that in case you have already run this cell, and you run it again
+# you may get the error message:
+#
+# fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
+# 
+# In this case you can safely ignore the error message.
+
+!git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
+remote: Enumerating objects: 16, done.
+remote: Counting objects: 100% (16/16), done.
+remote: Compressing objects: 100% (10/10), done.
+remote: Total 849 (delta 9), reused 13 (delta 6), pack-reused 833
+Receiving objects: 100% (849/849), 60.20 MiB | 38.58 MiB/s, done.
+Resolving deltas: 100% (403/403), done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell imports some custom written functions that we have created to </span>
+<span class="c1"># make the loading of the data and the plotting easier. You don&#39;t need </span>
+<span class="c1"># to undertsand the details and you can simply ignore this cell.</span>
+<span class="c1"># Simply run it with CMD+Enter (on Mac) or CTRL+Enter (Windows or Ubuntu) to</span>
+<span class="c1"># import the necessary functions.</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ADL-Book-2nd-Ed/modules/&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">read_radon_dataset</span> <span class="kn">import</span> <span class="n">read_data</span>
+<span class="kn">from</span> <span class="nn">style_setting</span> <span class="kn">import</span> <span class="n">set_style</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell provides the dataset on which you will implement the linear regression model.</span>
+<span class="c1"># Data are temporarily put into &quot;tmp&quot; folder. &quot;url_base&quot; contains the link to access the dataset.</span>
+
+<span class="c1"># After cell&#39;s execution, you will have a variable containing features (&quot;radon_features&quot;),</span>
+<span class="c1"># a variable containing labels (&quot;radon_labels&quot;) and an informative variable containing</span>
+<span class="c1"># all countries including in the dataset. </span>
+
+<span class="c1"># You don&#39;t need to understand the implementation&#39;s details and you can simply ignore this cell.</span>
+<span class="c1"># Simply run it with CMD+Enter (on Mac) or CTRL+Enter (Windows or Ubuntu) to</span>
+<span class="c1"># import the necessary functions.</span>
+
+<span class="c1"># inputs to download the dataset</span>
+<span class="n">CACHE_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">,</span> <span class="s1">&#39;tmp&#39;</span><span class="p">,</span> <span class="s1">&#39;radon&#39;</span><span class="p">)</span>
+<span class="n">url_base</span> <span class="o">=</span> <span class="s1">&#39;http://www.stat.columbia.edu/~gelman/arm/examples/radon/&#39;</span>
+<span class="c1"># Alternative source:</span>
+<span class="c1"># url_base = (&#39;https://raw.githubusercontent.com/pymc-devs/uq_chapter/master/reference/data/&#39;)</span>
+
+<span class="n">rd</span> <span class="o">=</span> <span class="n">read_data</span><span class="p">(</span><span class="n">CACHE_DIR</span><span class="p">,</span> <span class="n">url_base</span><span class="p">)</span>
+<span class="n">radon_features</span><span class="p">,</span> <span class="n">radon_labels</span><span class="p">,</span> <span class="n">county_name</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading http://www.stat.columbia.edu/~gelman/arm/examples/radon/srrs2.dat to /tmp/radon/srrs2.dat.
+Downloading http://www.stat.columbia.edu/~gelman/arm/examples/radon/cty.dat to /tmp/radon/cty.dat.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataset-splitting">
+<h3>Dataset Splitting<a class="headerlink" href="#dataset-splitting" title="Permalink to this headline">¶</a></h3>
+<p>The following lines will produce as output the training dataset and the testing dataset for model’s development, which are the same sets used in the example performed with one neuron, so that we can compare final results of both approaches. You can just execute the following cell, since we have already analyzed the details in <em>Linear_Regression_with_One_Neuron.ipynb</em> notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">rnd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">radon_features</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">0.8</span>
+
+<span class="n">train_x</span> <span class="o">=</span> <span class="n">radon_features</span><span class="p">[</span><span class="n">rnd</span><span class="p">]</span> <span class="c1"># training dataset (features)</span>
+<span class="n">train_y</span> <span class="o">=</span> <span class="n">radon_labels</span><span class="p">[</span><span class="n">rnd</span><span class="p">]</span> <span class="c1"># training dataset (labels)</span>
+<span class="n">test_x</span> <span class="o">=</span> <span class="n">radon_features</span><span class="p">[</span><span class="o">~</span><span class="n">rnd</span><span class="p">]</span> <span class="c1"># testing dataset (features)</span>
+<span class="n">test_y</span> <span class="o">=</span> <span class="n">radon_labels</span><span class="p">[</span><span class="o">~</span><span class="n">rnd</span><span class="p">]</span> <span class="c1"># testing dataset (labels)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The training dataset dimensions are: &#39;</span><span class="p">,</span> <span class="n">train_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The testing dataset dimensions are: &#39;</span><span class="p">,</span> <span class="n">test_x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The training dataset dimensions are:  (733, 4)
+The testing dataset dimensions are:  (186, 4)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="regression-coefficients-computation">
+<h3>Regression Coefficients Computation<a class="headerlink" href="#regression-coefficients-computation" title="Permalink to this headline">¶</a></h3>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">radon_features</span></code> is <span class="math notranslate nohighlight">\(X\)</span> and <code class="docutils literal notranslate"><span class="pre">radon_labels</span></code> is <span class="math notranslate nohighlight">\(Y\)</span>. Remember we want to calculate the linear regression coefficients:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{p} = (X^T X)^{-1} X^T Y
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># We convert our data into NumPy arrays since we will use NumPy operations</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train_x</span><span class="o">.</span><span class="n">values</span>
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">train_y</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test_x</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span> <span class="c1"># np.transpose returns the transpose of a matrix</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># np.linalg.inv returns the inverse of a matric</span>
+<span class="c1"># np.matmul returns the multiplication between two matrices</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">X_T</span><span class="p">,</span><span class="n">X_train</span><span class="p">)),</span><span class="n">X_T</span><span class="p">),</span><span class="n">Y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Easy, right? You had a proof of the power and easiness of use of NumPy library in the case of matrices’ operations. Now let’s have a look at <strong>p</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.82682133  0.01678125  5.79487471 -0.13826876]
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are the four regression coefficients that fully describe our linear regression model. You can compare these numbers with the ones obtained in the <em>Linear_regression_with_one_neuron.ipynb</em> notebook. Let’s try to predict some radon activities now.</p>
+</div>
+<div class="section" id="model-s-performances-evaluation">
+<h3>Model’s Performances Evaluation<a class="headerlink" href="#model-s-performances-evaluation" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following line contains the path to fonts that are used to plot result in</span>
+<span class="c1"># a uniform way.</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">set_style</span><span class="p">()</span><span class="o">.</span><span class="n">set_general_style_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span><span class="n">p</span><span class="p">)</span> <span class="c1"># predict radon activities using the linear regression </span>
+<span class="c1"># coefficients just calculated</span>
+
+<span class="c1"># Predictions vs. True Values PLOT</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">test_y</span><span class="p">,</span> <span class="n">test_predictions</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predictions [activity]&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;True Values [activity]&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Linear Regression with NumPy&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Linear_regression_with_numpy_36_0.png" src="../_images/Linear_regression_with_numpy_36_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="further-readings">
+<h2>Further Readings<a class="headerlink" href="#further-readings" title="Permalink to this headline">¶</a></h2>
+<p><strong>NumPy package</strong></p>
+<ol class="simple">
+<li><p>All documentation (with lots of tutorial and examples already implemented): https://numpy.org/doc/stable/</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Chapter12"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="Linear_regression_with_one_neuron.html" title="previous page">Linear Regression with One Neuron</a>
+    <a class='right-next' id="next-link" href="Logistic_regression_with_one_neuron.html" title="next page">Logistic Regression with One Neuron</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci and Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2021).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
