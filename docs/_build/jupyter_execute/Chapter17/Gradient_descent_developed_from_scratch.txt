@@ -1,6 +1,6 @@
 # Gradient Descent
 
-Version 1.21
+Version 1.22
 
 (C) 2020 - Umberto Michelucci, Michela Sperti
 
@@ -26,11 +26,9 @@ With $J(\mathbf{w}_{n})$, we have indicated the gradient of the cost function, w
 
 $$
 J(\mathbf{w}_{n})=\displaystyle
-\begin{pmatrix}
-\partial J(\mathbf{w})/\partial w_1\\
-\vdots\\
-\partial J(\mathbf{w})/\partial w_{n_x}
-\end{pmatrix} \tag{2}
+(
+\partial J(\mathbf{w})/\partial w_1, 
+\dots, \partial J(\mathbf{w})/\partial w_{n_x}) \tag{2}
 $$
 
 Let's suppose now that we want to fit some data to a generic function $f({\bf x}^{(i)})$ where ${\bf x}^{(i)}$ is the $i^th$ observation of an input dataset. In general we will have ${\bf x}^{(i)}\in \mathbb{R}^n$ with $n\in \mathbb{N}$, but for this example let's suppose that 

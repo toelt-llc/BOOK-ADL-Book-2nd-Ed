@@ -389,7 +389,7 @@
                 
   <div class="section" id="gradient-descent">
 <h1>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h1>
-<p>Version 1.21</p>
+<p>Version 1.22</p>
 <p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
 <p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
 <div class="section" id="notebook-learning-goals">
@@ -410,14 +410,12 @@
 \]</div>
 <p>With <span class="math notranslate nohighlight">\(J(\mathbf{w}_{n})\)</span>, we have indicated the gradient of the cost function, which is a vector whose components are the partial derivatives of the cost function with respect to all the components of the weight vector <span class="math notranslate nohighlight">\(\mathbf{w}\)</span>, as follows:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
+\[
 J(\mathbf{w}_{n})=\displaystyle
-\begin{pmatrix}
-\partial J(\mathbf{w})/\partial w_1\\
-\vdots\\
-\partial J(\mathbf{w})/\partial w_{n_x}
-\end{pmatrix} \tag{2}
-\end{split}\]</div>
+(
+\partial J(\mathbf{w})/\partial w_1, 
+\dots, \partial J(\mathbf{w})/\partial w_{n_x}) \tag{2}
+\]</div>
 <p>Let’s suppose now that we want to fit some data to a generic function <span class="math notranslate nohighlight">\(f({\bf x}^{(i)})\)</span> where <span class="math notranslate nohighlight">\({\bf x}^{(i)}\)</span> is the <span class="math notranslate nohighlight">\(i^th\)</span> observation of an input dataset. In general we will have <span class="math notranslate nohighlight">\({\bf x}^{(i)}\in \mathbb{R}^n\)</span> with <span class="math notranslate nohighlight">\(n\in \mathbb{N}\)</span>, but for this example let’s suppose that
 <span class="math notranslate nohighlight">\({\bf x}^{(i)}=x^{(i)}\in \mathbb{R}\)</span>.</p>
 <p>As a cost function, let’s choose the  <strong>mean squared error</strong> (MSE):</p>
