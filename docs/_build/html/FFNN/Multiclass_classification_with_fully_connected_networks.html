@@ -1,0 +1,1917 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multiclass Classification with Fully Connected Networks &#8212; Neural networks and deep learning: theory and applications</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Overfitting Example" href="Overfitting_example.html" />
+    <link rel="prev" title="Logistic Regression with One Neuron" href="../single_neuron/Logistic_regression_with_one_neuron.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Single Neuron
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Fully Connected Networks
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradientDescent/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Generative Adversarial Networks
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html">
+   GAN Example in TensorFlow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html#references">
+   References
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Variational Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../VAE/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/FFNN/Multiclass_classification_with_fully_connected_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/FFNN/Multiclass_classification_with_fully_connected_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/FFNN/Multiclass_classification_with_fully_connected_networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-overview">
+   Dataset Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#libraries-and-dataset-import">
+   Libraries and Dataset Import
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#helper-functions">
+   Helper Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-preparation">
+   Dataset Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-normalization">
+   Data Normalization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#feed-forward-network-model-with-one-hidden-layer">
+   Feed-forward Network Model with One Hidden Layer
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent-variations">
+   Gradient Descent Variations
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#batch-gradient-descent">
+     Batch Gradient Descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stochastic-gradient-descent">
+     Stochastic Gradient Descent
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mini-batch-gradient-descent">
+     Mini-batch Gradient Descent
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparison-of-mini-batch-sizes">
+       Comparison of Mini-batch Sizes
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#time-needed-by-different-batch-sizes">
+       Time Needed by Different Batch Sizes
+      </a>
+      <ul class="nav section-nav flex-column">
+       <li class="toc-h5 nav-item toc-entry">
+        <a class="reference internal nav-link" href="#final-tips">
+         Final Tips
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-wrong-predictions">
+   Examples of Wrong Predictions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-many-layers-efficiently">
+   Adding Many Layers Efficiently
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparing-different-networks">
+   Comparing Different Networks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Final Tips
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-readings-a-name-fr-a">
+   Further Readings
+   <a name="fr">
+   </a>
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="multiclass-classification-with-fully-connected-networks">
+<h1>Multiclass Classification with Fully Connected Networks<a class="headerlink" href="#multiclass-classification-with-fully-connected-networks" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.0</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<p>The purpose of this notebook is to give a practical example (with a dataset taken from the real world) of a multiclass classification problem solved by means of a Feed-Forward Neural Network architecture.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the notebook you are going to know how to implement yourself a feed-forward neural network architecture in Keras. Moreover, you will have learnt the main differences between the three versions of the gradient descent optimizer (i.e. batch gradient descent, stochastic gradient descent and mini-batch gradient descent). Finally, you are going to know what optimizing a neural network means and how to choose the best network among several possibilities.</p>
+</div>
+<div class="section" id="dataset-overview">
+<h2>Dataset Overview<a class="headerlink" href="#dataset-overview" title="Permalink to this headline">¶</a></h2>
+<p><strong>Context</strong></p>
+<p>Fashion-MNIST is a dataset of Zalando’s article images (consisting of a training set of 60000 examples and a test set of 10000 examples). Each example is a 28x28 grayscale image, associated with a label from 10 classes. Zalando intends Fashion-MNIST to serve as a direct drop-in replacement for the original MNIST dataset for benchmarking machine learning algorithms. It shares the same image size and structure of training and testing splits.</p>
+<p>The original MNIST dataset contains a lot of handwritten digits. Members of the AI/ML/Data Science community love this dataset and use it as a benchmark to validate their algorithms. In fact, MNIST is often the first dataset researchers try. “If it doesn’t work on MNIST, it won’t work at all”, they said. “Well, if it does work on MNIST, it may still fail on others.”
+Zalando seeks to replace the original MNIST dataset</p>
+<p><strong>Content</strong></p>
+<p>Each image is 28 pixels in height and 28 pixels in width, for a total of 784 pixels in total. Each pixel has a single pixel-value associated with it, indicating the lightness or darkness of that pixel, with higher numbers meaning darker. This pixel-value is an integer between 0 and 255. The training and test data sets have 785 columns. The first column consists of the class labels (see above), and represents the article of clothing. The rest of the columns contain the pixel-values of the associated image.</p>
+<p>To locate a pixel on the image, suppose that we have decomposed <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(x = 28i + j\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are integers between 0 and 27. The pixel is located on row <span class="math notranslate nohighlight">\(i\)</span> and column <span class="math notranslate nohighlight">\(j\)</span> of a 28x28 matrix.
+For example, pixel31 indicates the pixel that is in the fourth column from the left, and the second row from the top.</p>
+<p>Each row of the dataset is a separate image. Column 1 is the class label.
+Remaining columns are pixel numbers (784 total). Each value is the darkness of the pixel (1 to 255).</p>
+<p><strong>Labels</strong></p>
+<p>Each training and test example is assigned to one of the following labels:</p>
+<ul class="simple">
+<li><p>0 T-shirt/top</p></li>
+<li><p>1 Trouser</p></li>
+<li><p>2 Pullover</p></li>
+<li><p>3 Dress</p></li>
+<li><p>4 Coat</p></li>
+<li><p>5 Sandal</p></li>
+<li><p>6 Shirt</p></li>
+<li><p>7 Sneaker</p></li>
+<li><p>8 Bag</p></li>
+<li><p>9 Ankle boot</p></li>
+</ul>
+<p><strong>Acknowledgements</strong></p>
+<p>Original dataset was downloaded from TensorFlow datasets catalog.</p>
+<p><strong>License</strong></p>
+<p>The MIT License (MIT) Copyright © [2017] Zalando SE, https://tech.zalando.com</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</div>
+<div class="section" id="libraries-and-dataset-import">
+<h2>Libraries and Dataset Import<a class="headerlink" href="#libraries-and-dataset-import" title="Permalink to this headline">¶</a></h2>
+<p>This section contains the necessary libraries (such as tensorflow or pandas) you need to import to run the notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># This command install code from the tensorflow docs repository.
+# We need to use tensorflow_docs.modeling function when training our model.
+# This function will generate a report on the network&#39;s perfomances
+# step by step during the training phase (see Training Phase section of the
+# notebook). 
+
+# You can safely ignore this cell if you don&#39;t understand what it does.
+
+!pip install git+https://github.com/tensorflow/docs
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
+  Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-fjjd7bsb
+  Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-fjjd7bsb
+Requirement already satisfied: astor in /usr/local/lib/python3.7/dist-packages (from tensorflow-docs===0.0.00c8dbd4ba403cf3fdd30917f86f817f5228d3812-) (0.8.1)
+Requirement already satisfied: absl-py in /usr/local/lib/python3.7/dist-packages (from tensorflow-docs===0.0.00c8dbd4ba403cf3fdd30917f86f817f5228d3812-) (0.10.0)
+Collecting protobuf&gt;=3.14
+?25l  Downloading https://files.pythonhosted.org/packages/7d/cc/abf8e30629db7a8b15efb79d4c87e235895d2c636ce7a4ac625cfc816f07/protobuf-3.15.6-cp37-cp37m-manylinux1_x86_64.whl (1.0MB)
+     |████████████████████████████████| 1.0MB 9.3MB/s 
+?25hRequirement already satisfied: pyyaml in /usr/local/lib/python3.7/dist-packages (from tensorflow-docs===0.0.00c8dbd4ba403cf3fdd30917f86f817f5228d3812-) (3.13)
+Requirement already satisfied: six in /usr/local/lib/python3.7/dist-packages (from absl-py-&gt;tensorflow-docs===0.0.00c8dbd4ba403cf3fdd30917f86f817f5228d3812-) (1.15.0)
+Building wheels for collected packages: tensorflow-docs
+  Building wheel for tensorflow-docs (setup.py) ... ?25l?25hdone
+  Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.00c8dbd4ba403cf3fdd30917f86f817f5228d3812_-cp37-none-any.whl size=147330 sha256=9ed6d253c77ceb2a25a8edbc456968e47b4cb86a76672a39754815396a55e317
+  Stored in directory: /tmp/pip-ephem-wheel-cache-g9kwqb78/wheels/eb/1b/35/fce87697be00d2fc63e0b4b395b0d9c7e391a10e98d9a0d97f
+Successfully built tensorflow-docs
+Installing collected packages: protobuf, tensorflow-docs
+  Found existing installation: protobuf 3.12.4
+    Uninstalling protobuf-3.12.4:
+      Successfully uninstalled protobuf-3.12.4
+Successfully installed protobuf-3.15.6 tensorflow-docs-0.0.00c8dbd4ba403cf3fdd30917f86f817f5228d3812-
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># general libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="k">as</span> <span class="nn">fm</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># tensorflow libraries</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">fashion_mnist</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">import</span> <span class="nn">tensorflow_docs</span> <span class="k">as</span> <span class="nn">tfdocs</span>
+<span class="kn">import</span> <span class="nn">tensorflow_docs.modeling</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Referring to the following cell, if you want to re-clone a repository</span>
+<span class="c1"># inside the google colab instance, you need to delete it first. </span>
+<span class="c1"># You can delete the repositories contained in this instance executing </span>
+<span class="c1"># the following two lines of code (deleting the # comment symbol).</span>
+
+<span class="c1"># !rm -rf ADL-Book-2nd-Ed</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># This command actually clone the repository of the book in the google colab
+# instance. In this way this notebook will have access to the modules
+# we have written for this book.
+
+# Please note that in case you have already run this cell, and you run it again
+# you may get the error message:
+#
+# fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
+# 
+# In this case you can safely ignore the error message.
+
+!git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
+remote: Enumerating objects: 86, done.
+remote: Counting objects: 100% (86/86), done.
+remote: Compressing objects: 100% (83/83), done.
+remote: Total 1013 (delta 16), reused 50 (delta 3), pack-reused 927
+Receiving objects: 100% (1013/1013), 151.66 MiB | 13.79 MiB/s, done.
+Resolving deltas: 100% (444/444), done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell imports some custom written functions that we have created to </span>
+<span class="c1"># make the plotting easier. You don&#39;t need to undertsand the details and </span>
+<span class="c1"># you can simply ignore this cell.</span>
+<span class="c1"># Simply run it with CMD+Enter (on Mac) or CTRL+Enter (Windows or Ubuntu) to</span>
+<span class="c1"># import the necessary functions.</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ADL-Book-2nd-Ed/modules/&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">style_setting</span> <span class="kn">import</span> <span class="n">set_style</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cells are needed to <strong>download</strong> the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">((</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">),</span> <span class="p">(</span><span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">))</span> <span class="o">=</span> <span class="n">fashion_mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
+32768/29515 [=================================] - 0s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
+26427392/26421880 [==============================] - 0s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
+8192/5148 [===============================================] - 0s 0us/step
+Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
+4423680/4422102 [==============================] - 0s 0us/step
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="helper-functions">
+<h2>Helper Functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_label_name</span><span class="p">(</span><span class="n">idx</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Returns the corresponding label&#39;s name, given its numerical value.&quot;&quot;&quot;</span>
+  
+  <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(0) T-shirt/top&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(1) Trouser&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(2) Pullover&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">3</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(3) Dress&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">4</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(4) Coat&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">5</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(5) Sandal&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">6</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(6) Shirt&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">7</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(7) Sneaker&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">8</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(8) Bag&#39;</span>
+  <span class="k">elif</span> <span class="p">(</span><span class="n">idx</span> <span class="o">==</span> <span class="mi">9</span><span class="p">):</span>
+      <span class="k">return</span> <span class="s1">&#39;(9) Ankle boot&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_random_element_with_label</span> <span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lbls</span><span class="p">,</span> <span class="n">lbl</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot;Returns one numpy array (one column) with an example of a choosen label.&quot;&quot;&quot;</span>
+  
+  <span class="n">tmp</span> <span class="o">=</span> <span class="n">lbls</span> <span class="o">==</span> <span class="n">lbl</span>
+  <span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">tmp</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="p">:]</span>
+  <span class="k">return</span> <span class="n">subset</span><span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">subset</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now you have all the necessary elements to successfully implement this tutorial. <strong>Let’s have a look at our data</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training dataset: &#39;</span><span class="p">,</span> <span class="n">trainX</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test dataset: &#39;</span><span class="p">,</span> <span class="n">testX</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training labels: &#39;</span><span class="p">,</span> <span class="n">trainY</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test labels: &#39;</span><span class="p">,</span> <span class="n">testY</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensions of the training dataset:  (60000, 28, 28)
+Dimensions of the test dataset:  (10000, 28, 28)
+Dimensions of the training labels:  (60000,)
+Dimensions of the test labels:  (10000,)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataset-preparation">
+<h2>Dataset Preparation<a class="headerlink" href="#dataset-preparation" title="Permalink to this headline">¶</a></h2>
+<p>We now one-hot encode the labels and change the images dimensions, to get easy to use data for later. To know more about one-hot encoding process see the <a class="reference external" href="#fr">Further Readings</a> section or refer to the hands-on chapter 15 of the book.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">labels_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">labels_train</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">60000</span><span class="p">),</span> <span class="n">trainY</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">data_train</span> <span class="o">=</span> <span class="n">trainX</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">labels_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">labels_test</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span> <span class="n">testY</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">data_test</span> <span class="o">=</span> <span class="n">testX</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training dataset: &#39;</span><span class="p">,</span> <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test dataset: &#39;</span><span class="p">,</span> <span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training labels: &#39;</span><span class="p">,</span> <span class="n">labels_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test labels: &#39;</span><span class="p">,</span> <span class="n">labels_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensions of the training dataset:  (60000, 784)
+Dimensions of the test dataset:  (10000, 784)
+Dimensions of the training labels:  (60000, 10)
+Dimensions of the test labels:  (10000, 10)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-normalization">
+<h2>Data Normalization<a class="headerlink" href="#data-normalization" title="Permalink to this headline">¶</a></h2>
+<p>Let’s normalize the training data dividing by 255.0 to get the values between 0 and 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_train_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_train</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+<span class="n">data_test_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_test</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot an image as example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data_train_norm</span><span class="p">[</span><span class="n">idx</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;on&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">get_label_name</span><span class="p">(</span><span class="n">trainY</span><span class="p">[</span><span class="n">idx</span><span class="p">]))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_30_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_30_0.png" />
+</div>
+</div>
+<p>Now let’s plot one example of each type (label).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following code create a numpy array where in column 0 you will find </span>
+<span class="c1"># an example of label 0, in column 1 of label 1 and so on.</span>
+<span class="n">labels_overview</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="mi">784</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">col</span> <span class="o">=</span> <span class="n">get_random_element_with_label</span><span class="p">(</span><span class="n">data_train_norm</span><span class="p">,</span> <span class="n">trainY</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">labels_overview</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">col</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">get_label_name</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">some_digit_image</span> <span class="o">=</span> <span class="n">labels_overview</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">some_digit_image</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_33_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_33_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="feed-forward-network-model-with-one-hidden-layer">
+<h2>Feed-forward Network Model with One Hidden Layer<a class="headerlink" href="#feed-forward-network-model-with-one-hidden-layer" title="Permalink to this headline">¶</a></h2>
+<p>We will first use a feed-forward network model with one single hidden layer. Our model will be made of an input layer of 784 neurons, an hidden layer of 15 neurons and an output layer of 10 neurons with a softmax function as activation function. Softmax function here is needed since we one-hot encoded the labels. To have more details about this, see the <a class="reference external" href="#fr">Further Readings</a> section of the notebook or refer to the hands-on chapter of the book about feed-forward neural networks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_model</span><span class="p">(</span><span class="n">opt</span><span class="p">):</span>
+  <span class="c1"># create model</span>
+	<span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">input_dim</span> <span class="o">=</span> <span class="mi">784</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span> <span class="c1"># add first hidden layer and set input dimensions</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">))</span> <span class="c1"># add output layer</span>
+	<span class="c1"># compile model</span>
+	<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">opt</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;categorical_accuracy&#39;</span><span class="p">])</span>
+	<span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+dense (Dense)                (None, 15)                11775     
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                160       
+=================================================================
+Total params: 11,935
+Trainable params: 11,935
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now train the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">batch_size</span> <span class="o">=</span> <span class="n">data_train_norm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+  <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, categorical_accuracy:0.1196,  loss:2.2998,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.3988,  loss:1.7928,  
+....................................................................................................
+Epoch: 200, categorical_accuracy:0.5263,  loss:1.3827,  
+....................................................................................................
+Epoch: 300, categorical_accuracy:0.6404,  loss:1.1565,  
+....................................................................................................
+Epoch: 400, categorical_accuracy:0.6767,  loss:1.0166,  
+....................................................................................................
+Epoch: 500, categorical_accuracy:0.6975,  loss:0.9267,  
+....................................................................................................
+Epoch: 600, categorical_accuracy:0.7140,  loss:0.8634,  
+....................................................................................................
+Epoch: 700, categorical_accuracy:0.7273,  loss:0.8156,  
+....................................................................................................
+Epoch: 800, categorical_accuracy:0.7394,  loss:0.7774,  
+....................................................................................................
+Epoch: 900, categorical_accuracy:0.7497,  loss:0.7460,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="n">hist</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">epoch</span>
+<span class="n">hist</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loss</th>
+      <th>categorical_accuracy</th>
+      <th>epoch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>995</th>
+      <td>0.720737</td>
+      <td>0.758050</td>
+      <td>995</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>0.720491</td>
+      <td>0.758167</td>
+      <td>996</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>0.720246</td>
+      <td>0.758367</td>
+      <td>997</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>0.720001</td>
+      <td>0.758417</td>
+      <td>998</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>0.719756</td>
+      <td>0.758500</td>
+      <td>999</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>And we used the trained model on the test dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">data_test_norm</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The accuracy on the test set is equal to: &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the test set is equal to:  74 %.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that, when training the model, we have set <strong><code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">=</span> <span class="pre">data_train_norm.shape[0]</span></code></strong> inside Keras <code class="docutils literal notranslate"><span class="pre">fit</span></code> method. The reason for this choice is that we implemented the so-called <em>batch gradient descent</em> (i.e. the standard and most simple version of gradient descent). Since Keras set by default the batch size to 32 observations (see Keras <code class="docutils literal notranslate"><span class="pre">fit</span></code> method official documentation for more details, in the <a class="reference external" href="#fr">Further Readings</a> section of the notebook), while the batch gradient descent updates weights and biases after all training observations have been seen by the network, we needed to change this parameter to obtain the basic version of gradient descent.</p>
+<p>In the same way, we needed to set the <strong><code class="docutils literal notranslate"><span class="pre">momentum</span> <span class="pre">=</span> <span class="pre">0.0</span></code></strong> inside the method <code class="docutils literal notranslate"><span class="pre">tf.keras.optimizers.SGD</span></code>. Therefore, since Keras does not include a function to perform the standard gradient descent, we used the Stochastic Gradient Descent function, setting the momentum to zero and the batch size to the entire number of observations.</p>
+<p>We implemented this first feed-forward model to get an idea of what the final performances can be and which are the basic components of feed-forward neural networks in Keras. Now, let’s see in more detail which kind of optimizers we can use to obtain the best performances and how they differ from each other.</p>
+</div>
+<div class="section" id="gradient-descent-variations">
+<h2>Gradient Descent Variations<a class="headerlink" href="#gradient-descent-variations" title="Permalink to this headline">¶</a></h2>
+<p>We will compare three different variations of the gradient descent optimizer to see how much they are efficient.</p>
+<div class="section" id="batch-gradient-descent">
+<h3>Batch Gradient Descent<a class="headerlink" href="#batch-gradient-descent" title="Permalink to this headline">¶</a></h3>
+<p>As we just saw, the batch gradient descent can be defined by the Keras function <code class="docutils literal notranslate"><span class="pre">tf.keras.optimizers.SGD</span></code>, setting the <code class="docutils literal notranslate"><span class="pre">momentum</span> <span class="pre">=</span> <span class="pre">0.0</span></code> and the <code class="docutils literal notranslate"><span class="pre">batch_size</span> <span class="pre">=</span> <span class="pre">data_train_norm.shape[0]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_bgd</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">history_bgd</span> <span class="o">=</span> <span class="n">model_bgd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">batch_size</span> <span class="o">=</span> <span class="n">data_train_norm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+  <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, categorical_accuracy:0.0552,  loss:2.3861,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This took </span><span class="si">{:.2f}</span><span class="s1"> minutes.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This took 0.35 minutes.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist_bgd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history_bgd</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="n">hist_bgd</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history_bgd</span><span class="o">.</span><span class="n">epoch</span>
+<span class="n">hist_bgd</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loss</th>
+      <th>categorical_accuracy</th>
+      <th>epoch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>95</th>
+      <td>1.876968</td>
+      <td>0.421200</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>1.873217</td>
+      <td>0.423750</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>1.869471</td>
+      <td>0.426417</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>1.865731</td>
+      <td>0.429133</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>1.861996</td>
+      <td>0.431717</td>
+      <td>99</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="stochastic-gradient-descent">
+<h3>Stochastic Gradient Descent<a class="headerlink" href="#stochastic-gradient-descent" title="Permalink to this headline">¶</a></h3>
+<p>The stochastic gradient descent, as the name suggests, selects a single observation from the dataset with a random probability distribution (which cannot be exactly predicted) and updates weights and biases based on that single observation. Then the process is repeated several times.</p>
+<p>To implement stochastic gradient descent, we need to change the <strong>momentum</strong> parameter, setting it to a value which is <strong>not zero</strong> and we need to set the <strong>mini-batch</strong> size to <strong>1</strong> (in fact, stochastic gradient descent chooses one training sample at a time to update the weights and biases).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_sgd</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">history_sgd</span> <span class="o">=</span> <span class="n">model_sgd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, categorical_accuracy:0.7794,  loss:0.6514,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This took </span><span class="si">{:.2f}</span><span class="s1"> minutes.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This took 60.23 minutes.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist_sgd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history_sgd</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="n">hist_sgd</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history_sgd</span><span class="o">.</span><span class="n">epoch</span>
+<span class="n">hist_sgd</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loss</th>
+      <th>categorical_accuracy</th>
+      <th>epoch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>95</th>
+      <td>0.266158</td>
+      <td>0.903250</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0.264982</td>
+      <td>0.904917</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.264688</td>
+      <td>0.904633</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0.264469</td>
+      <td>0.904117</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0.263607</td>
+      <td>0.905600</td>
+      <td>99</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="mini-batch-gradient-descent">
+<h3>Mini-batch Gradient Descent<a class="headerlink" href="#mini-batch-gradient-descent" title="Permalink to this headline">¶</a></h3>
+<p>With this variation of the gradient descent, the dataset is split into a certain number of groups of observations (called batches) and weights are updated only after each batch has been fed to the model. This is by far the method most commonly used in the field of deep learning.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_mbgd</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">history_mbgd</span> <span class="o">=</span> <span class="n">model_mbgd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+  <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, categorical_accuracy:0.7879,  loss:0.6068,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This took </span><span class="si">{:.2f}</span><span class="s1"> minutes.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>This took 1.70 minutes.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist_mbgd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history_mbgd</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="n">hist_mbgd</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history_mbgd</span><span class="o">.</span><span class="n">epoch</span>
+<span class="n">hist_mbgd</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loss</th>
+      <th>categorical_accuracy</th>
+      <th>epoch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>95</th>
+      <td>0.264526</td>
+      <td>0.902383</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0.264654</td>
+      <td>0.903250</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.263360</td>
+      <td>0.903100</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0.263430</td>
+      <td>0.903933</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0.263868</td>
+      <td>0.901950</td>
+      <td>99</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>As you can notice from the above results, the <strong>batch gradient descent</strong> is the fastest method in terms of learning phase execution, while the <strong>stochastic gradient descent</strong> is very slow. After 100 epochs, the batch gradient descent reaches an accuracy of only 43% on the training set, while the stochastic gradient descent performs increasingly better (91% accuracy), but it takes around 1 hour to train!!! In the first case the <em>entire training dataset</em> is presented to the net before the actual weights and biases update takes place, while in the second case <em>a single observation</em> is randomly picked up to perform update.</p>
+<p>The <strong>mini-batch gradient descent</strong>, on the contrary, is slightly slower than the batch gradient descent, but after only 100 epochs achieves an accuracy of 90% on the training dataset. In this case, groups of 50 training set observations are presented to the net before the actual weights and biases update takes place. Therefore, updates are more frequent with respect to the traditional gradient descent, leading to an overall increasing performance.</p>
+<p>The mini-batch gradient descent is definitely the best compromise in terms of execution time and classification performance. In fact, it is currently the preferred method to be used as optimizer in deep neural networks, among the different gradient descent types, since it can reach high performances, maintaining a good trade-off between performance and execution time.</p>
+<div class="section" id="comparison-of-mini-batch-sizes">
+<h4>Comparison of Mini-batch Sizes<a class="headerlink" href="#comparison-of-mini-batch-sizes" title="Permalink to this headline">¶</a></h4>
+<p>We now define a function to easily try different mini-batch sizes and compare the relative performances.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mini_batch_gradient_descent</span><span class="p">(</span><span class="n">mb_size</span><span class="p">):</span>
+  <span class="c1"># build model</span>
+  <span class="n">model_mbgd</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">))</span>
+  <span class="c1"># set number of epochs</span>
+  <span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">100</span>
+  <span class="c1"># train model</span>
+  <span class="n">history_mbgd</span> <span class="o">=</span> <span class="n">model_mbgd</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span>
+    <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="n">mb_size</span><span class="p">,</span>
+    <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+  <span class="c1"># save performances</span>
+  <span class="n">hist_mbgd</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history_mbgd</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+  <span class="n">hist_mbgd</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history_mbgd</span><span class="o">.</span><span class="n">epoch</span>  
+  <span class="k">return</span> <span class="n">hist_mbgd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We also save the execution time associated to each mini-batch size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">res_5</span> <span class="o">=</span> <span class="n">mini_batch_gradient_descent</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">time_5</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">res_20</span> <span class="o">=</span> <span class="n">mini_batch_gradient_descent</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">time_20</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">res_50</span> <span class="o">=</span> <span class="n">mini_batch_gradient_descent</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">time_50</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">res_100</span> <span class="o">=</span> <span class="n">mini_batch_gradient_descent</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">time_100</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">res_200</span> <span class="o">=</span> <span class="n">mini_batch_gradient_descent</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">time_200</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span>
+
+<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">res_300</span> <span class="o">=</span> <span class="n">mini_batch_gradient_descent</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">time_300</span> <span class="o">=</span> <span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, categorical_accuracy:0.6618,  loss:1.0341,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.4857,  loss:1.6622,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.3795,  loss:1.9353,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.2293,  loss:2.1291,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.0830,  loss:2.2095,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.2086,  loss:2.1759,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<p>Have a look at the results. We compared the performance and the execution time of 6 different mini-batch sizes:</p>
+<ul class="simple">
+<li><p>5</p></li>
+<li><p>20</p></li>
+<li><p>50</p></li>
+<li><p>100</p></li>
+<li><p>200</p></li>
+<li><p>300</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following line contains the path to fonts that are used to plot result in</span>
+<span class="c1"># a uniform way.</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">set_style</span><span class="p">()</span><span class="o">.</span><span class="n">set_general_style_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_20</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_20</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mini-batch size 20&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_50</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_50</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mini-batch size 50&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_100</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_100</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mini-batch size 100&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_200</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_200</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mini-batch size 200&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cost function $J$&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epochs&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_77_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_77_0.png" />
+</div>
+</div>
+<p>The above plot, which reports the decreasing cost function against the number of epochs for 4 of the 6 sizes that have been tested, shows that the smaller the mini-batch size, the lower the cost function. Before discussing about which can be the best solution, let’s have a look at the time required to training the network for different mini-batch sizes.</p>
+</div>
+<div class="section" id="time-needed-by-different-batch-sizes">
+<h4>Time Needed by Different Batch Sizes<a class="headerlink" href="#time-needed-by-different-batch-sizes" title="Permalink to this headline">¶</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time_mb</span> <span class="o">=</span> <span class="p">[</span><span class="n">time_5</span><span class="p">,</span> <span class="n">time_20</span><span class="p">,</span> <span class="n">time_50</span><span class="p">,</span> <span class="n">time_100</span><span class="p">,</span> <span class="n">time_200</span><span class="p">,</span> <span class="n">time_300</span><span class="p">]</span>
+<span class="n">cost_funct_100</span> <span class="o">=</span> <span class="p">[</span><span class="n">res_5</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_20</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_50</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                  <span class="n">res_100</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_200</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">res_300</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">label_mb</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">time_mb</span><span class="p">,</span> <span class="n">cost_funct_100</span><span class="p">,</span>  <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cost function $J$ after 100 epochs&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (min)&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">label_mb</span><span class="p">):</span>
+  <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="p">(</span><span class="n">time_mb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">cost_funct_100</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.60</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_81_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_81_0.png" />
+</div>
+</div>
+<p>As you can see, to choose which is the best value for the mini-batch size, we must always consider the trade-off between performance and execution time. In fact, with a very little mini-batch size (5) we obtain a very low cost function, but with a high execution time (around 14 minutes). Let’s know recap what we have just seen.</p>
+<div class="section" id="final-tips">
+<h5>Final Tips<a class="headerlink" href="#final-tips" title="Permalink to this headline">¶</a></h5>
+<p>So, how can we choose the size of mini-batches?</p>
+<ul class="simple">
+<li><p>As a general rule of thumb, small numbers (such as 30 of 50) are a good option.</p></li>
+<li><p>In general, the lower the mini-batch size, the lower is the value achieved by the cost function.</p></li>
+<li><p>However, you must always consider both running time and convergence speed (with respect to number of epochs).</p></li>
+</ul>
+<p>For example, as you can see in the last figure, after 100 epochs, a mini-batch size of 5 reaches a very low cost function value, but the running time is increasingly higher than a mini-batch size of 20. In this specific case, 20 is a better choice, since it takes into account both the performance and the running time.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="examples-of-wrong-predictions">
+<h2>Examples of Wrong Predictions<a class="headerlink" href="#examples-of-wrong-predictions" title="Permalink to this headline">¶</a></h2>
+<p>It is instructive to inspect where the network got wrong results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pred_prob_test</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">data_test_norm</span><span class="p">)</span> <span class="c1"># predictions</span>
+<span class="n">pred_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred_prob_test</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># keep the highest probability returned by the softmax function</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">corr_pred</span> <span class="o">=</span> <span class="n">pred_test</span> <span class="o">==</span> <span class="n">testY</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">corr_pred</span></code> array contains True when the prediction on the test set is right and False when it is not.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">corr_pred</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ True,  True,  True,  True,  True,  True, False,  True, False,
+        True, False,  True, False,  True,  True,  True,  True, False,
+        True,  True, False, False,  True, False,  True, False, False,
+       False,  True,  True,  True,  True,  True,  True,  True,  True,
+        True,  True,  True,  True, False,  True,  True, False,  True,
+       False, False,  True, False, False])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot one example of wrong prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">));</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data_test_norm</span><span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;True : &#39;</span> <span class="o">+</span> <span class="n">get_label_name</span><span class="p">(</span><span class="n">testY</span><span class="p">[</span><span class="mi">12</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; - Pred.: &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">get_label_name</span><span class="p">(</span><span class="n">pred_test</span><span class="p">[</span><span class="mi">12</span><span class="p">])))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;on&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_92_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_92_0.png" />
+</div>
+</div>
+<p>Let’s get 10 random examples of wrongly classified images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lim</span> <span class="o">=</span> <span class="mi">70</span>
+<span class="n">wrongly_classified_images</span> <span class="o">=</span> <span class="n">data_test_norm</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lim</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">wrongly_classified_images</span> <span class="o">=</span> <span class="n">wrongly_classified_images</span><span class="p">[</span><span class="n">corr_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lim</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">wrong_labels</span> <span class="o">=</span> <span class="n">testY</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lim</span><span class="p">]</span>
+<span class="n">wrong_labels</span> <span class="o">=</span> <span class="n">wrong_labels</span><span class="p">[</span><span class="n">corr_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lim</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">]</span>
+<span class="n">wrong_pred</span> <span class="o">=</span> <span class="n">pred_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lim</span><span class="p">]</span>
+<span class="n">wrong_pred</span> <span class="o">=</span> <span class="n">wrong_pred</span><span class="p">[</span><span class="n">corr_pred</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">lim</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span> 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">count</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;True: &#39;</span> <span class="o">+</span> <span class="n">get_label_name</span><span class="p">(</span><span class="n">wrong_labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">+</span> <span class="s1">&#39; - Pred: &#39;</span> <span class="o">+</span> <span class="n">get_label_name</span><span class="p">(</span><span class="n">wrong_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+    <span class="n">some_digit_image</span> <span class="o">=</span> <span class="n">wrongly_classified_images</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">some_digit_image</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_95_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_95_0.png" />
+</div>
+</div>
+<p>The question to ask yourself is: would I have done the same errors made by the network? For example, in the case reported left top, the answer is yes: it is difficult to say if that image is a coat or a shirt. So, the error may be acceptable.</p>
+</div>
+<div class="section" id="adding-many-layers-efficiently">
+<h2>Adding Many Layers Efficiently<a class="headerlink" href="#adding-many-layers-efficiently" title="Permalink to this headline">¶</a></h2>
+<p>Until know we have changed the optimizer, but always working with the same architecture made of one single hidden layer. Let’s try adding several layers and several numbers of neurons per layer.</p>
+<p>We first write a function to easily change and test different number of layers and neurons per layer of our model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model_nlayers</span><span class="p">(</span><span class="n">num_neurons</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">):</span>
+    <span class="c1"># build model</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span> <span class="o">=</span> <span class="mi">784</span><span class="p">)</span> <span class="c1"># input layer</span>
+    <span class="c1"># first hidden layer</span>
+    <span class="n">dense</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_neurons</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="c1"># customized number of layers and neurons per layer</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>       
+        <span class="n">dense</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_neurons</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">dense</span><span class="p">)</span>
+    <span class="c1"># output layer   </span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">)(</span><span class="n">dense</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;model&#39;</span><span class="p">)</span>
+    <span class="c1"># set optimizer and loss</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="n">opt</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;categorical_accuracy&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># train model</span>
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+      <span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span>
+      <span class="n">epochs</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+      <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+    <span class="c1"># save performances</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+    <span class="n">hist</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">epoch</span> 
+
+    <span class="k">return</span> <span class="n">hist</span><span class="p">,</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res_10_1</span><span class="p">,</span> <span class="n">model_10_1</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">res_10_2</span><span class="p">,</span> <span class="n">model_10_2</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">res_10_3</span><span class="p">,</span> <span class="n">model_10_3</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">res_10_4</span><span class="p">,</span> <span class="n">model_10_4</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">res_100_4</span><span class="p">,</span> <span class="n">model_100_4</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, categorical_accuracy:0.2895,  loss:1.9510,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8501,  loss:0.4346,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.2192,  loss:2.1002,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8481,  loss:0.4347,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.1972,  loss:2.2526,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8120,  loss:0.5151,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.1023,  loss:2.2771,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8527,  loss:0.4271,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.3182,  loss:2.1058,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8892,  loss:0.3104,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following line contains the path to fonts that are used to plot result in</span>
+<span class="c1"># a uniform way.</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">set_style</span><span class="p">()</span><span class="o">.</span><span class="n">set_general_style_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_10_1</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_10_1</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;1 layer / 10 neurons&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_10_2</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_10_2</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;2 layers / 10 neurons&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_10_3</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_10_3</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;3 layers / 10 neurons&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_10_4</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_10_4</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;4 layers / 10 neurons&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_100_4</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_100_4</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;4 layers / 100 neurons&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cost function $J$&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epochs&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_102_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_102_0.png" />
+</div>
+</div>
+<p>In the above plot you can see the results of testing 5 different combinations of neurons and layers:</p>
+<ul class="simple">
+<li><p>1 layer and 10 neurons</p></li>
+<li><p>2 layers and 10 neurons</p></li>
+<li><p>3 layers and 10 neurons</p></li>
+<li><p>4 layers and 10 neurons</p></li>
+<li><p>4 layers and 100 neurons</p></li>
+</ul>
+<p>You can be forced to think that the last model is the best, but you first have to check overfitting (never forget overfitting). In fact, when the model is too complex, it can be too precise on the training dataset and not general on other datasets. Let’s check it together.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_loss</span><span class="p">,</span> <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">model_100_4</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The accuracy on the train set is equal to: &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">train_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the train set is equal to:  91 %.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">model_100_4</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">data_test_norm</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The accuracy on the test set is equal to: &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the test set is equal to:  87 %.
+</pre></div>
+</div>
+</div>
+</div>
+<p>And in fact, as you can see from the performance of the last model in terms of accuracy on the training and test set, it is starting to go in overfitting regime.</p>
+</div>
+<div class="section" id="comparing-different-networks">
+<h2>Comparing Different Networks<a class="headerlink" href="#comparing-different-networks" title="Permalink to this headline">¶</a></h2>
+<p>We now study how adding more  neurons in a network with one hidden layer changes the training phase of the network itself.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res_1_1</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">res_5_1</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">res_15_1</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">res_30_1</span> <span class="o">=</span> <span class="n">model_nlayers</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, categorical_accuracy:0.1463,  loss:2.2445,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.3083,  loss:1.7661,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.1853,  loss:2.1649,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8246,  loss:0.5089,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.3774,  loss:1.8675,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8557,  loss:0.4202,  
+....................................................................................................
+Epoch: 0, categorical_accuracy:0.3945,  loss:1.8782,  
+....................................................................................................
+Epoch: 100, categorical_accuracy:0.8570,  loss:0.4172,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following line contains the path to fonts that are used to plot result in</span>
+<span class="c1"># a uniform way.</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">set_style</span><span class="p">()</span><span class="o">.</span><span class="n">set_general_style_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_1_1</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_1_1</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;1 neuron&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_5_1</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_5_1</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;5 neurons&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_15_1</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_15_1</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;15 neurons&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_30_1</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">],</span> <span class="n">res_30_1</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;30 neurons&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Cost function $J$&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Epochs&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;best&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Multiclass_classification_with_fully_connected_networks_111_0.png" src="../_images/Multiclass_classification_with_fully_connected_networks_111_0.png" />
+</div>
+</div>
+<p>As you can see from the above plot, one single neuron is too simple (and underfits the dataset), while at a certain point, adding so many neurons does not change the performance.</p>
+<div class="section" id="id1">
+<h3>Final Tips<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The best way to get experience with feed-forward neural networks is to play with the models. As you can imagine, there is no one solution that fits all the cases and there is no specific rule. In each case you have to try different architectures (varying number of layers and number of neurons), parameters (learning rate), optimizers, …. Then you check the performance of your models on the training and test datasets to see which is the one that gives best values (without overfitting) and you inspect the plot of loss function vs number of epochs to understand if the model was well trained.</p>
+<p>General useful advice can be:</p>
+<ul class="simple">
+<li><p>Always start with the less complex models (e.g. small number of neurons and layers) and move to more complex ones.</p></li>
+<li><p>In case you cannot achieve good accuracy, check if any of your layers has a particularly low number of neurons. This may have killed the effective capacity of learning. Remember when we tried a model with just one neuron.</p></li>
+<li><p>Remember that a low or high number of neurons is always relative to the number of features you have (the more the features the more the complexity of learning).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>[<em>Easy Difficulty</em>] Try to build a multiclass classification model like the one we saw together in this notebook, but with a different dataset, the MNIST database of handwritten digits (http://yann.lecun.com/exdb/mnist/). To download the dataset from TensorFlow use the following lines of code:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span> 
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>[<em>Medium Difficulty</em>] Try to apply He weights initialization (https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal) in the multiclass classification problem we saw in the notebook and see if you can speed up the learning phase.</p></li>
+<li><p>[<em>Hard Difficulty</em>] Try to optimize the feed-forward neural network built in this notebook to reach the best possible accuracy (without overfitting the training dataset!). Tune the number of epochs, the learning rate, the optimizer, the number of neurons, layers and mini-batches. Hint: write a function like the one we used to test different numbers of layers and neurons and give it as inputs all the tunable parameters.</p></li>
+<li><p>[<em>Hard Difficulty</em>] Consider the regression problem we solved with a model made by one single neuron in the notebook linked to Chapter 14 (predicting radon activity in U.S. houses). Try to build a feed-forward neural network to solve the same regression task. See if you can get better prediction performances. Hint: you will need to change the loss function and the metrics to evaluate your results, and one-hot encoding will not be necessary anymore.</p></li>
+</ol>
+</div>
+<div class="section" id="further-readings-a-name-fr-a">
+<h2>Further Readings <a name = "fr"></a><a class="headerlink" href="#further-readings-a-name-fr-a" title="Permalink to this headline">¶</a></h2>
+<p><strong>Fashion-MNIST dataset</strong></p>
+<ol class="simple">
+<li><p>Xiao, Han, Kashif Rasul, and Roland Vollgraf. “Fashion-mnist: a novel image dataset for benchmarking machine learning algorithms.” arXiv preprint arXiv:1708.07747 (2017)</p></li>
+</ol>
+<p><strong>One-hot encoding, integer encoding, softmax function</strong></p>
+<ol class="simple">
+<li><p>https://deepai.org/machine-learning-glossary-and-terms/one-hot-encoding (what one-hot encoding means)</p></li>
+<li><p>https://towardsdatascience.com/softmax-activation-function-how-it-actually-works-d292d335bd78 (why we need to use softmax function and the difference between one-hot encoding and integer encoding)</p></li>
+</ol>
+<p><strong>Keras fit method</strong></p>
+<ol class="simple">
+<li><p>https://keras.io/api/models/model_training_apis/#fit-method (official documentation)</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./FFNN"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="../single_neuron/Logistic_regression_with_one_neuron.html" title="previous page">Logistic Regression with One Neuron</a>
+    <a class='right-next' id="next-link" href="Overfitting_example.html" title="next page">Overfitting Example</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci and Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2021).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>

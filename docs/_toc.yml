@@ -2,7 +2,7 @@
 - part: Get started
   chapters:
   - file: start/introduction
-  - file: start/faq  
+  - file: start/faq
     # sections:
     # #- file: content
       #- file: intro
@@ -10,42 +10,47 @@
       # - file: start/introduction.md
       #
 
-- part: Chapter 10 - An Introduction to TensorFlow 2.x and 1.x
+- part: An Introduction to TensorFlow 2.x and 1.x
   chapters:
-  - file: Chapter10/Computational_graphs_with_TF1.X.ipynb
-  - file: Chapter10/Computational_graphs_exercises.ipynb
-  - file: Chapter10/Eager_execution_with_TF2.X.ipynb
-  - file: Chapter10/Overloading_of_operators_in_TF.ipynb
+  - file: Introduction/Computational_graphs_with_TF1.X.ipynb
+  - file: Introduction/Computational_graphs_exercises.ipynb
+  - file: Introduction/Eager_execution_with_TF2.X.ipynb
+  - file: Introduction/Overloading_of_operators_in_TF.ipynb
 
 
-- part: Chapter 12 - Single Neuron
+- part: Single Neuron
   chapters:
-  - file: Chapter12/Introduction
-  - file: Chapter12/Linear_regression_with_one_neuron.ipynb
-  - file: Chapter12/Linear_regression_with_numpy.ipynb 
-  - file: Chapter12/Logistic_regression_with_one_neuron.ipynb
+  - file: single_neuron/Introduction
+  - file: single_neuron/Linear_regression_with_one_neuron.ipynb
+  - file: single_neuron/Linear_regression_with_numpy.ipynb
+  - file: single_neuron/Logistic_regression_with_one_neuron.ipynb
 
-- part: Chapter 13 - Fully Connected Networks
+- part: Fully Connected Networks
   chapters:
-  - file: Chapter13/Multiclass_classification_with_fully_connected_networks.ipynb
-  - file: Chapter13/Overfitting_example.ipynb
+  - file: FFNN/Multiclass_classification_with_fully_connected_networks.ipynb
+  - file: FFNN/Overfitting_example.ipynb
 
-- part: Chapter 14 - Regularization Techniques
+- part: Regularization Techniques
   chapters:
-  - file: Chapter14/Regularization_techniques.ipynb
-  - file: Chapter14/Regularization_decision_boundaries.ipynb
+  - file: Regularization/Regularization_techniques.ipynb
+  - file: Regularization/Regularization_decision_boundaries.ipynb
 
-- part: Chapter 17 - Gradient Descent Optimizer
+- part: Gradient Descent Optimizer
   chapters:
-  - file: Chapter17/Gradient_descent_developed_from_scratch.ipynb
+  - file: gradientDescent/Gradient_descent_developed_from_scratch.ipynb
 
-- part: Chapter 25 - Autoencoders
+- part: Generative Adversarial Networks
   chapters:
-  - file: Chapter25/Your_first_autoencoder_with_Keras.ipynb
-  - file: Chapter25/Anomaly_detection_with_autoencoders.ipynb
-  - file: Chapter25/Denoising_autoencoders_with_FFNN.ipynb
-  - file: Chapter25/Denoising_autoencoders_with_CNN.ipynb
+  - file: GAN/GAN_with_MNIST.ipynb
 
-- part: Chapter 26 - Variational Autoencoders
+
+- part: Autoencoders
   chapters:
-  - file: Chapter26/Variational_Autoencoders.ipynb
+  - file: Autoencoders/Your_first_autoencoder_with_Keras.ipynb
+  - file: Autoencoders/Anomaly_detection_with_autoencoders.ipynb
+  - file: Autoencoders/Denoising_autoencoders_with_FFNN.ipynb
+  - file: Autoencoders/Denoising_autoencoders_with_CNN.ipynb
+
+- part: Variational Autoencoders
+  chapters:
+  - file: VAE/Variational_Autoencoders.ipynb

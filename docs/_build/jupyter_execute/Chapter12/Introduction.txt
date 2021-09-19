@@ -1,2 +1,0 @@
-Keras is an API, running on top of TensorFlow environment, used for defining and training deep learning models. In particular, TensorFlow implements the specification in its `tf.keras` module.
-

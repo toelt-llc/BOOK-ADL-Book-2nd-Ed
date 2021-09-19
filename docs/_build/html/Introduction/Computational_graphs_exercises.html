@@ -1,0 +1,1184 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>Computational Graphs - Exercises &#8212; Neural networks and deep learning: theory and applications</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Eager Execution" href="Eager_execution_with_TF2.X.html" />
+    <link rel="prev" title="Computational Graphs" href="Computational_graphs_with_TF1.X.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">Neural networks and deep learning: theory and applications</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Single Neuron
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Fully Connected Networks
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Regularization Techniques
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradientDescent/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Generative Adversarial Networks
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html">
+   GAN Example in TensorFlow
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html#references">
+   References
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Variational Autoencoders
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../VAE/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/Introduction/Computational_graphs_exercises.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/Introduction/Computational_graphs_exercises.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/Introduction/Computational_graphs_exercises.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computational-graph-sum-of-two-variables">
+   Computational Graph - Sum of Two Variables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-with-tf-constant">
+   Graph with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     tf.constant
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-with-tf-variable">
+   Graph with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     tf.Variable
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graph-with-tf-placeholder">
+   Graph with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     tf.placeholder
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-1-difficulty-easy">
+     Exercise 1 (Difficulty: easy)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-2-difficulty-medium">
+     Exercise 2 (Difficulty: medium)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-3-difficulty-fun">
+     Exercise 3 (Difficulty: FUN)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#difference-between-run-and-eval">
+   Difference between
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     run
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     eval
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependencies-between-nodes">
+   Dependencies between Nodes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-to-close-a-session">
+   How to Close a Session
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Exercises
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-4-difficulty-medium">
+     Exercise 4 (Difficulty: medium)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-5-difficult-fun">
+     Exercise 5 (Difficult: FUN)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-regression-with-tensorflow">
+     Linear Regression with TensorFlow
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="computational-graphs-exercises">
+<h1>Computational Graphs - Exercises<a class="headerlink" href="#computational-graphs-exercises" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.02</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tensorflow setup</span>
+
+<span class="o">%</span><span class="k">tensorflow_version</span> 1.x
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow 1.x selected.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of this notebook you will know how to create an easy computational graph with the basic types in TensorFlow.</p>
+<p>To show you how the different datatypes worked in TensorFlow 1.X we will need this version and therefore at the beginning we use the magic command</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%tensorflow_version 1.x
+</pre></div>
+</div>
+<p>Since if we use TensorFlow 2.X we would have Eager execution enabled and the examples would not work.</p>
+</div>
+<div class="section" id="computational-graph-sum-of-two-variables">
+<h2>Computational Graph - Sum of Two Variables<a class="headerlink" href="#computational-graph-sum-of-two-variables" title="Permalink to this headline">¶</a></h2>
+<p>Let’s see some examples that will show you how you can solve the exercises that you will find in this notebook.</p>
+<p>Let’s start with something easy.</p>
+<div class="math notranslate nohighlight">
+\[
+z = x_1+x_2
+\]</div>
+<p>This is simply the sum of two variables. Now let’s create the computational graph with different datatypes in TensorFlow to see the differences in how they work.</p>
+</div>
+<div class="section" id="graph-with-tf-constant">
+<h2>Graph with <code class="docutils literal notranslate"><span class="pre">tf.constant</span></code><a class="headerlink" href="#graph-with-tf-constant" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensor(&quot;Add:0&quot;, shape=(), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensor(&quot;Const:0&quot;, shape=(), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let’s create a session and let’s evaluate the graph</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span><span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">x1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="graph-with-tf-variable">
+<h2>Graph with <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code><a class="headerlink" href="#graph-with-tf-variable" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensor(&quot;Add_1:0&quot;, shape=(), dtype=int32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
+<span class="c1"># WARNING: you will get an error from this cell. This is normal and is designed</span>
+<span class="c1"># to return an error. Continue to read below for the explanation.</span>
+<span class="c1">#</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FailedPreconditionError</span><span class="g g-Whitespace">                   </span>Traceback (most recent call last)
+<span class="nn">/tensorflow-1.15.2/python3.6/tensorflow_core/python/client/session.py</span> in <span class="ni">_do_call</span><span class="nt">(self, fn, *args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1364</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1365</span>       <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1366</span>     <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">OpError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+
+<span class="nn">/tensorflow-1.15.2/python3.6/tensorflow_core/python/client/session.py</span> in <span class="ni">_run_fn</span><span class="nt">(feed_dict, fetch_list, target_list, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1349</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_tf_sessionrun</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">,</span> <span class="n">fetch_list</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1350</span>                                       <span class="n">target_list</span><span class="p">,</span> <span class="n">run_metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1351</span> 
+
+<span class="nn">/tensorflow-1.15.2/python3.6/tensorflow_core/python/client/session.py</span> in <span class="ni">_call_tf_sessionrun</span><span class="nt">(self, options, feed_dict, fetch_list, target_list, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1442</span>                                             <span class="n">fetch_list</span><span class="p">,</span> <span class="n">target_list</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1443</span>                                             <span class="n">run_metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1444</span> 
+
+<span class="ne">FailedPreconditionError</span>: Attempting to use uninitialized value Variable_1
+	 <span class="p">[[{{</span><span class="n">node</span> <span class="n">Variable_1</span><span class="o">/</span><span class="n">read</span><span class="p">}}]]</span>
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">FailedPreconditionError</span><span class="g g-Whitespace">                   </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-11-b1e96672aef6&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="nb">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+
+<span class="nn">/tensorflow-1.15.2/python3.6/tensorflow_core/python/client/session.py</span> in <span class="ni">run</span><span class="nt">(self, fetches, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">    </span><span class="mi">954</span>     <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">955</span>       <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_run</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">fetches</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">,</span> <span class="n">options_ptr</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">956</span>                          <span class="n">run_metadata_ptr</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span>       <span class="k">if</span> <span class="n">run_metadata</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">958</span>         <span class="n">proto_data</span> <span class="o">=</span> <span class="n">tf_session</span><span class="o">.</span><span class="n">TF_GetBuffer</span><span class="p">(</span><span class="n">run_metadata_ptr</span><span class="p">)</span>
+
+<span class="nn">/tensorflow-1.15.2/python3.6/tensorflow_core/python/client/session.py</span> in <span class="ni">_run</span><span class="nt">(self, handle, fetches, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1178</span>     <span class="k">if</span> <span class="n">final_fetches</span> <span class="ow">or</span> <span class="n">final_targets</span> <span class="ow">or</span> <span class="p">(</span><span class="n">handle</span> <span class="ow">and</span> <span class="n">feed_dict_tensor</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1179</span>       <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_run</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">final_targets</span><span class="p">,</span> <span class="n">final_fetches</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1180</span>                              <span class="n">feed_dict_tensor</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">run_metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1181</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1182</span>       <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="nn">/tensorflow-1.15.2/python3.6/tensorflow_core/python/client/session.py</span> in <span class="ni">_do_run</span><span class="nt">(self, handle, target_list, fetch_list, feed_dict, options, run_metadata)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1357</span>     <span class="k">if</span> <span class="n">handle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1358</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_call</span><span class="p">(</span><span class="n">_run_fn</span><span class="p">,</span> <span class="n">feeds</span><span class="p">,</span> <span class="n">fetches</span><span class="p">,</span> <span class="n">targets</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span>
+<span class="ne">-&gt; </span><span class="mi">1359</span>                            <span class="n">run_metadata</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1360</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1361</span>       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_do_call</span><span class="p">(</span><span class="n">_prun_fn</span><span class="p">,</span> <span class="n">handle</span><span class="p">,</span> <span class="n">feeds</span><span class="p">,</span> <span class="n">fetches</span><span class="p">)</span>
+
+<span class="nn">/tensorflow-1.15.2/python3.6/tensorflow_core/python/client/session.py</span> in <span class="ni">_do_call</span><span class="nt">(self, fn, *args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1382</span>                     <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">session_config.graph_options.rewrite_options.&#39;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1383</span>                     <span class="s1">&#39;disable_meta_optimizer = True&#39;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1384</span>       <span class="k">raise</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)(</span><span class="n">node_def</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">message</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1385</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1386</span>   <span class="k">def</span> <span class="nf">_extend_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="ne">FailedPreconditionError</span>: Attempting to use uninitialized value Variable_1
+	 <span class="p">[[</span><span class="n">node</span> <span class="n">Variable_1</span><span class="o">/</span><span class="n">read</span> <span class="p">(</span><span class="n">defined</span> <span class="n">at</span> <span class="o">/</span><span class="n">tensorflow</span><span class="o">-</span><span class="mf">1.15</span><span class="o">.</span><span class="mi">2</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">tensorflow_core</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">framework</span><span class="o">/</span><span class="n">ops</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1748</span><span class="p">)</span> <span class="p">]]</span>
+
+<span class="n">Original</span> <span class="n">stack</span> <span class="n">trace</span> <span class="k">for</span> <span class="s1">&#39;Variable_1/read&#39;</span><span class="p">:</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/lib/python3.6/runpy.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">193</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_module_as_main</span>
+    <span class="s2">&quot;__main__&quot;</span><span class="p">,</span> <span class="n">mod_spec</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/lib/python3.6/runpy.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">85</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_code</span>
+    <span class="n">exec</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">run_globals</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/ipykernel_launcher.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">16</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">launch_new_instance</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/traitlets/config/application.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">664</span><span class="p">,</span> <span class="ow">in</span> <span class="n">launch_instance</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/ipykernel/kernelapp.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">499</span><span class="p">,</span> <span class="ow">in</span> <span class="n">start</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">io_loop</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/tornado/platform/asyncio.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">132</span><span class="p">,</span> <span class="ow">in</span> <span class="n">start</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">asyncio_loop</span><span class="o">.</span><span class="n">run_forever</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/lib/python3.6/asyncio/base_events.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">438</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_forever</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_run_once</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/lib/python3.6/asyncio/base_events.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1451</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_once</span>
+    <span class="n">handle</span><span class="o">.</span><span class="n">_run</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/lib/python3.6/asyncio/events.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">145</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_callback</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/tornado/platform/asyncio.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">122</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_handle_events</span>
+    <span class="n">handler_func</span><span class="p">(</span><span class="n">fileobj</span><span class="p">,</span> <span class="n">events</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/tornado/stack_context.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">300</span><span class="p">,</span> <span class="ow">in</span> <span class="n">null_wrapper</span>
+    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/zmq/eventloop/zmqstream.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">462</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_handle_events</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handle_recv</span><span class="p">()</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/zmq/eventloop/zmqstream.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">492</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_handle_recv</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_run_callback</span><span class="p">(</span><span class="n">callback</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/zmq/eventloop/zmqstream.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">444</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_callback</span>
+    <span class="n">callback</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/tornado/stack_context.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">300</span><span class="p">,</span> <span class="ow">in</span> <span class="n">null_wrapper</span>
+    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/ipykernel/kernelbase.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">283</span><span class="p">,</span> <span class="ow">in</span> <span class="n">dispatcher</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dispatch_shell</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/ipykernel/kernelbase.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">233</span><span class="p">,</span> <span class="ow">in</span> <span class="n">dispatch_shell</span>
+    <span class="n">handler</span><span class="p">(</span><span class="n">stream</span><span class="p">,</span> <span class="n">idents</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/ipykernel/kernelbase.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">399</span><span class="p">,</span> <span class="ow">in</span> <span class="n">execute_request</span>
+    <span class="n">user_expressions</span><span class="p">,</span> <span class="n">allow_stdin</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/ipykernel/ipkernel.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">208</span><span class="p">,</span> <span class="ow">in</span> <span class="n">do_execute</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">shell</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">store_history</span><span class="o">=</span><span class="n">store_history</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="n">silent</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/ipykernel/zmqshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">537</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_cell</span>
+    <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">ZMQInteractiveShell</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2718</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_cell</span>
+    <span class="n">interactivity</span><span class="o">=</span><span class="n">interactivity</span><span class="p">,</span> <span class="n">compiler</span><span class="o">=</span><span class="n">compiler</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2822</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_ast_nodes</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_code</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">result</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;/usr/local/lib/python3.6/dist-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2882</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_code</span>
+    <span class="n">exec</span><span class="p">(</span><span class="n">code_obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_global_ns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;ipython-input-9-93cd6787ae35&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/variables.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">258</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>
+    <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_variable_v1_call</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/variables.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">219</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_variable_v1_call</span>
+    <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/variables.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">197</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="k">lambda</span><span class="o">&gt;</span>
+    <span class="n">previous_getter</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">default_variable_creator</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/variable_scope.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2519</span><span class="p">,</span> <span class="ow">in</span> <span class="n">default_variable_creator</span>
+    <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/variables.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">262</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__call__</span>
+    <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">VariableMetaclass</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/variables.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1688</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
+    <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/variables.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1872</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_init_from_args</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_snapshot</span> <span class="o">=</span> <span class="n">array_ops</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variable</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;read&quot;</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/util/dispatch.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">180</span><span class="p">,</span> <span class="ow">in</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">target</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/array_ops.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">203</span><span class="p">,</span> <span class="ow">in</span> <span class="n">identity</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="n">gen_array_ops</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/ops/gen_array_ops.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">4239</span><span class="p">,</span> <span class="ow">in</span> <span class="n">identity</span>
+    <span class="s2">&quot;Identity&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="nb">input</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/framework/op_def_library.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">794</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_apply_op_helper</span>
+    <span class="n">op_def</span><span class="o">=</span><span class="n">op_def</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/util/deprecation.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">507</span><span class="p">,</span> <span class="ow">in</span> <span class="n">new_func</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/framework/ops.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3357</span><span class="p">,</span> <span class="ow">in</span> <span class="n">create_op</span>
+    <span class="n">attrs</span><span class="p">,</span> <span class="n">op_def</span><span class="p">,</span> <span class="n">compute_device</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/framework/ops.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3426</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_create_op_internal</span>
+    <span class="n">op_def</span><span class="o">=</span><span class="n">op_def</span><span class="p">)</span>
+  <span class="n">File</span> <span class="s2">&quot;/tensorflow-1.15.2/python3.6/tensorflow_core/python/framework/ops.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1748</span><span class="p">,</span> <span class="ow">in</span> <span class="fm">__init__</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_traceback</span> <span class="o">=</span> <span class="n">tf_stack</span><span class="o">.</span><span class="n">extract_stack</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The error message is normal… First you have to initialize the variables in TensorFlow! TensorFlow <em><strong>does not automatically initialize the variables</strong></em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">x1</span><span class="o">.</span><span class="n">initializer</span><span class="p">)</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">x2</span><span class="o">.</span><span class="n">initializer</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="graph-with-tf-placeholder">
+<h2>Graph with <code class="docutils literal notranslate"><span class="pre">tf.placeholder</span></code><a class="headerlink" href="#graph-with-tf-placeholder" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that in this declaration no values were passed. The “1” is the dimension of the placeholder, in this case a scalar!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensor(&quot;Add_2:0&quot;, shape=(1,), dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feed_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">x1</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x2</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">]}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3.]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we can also use vectors as input, to show that we don’t need to deal only with scalars.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
+<span class="n">feed_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">x1</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span> <span class="n">x2</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]}</span>
+
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">feed_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2., 6.], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise-1-difficulty-easy">
+<h3>Exercise 1 (Difficulty: easy)<a class="headerlink" href="#exercise-1-difficulty-easy" title="Permalink to this headline">¶</a></h3>
+<p>Draw and develop in TensorFlow with <code class="docutils literal notranslate"><span class="pre">tf.constant</span></code> the computational graphs for the following operations</p>
+<p>A) <code class="docutils literal notranslate"><span class="pre">w1*x1</span> <span class="pre">+</span> <span class="pre">w2*x2</span> <span class="pre">+</span> <span class="pre">x1*x1</span></code></p>
+<p>B) <code class="docutils literal notranslate"><span class="pre">A*x1</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">x2/2</span></code></p>
+<p>Use as input values <code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">=</span> <span class="pre">5</span></code> and <code class="docutils literal notranslate"><span class="pre">x2</span> <span class="pre">=</span> <span class="pre">6</span></code>.</p>
+</div>
+<div class="section" id="exercise-2-difficulty-medium">
+<h3>Exercise 2 (Difficulty: medium)<a class="headerlink" href="#exercise-2-difficulty-medium" title="Permalink to this headline">¶</a></h3>
+<p>Draw and develop in TensorFlow with <code class="docutils literal notranslate"><span class="pre">tf.Variable</span></code> the computational graph for the following operation <code class="docutils literal notranslate"><span class="pre">A*(w1*x1</span> <span class="pre">+</span> <span class="pre">w2*x2)</span></code>.</p>
+<p>Build the computational graph and then evaluate it two times (without re-building it) with the initial values in the same session</p>
+<p>A) <code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">=</span> <span class="pre">3,</span> <span class="pre">x2</span> <span class="pre">=</span> <span class="pre">4</span></code></p>
+<p>B) <code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">=</span> <span class="pre">5,</span> <span class="pre">x2</span> <span class="pre">=</span> <span class="pre">7</span></code></p>
+</div>
+<div class="section" id="exercise-3-difficulty-fun">
+<h3>Exercise 3 (Difficulty: FUN)<a class="headerlink" href="#exercise-3-difficulty-fun" title="Permalink to this headline">¶</a></h3>
+<p>Consider two vectors</p>
+<p><code class="docutils literal notranslate"> <span class="pre">x1</span> <span class="pre">=</span> <span class="pre">[1,2,3,4,5],</span>&#160; <span class="pre">x2</span> <span class="pre">=</span> <span class="pre">[6,7,8,9,10]</span></code></p>
+<p>Draw and build in TensorFlow the computational graph for the dot-product operation between the two vectors. If you don’t know what a dot-product is you can check it here (we covered that in our introductory week) <a class="reference external" href="https://en.wikipedia.org/wiki/Dot_product"></a>.</p>
+<p>Build it in two different ways:</p>
+<p>A) Do it with loops. Build a computational graph that takes as input scalars and in the session/evaluation phase build a loop to go over all the inputs and then sums the results.</p>
+<p>B) Do it in one shot with tensorflow. Build a computational graph that takes as input vectors and do the entire operation directly in TensorFlow.</p>
+<p><em>Hint</em>: you can use in TensorFlow two methods: <code class="docutils literal notranslate"><span class="pre">tf.reduce_sum(tf.multiply(x1,</span> <span class="pre">x2))</span></code> or <code class="docutils literal notranslate"><span class="pre">tf.matmul(x1,</span> <span class="pre">tf.reshape(x2,</span> <span class="pre">[-1,</span> <span class="pre">1]))</span></code>. Try to understand why they work checking the official documentation.</p>
+</div>
+</div>
+<div class="section" id="difference-between-run-and-eval">
+<h2>Difference between <code class="docutils literal notranslate"><span class="pre">run</span></code> and <code class="docutils literal notranslate"><span class="pre">eval</span></code><a class="headerlink" href="#difference-between-run-and-eval" title="Permalink to this headline">¶</a></h2>
+<p>Consider the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+<span class="n">init</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">global_variables_initializer</span><span class="p">()</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can evaluate more nodes at the same time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">z</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">eval()</span></code> method to evaluate nodes, but you have to provide the session name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">session</span> <span class="o">=</span> <span class="n">sess</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dependencies-between-nodes">
+<h2>Dependencies between Nodes<a class="headerlink" href="#dependencies-between-nodes" title="Permalink to this headline">¶</a></h2>
+<p>Sometime TensorFlow may evaluate some nodes multiple times. Pay attention. Consider the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y is&#39;</span><span class="p">,</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;z is&#39;</span><span class="p">,</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y is 7
+z is 8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">x</span></code> is evaluated twice! You can do it like this:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y,z are&#39;</span><span class="p">,</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">]))</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y,z are [7, 8]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now <code class="docutils literal notranslate"><span class="pre">x</span></code> is evaluated only once.</p>
+</div>
+<div class="section" id="how-to-close-a-session">
+<h2>How to Close a Session<a class="headerlink" href="#how-to-close-a-session" title="Permalink to this headline">¶</a></h2>
+<p>You can close a session in this way:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="c1"># Do something here</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also do it in this way:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="c1"># Do something here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">  File</span><span class="nn"> &quot;&lt;ipython-input-29-ede77bfb1f3b&gt;&quot;</span><span class="gt">, line </span><span class="mi">2</span>
+    <span class="c1"># Do something here</span>
+                       <span class="o">^</span>
+<span class="ne">SyntaxError</span>: unexpected EOF while parsing
+</pre></div>
+</div>
+</div>
+</div>
+<p>You need some code to avoid the error. Consider the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="n">sess</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y is&#39;</span><span class="p">,</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;z is&#39;</span><span class="p">,</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+<span class="n">sess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y is 7
+z is 8
+</pre></div>
+</div>
+</div>
+</div>
+<p>This can also be written as the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<span class="k">with</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">sess</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;y is&#39;</span><span class="p">,</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;z is&#39;</span><span class="p">,</span><span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">z</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>y is 7
+z is 8
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now you don’t need to close the session explicitly. Is done for you.</p>
+</div>
+<div class="section" id="id1">
+<h2>Exercises<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="exercise-4-difficulty-medium">
+<h3>Exercise 4 (Difficulty: medium)<a class="headerlink" href="#exercise-4-difficulty-medium" title="Permalink to this headline">¶</a></h3>
+<p>Write a function that build a computational graph for the operation <code class="docutils literal notranslate"><span class="pre">x1+x2</span></code> where the input <code class="docutils literal notranslate"><span class="pre">x1</span></code> and <code class="docutils literal notranslate"><span class="pre">x2</span></code> are input with given dimensions. Your <code class="docutils literal notranslate"><span class="pre">x1</span></code> and <code class="docutils literal notranslate"><span class="pre">x2</span></code> should be declared as <code class="docutils literal notranslate"><span class="pre">tf.placeholder</span></code>.
+Your functions should accept as input:</p>
+<ul class="simple">
+<li><p>dimensions of <code class="docutils literal notranslate"><span class="pre">x1</span></code> as list, for example <code class="docutils literal notranslate"><span class="pre">[3]</span></code></p></li>
+<li><p>dimensions of <code class="docutils literal notranslate"><span class="pre">x2</span></code> as list, for example <code class="docutils literal notranslate"><span class="pre">[3]</span></code></p></li>
+</ul>
+<p>The function should return a tensor <code class="docutils literal notranslate"><span class="pre">z</span> <span class="pre">=</span> <span class="pre">x1</span> <span class="pre">+</span> <span class="pre">x2</span></code>.
+Then open a session and evaluate <code class="docutils literal notranslate"><span class="pre">z</span></code> with the following inputs:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">=</span> <span class="pre">[4,6,7],</span> <span class="pre">x2</span> <span class="pre">=</span> <span class="pre">[1,2,9]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x1</span> <span class="pre">=</span> <span class="pre">[1,2,.....,</span> <span class="pre">1000],</span> <span class="pre">x2</span> <span class="pre">=</span> <span class="pre">[10001,</span> <span class="pre">10002,</span> <span class="pre">....,</span> <span class="pre">11000]</span></code></p></li>
+</ul>
+<p>and print the result.</p>
+</div>
+<div class="section" id="exercise-5-difficult-fun">
+<h3>Exercise 5 (Difficult: FUN)<a class="headerlink" href="#exercise-5-difficult-fun" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="linear-regression-with-tensorflow">
+<h3>Linear Regression with TensorFlow<a class="headerlink" href="#linear-regression-with-tensorflow" title="Permalink to this headline">¶</a></h3>
+<p>https://onlinecourses.science.psu.edu/stat501/node/382/</p>
+<p>Consider the following dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">53</span><span class="p">,</span> <span class="mi">61</span><span class="p">,</span> <span class="mi">62</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We want to find the best parameters <span class="math notranslate nohighlight">\(p_0\)</span> and <span class="math notranslate nohighlight">\(p_1\)</span> that minimise the MSE (Mean Squared Error) for the data given, in other words we want to do a linear regression on the data <span class="math notranslate nohighlight">\((x,y)\)</span>. Given that a matrix solution to find the best parameter is</p>
+<div class="math notranslate nohighlight">
+\[
+{\bf p} =(X^TX)^{-1} X^T Y
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(X^T\)</span> is the transpose of the matrix <span class="math notranslate nohighlight">\(X\)</span>. The matrix <span class="math notranslate nohighlight">\(X\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X = 
+\begin{bmatrix}
+1 &amp; x_1  \\
+... &amp;  ...  \\
+1 &amp;  x_n 
+\end{bmatrix}
+\end{split}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(Y\)</span> is simply a matrix <span class="math notranslate nohighlight">\(n\times 1\)</span> containing the values <span class="math notranslate nohighlight">\(y_i\)</span>.</p>
+<p>Dimensions are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> has dimensions <span class="math notranslate nohighlight">\(n\times 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> has dimensions <span class="math notranslate nohighlight">\(n\times 1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\({\bf p}\)</span> has dimensions <span class="math notranslate nohighlight">\(2\times 1\)</span></p></li>
+</ul>
+<p>Build a computational graph that evaluates <span class="math notranslate nohighlight">\(\bf p\)</span> as given above, given the matrices <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>. Note you will have to build the matrices from the data given at the beginning. If you need more information a beatifully long explanation can be found here https://onlinecourses.science.psu.edu/stat501/node/382/.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Introduction"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="Computational_graphs_with_TF1.X.html" title="previous page">Computational Graphs</a>
+    <a class='right-next' id="next-link" href="Eager_execution_with_TF2.X.html" title="next page">Eager Execution</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci and Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2021).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
+
+
+    
+  </body>
+</html>
