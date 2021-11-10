@@ -1,56 +1,42 @@
-- file: landingpage.md
-- part: Get started
+format: jb-book
+root: landingpage.md
+parts:
+- caption: Get started
   chapters:
   - file: start/introduction
   - file: start/faq
-    # sections:
-    # #- file: content
-      #- file: intro
-      #
-      # - file: start/introduction.md
-      #
-
-- part: An Introduction to TensorFlow 2.x and 1.x
+- caption: An Introduction to TensorFlow 2.x and 1.x
   chapters:
   - file: Introduction/Computational_graphs_with_TF1.X.ipynb
   - file: Introduction/Computational_graphs_exercises.ipynb
   - file: Introduction/Eager_execution_with_TF2.X.ipynb
   - file: Introduction/Overloading_of_operators_in_TF.ipynb
-
-
-- part: Single Neuron
+- caption: Single Neuron
   chapters:
   - file: single_neuron/Introduction
   - file: single_neuron/Linear_regression_with_one_neuron.ipynb
   - file: single_neuron/Linear_regression_with_numpy.ipynb
   - file: single_neuron/Logistic_regression_with_one_neuron.ipynb
-
-- part: Fully Connected Networks
+- caption: Fully Connected Networks
   chapters:
   - file: FFNN/Multiclass_classification_with_fully_connected_networks.ipynb
   - file: FFNN/Overfitting_example.ipynb
-
-- part: Regularization Techniques
+- caption: Regularization Techniques
   chapters:
   - file: Regularization/Regularization_techniques.ipynb
   - file: Regularization/Regularization_decision_boundaries.ipynb
-
-- part: Gradient Descent Optimizer
+- caption: Gradient Descent Optimizer
   chapters:
   - file: gradientDescent/Gradient_descent_developed_from_scratch.ipynb
-
-- part: Generative Adversarial Networks
+- caption: Generative Adversarial Networks
   chapters:
   - file: GAN/GAN_with_MNIST.ipynb
-
-
-- part: Autoencoders
+- caption: Autoencoders
   chapters:
   - file: Autoencoders/Your_first_autoencoder_with_Keras.ipynb
   - file: Autoencoders/Anomaly_detection_with_autoencoders.ipynb
   - file: Autoencoders/Denoising_autoencoders_with_FFNN.ipynb
   - file: Autoencoders/Denoising_autoencoders_with_CNN.ipynb
-
-- part: Variational Autoencoders
+- caption: Variational Autoencoders
   chapters:
   - file: VAE/Variational_Autoencoders.ipynb

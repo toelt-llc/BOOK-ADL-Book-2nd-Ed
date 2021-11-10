@@ -1,15 +1,29 @@
-# GAN Example in TensorFlow
+#!/usr/bin/env python
+# coding: utf-8
 
-Author: Umberto Michelucci
+# # GAN Example in TensorFlow
+# 
+# Author: Umberto Michelucci
+# 
+# Version: 1.0
 
-Version: 1.0
+# In[1]:
 
-!nvidia-smi
+
+get_ipython().system('nvidia-smi')
+
+
+# In[2]:
+
 
 # This line is not necessary to run the code. But otherwise the pptxas is not found
 # and some parts of the tensorflow code will be re-compiled on the run, possibly
 # making the start of the training slower than usual. 
-!PATH=$PATH:/usr/local/cuda-11.3/bin
+get_ipython().system('PATH=$PATH:/usr/local/cuda-11.3/bin')
+
+
+# In[3]:
+
 
 import glob
 import matplotlib.pyplot as plt
@@ -22,25 +36,49 @@ import tensorflow as tf
 
 from IPython import display
 
+
+# In[4]:
+
+
 print(tf.__version__)
 
-A GAN does not need test images. The dataset is not split, and only a set of images is used, this is why in the next cell only the train images are needed.
+
+# A GAN does not need test images. The dataset is not split, and only a set of images is used, this is why in the next cell only the train images are needed.
+
+# In[5]:
+
 
 # Don't care for the test images with GANs...
 (train_images, train_labels), (_, _) = tf.keras.datasets.mnist.load_data()
 
-Some normalization and reshaping. Since we will use convolutional layers we need the images to have a 2D structure (28x28).
+
+# Some normalization and reshaping. Since we will use convolutional layers we need the images to have a 2D structure (28x28).
+
+# In[6]:
+
 
 train_images = train_images.reshape(train_images.shape[0], 28, 28, 1).astype('float32')
 train_images = (train_images - 127.5) / 127.5  # Normalize the images to [-1, 1]
 
+
+# In[7]:
+
+
 BUFFER_SIZE = 60000
 BATCH_SIZE = 256
+
+
+# In[8]:
+
 
 # Batch and shuffle the data
 train_dataset = tf.data.Dataset.from_tensor_slices(train_images).shuffle(BUFFER_SIZE).batch(BATCH_SIZE)
 
-## Generator Model [1]
+
+# ## Generator Model [1]
+
+# In[9]:
+
 
 # Note that the input is a random vector, not the images!
 # model Reference can be found in [1]
@@ -68,9 +106,21 @@ def make_generator_model():
 
     return model
 
+
+# In[10]:
+
+
 gen = make_generator_model()
 
+
+# In[11]:
+
+
 tf.keras.utils.plot_model(gen, show_shapes=True)
+
+
+# In[12]:
+
 
 generator = make_generator_model()
 
@@ -79,7 +129,11 @@ generated_image = generator(noise, training=False)
 
 plt.imshow(generated_image[0, :, :, 0], cmap='gray')
 
-## Discriminator Model
+
+# ## Discriminator Model
+
+# In[13]:
+
 
 def make_discriminator_model():
     model = tf.keras.Sequential()
@@ -97,16 +151,32 @@ def make_discriminator_model():
 
     return model
 
+
+# In[14]:
+
+
 discriminator = make_discriminator_model()
 decision = discriminator(generated_image)
 print (decision)
 
+
+# In[15]:
+
+
 tf.keras.utils.plot_model(discriminator, show_shapes=True)
 
-## Loss Functions
+
+# ## Loss Functions
+
+# In[16]:
+
 
 # This method returns a helper function to compute cross entropy loss
 cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+
+
+# In[17]:
+
 
 def discriminator_loss(real_output, fake_output):
     real_loss = cross_entropy(tf.ones_like(real_output), real_output)
@@ -114,11 +184,23 @@ def discriminator_loss(real_output, fake_output):
     total_loss = real_loss + fake_loss
     return total_loss
 
+
+# In[18]:
+
+
 def generator_loss(fake_output):
     return cross_entropy(tf.ones_like(fake_output), fake_output)
 
+
+# In[19]:
+
+
 generator_optimizer = tf.keras.optimizers.Adam(1e-4)
 discriminator_optimizer = tf.keras.optimizers.Adam(1e-4)
+
+
+# In[20]:
+
 
 EPOCHS = 50
 noise_dim = 100
@@ -128,13 +210,17 @@ num_examples_to_generate = 16
 # to visualize progress in the animated GIF)
 seed = tf.random.normal([num_examples_to_generate, noise_dim])
 
-## Training Custom Loop 
 
-The training of the GAN works as explained in the diagram
+# ## Training Custom Loop 
 
-![GAN Training](images/GAN_Training_Schema.png)
+# The training of the GAN works as explained in the diagram
+# 
+# ![GAN Training](images/GAN_Training_Schema.png)
+# 
+# Step A and B are repeated in sequence.
+# 
 
-Step A and B are repeated in sequence.
+# In[21]:
 
 
 # Notice the use of `tf.function`
@@ -177,12 +263,20 @@ def train_step(images):
     # Step B
     discriminator_optimizer.apply_gradients(zip(gradients_of_discriminator, discriminator.trainable_variables))
 
+
+# In[22]:
+
+
 checkpoint_dir = './training_checkpoints'
 checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
 checkpoint = tf.train.Checkpoint(generator_optimizer=generator_optimizer,
                                  discriminator_optimizer=discriminator_optimizer,
                                  generator=generator,
                                  discriminator=discriminator)
+
+
+# In[23]:
+
 
 def train(dataset, epochs):
   for epoch in range(epochs):
@@ -209,6 +303,10 @@ def train(dataset, epochs):
                            epochs,
                            seed)
 
+
+# In[25]:
+
+
 def generate_and_save_images(model, epoch, test_input):
   # Notice `training` is set to False.
   # This is so all layers run in inference mode (batchnorm).
@@ -224,13 +322,25 @@ def generate_and_save_images(model, epoch, test_input):
   plt.savefig('image_at_epoch_{:04d}.png'.format(epoch))
   plt.show()
 
-## Training of the GAN
+
+# ## Training of the GAN
+
+# In[26]:
+
 
 EPOCHS = 50
 train(train_dataset, EPOCHS)
 
+
+# In[23]:
+
+
 EPOCHS = 200
 train(train_dataset, EPOCHS)
+
+
+# In[28]:
+
 
 # This code generates each time new digits
 seed2 = tf.random.normal([num_examples_to_generate, noise_dim])
@@ -238,16 +348,26 @@ generate_and_save_images(generator,
                            10,
                            seed2)
 
-## Tests: Single Images
 
-Let's see single images
+# ## Tests: Single Images
+
+# Let's see single images
+
+# In[40]:
+
 
 noise = tf.random.normal([1, 100])
 generated_image = generator(noise, training=False)
 
 plt.imshow(generated_image[0, :, :, 0], cmap='gray')
 
-# References
 
-[1] Radford, Alec, Luke Metz, and Soumith Chintala. "Unsupervised representation learning with deep convolutional generative adversarial networks." arXiv preprint [arXiv:1511.06434](https://arxiv.org/pdf/1511.06434.pdf%C3) (2015).
+# # References
+# 
+# [1] Radford, Alec, Luke Metz, and Soumith Chintala. "Unsupervised representation learning with deep convolutional generative adversarial networks." arXiv preprint [arXiv:1511.06434](https://arxiv.org/pdf/1511.06434.pdf%C3) (2015).
+
+# In[ ]:
+
+
+
 

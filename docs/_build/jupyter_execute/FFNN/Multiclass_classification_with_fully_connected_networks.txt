@@ -1,69 +1,3 @@
-# Multiclass Classification with Fully Connected Networks
-
-Version 1.0
-
-(C) 2020 - Umberto Michelucci, Michela Sperti
-
-This notebook is part of the book _Applied Deep Learning: a case based approach, **2nd edition**_ from APRESS by [U. Michelucci](mailto:umberto.michelucci@toelt.ai) and [M. Sperti](mailto:michela.sperti@toelt.ai).
-
-The purpose of this notebook is to give a practical example (with a dataset taken from the real world) of a multiclass classification problem solved by means of a Feed-Forward Neural Network architecture.
-
-## Notebook Learning Goals
-
-At the end of the notebook you are going to know how to implement yourself a feed-forward neural network architecture in Keras. Moreover, you will have learnt the main differences between the three versions of the gradient descent optimizer (i.e. batch gradient descent, stochastic gradient descent and mini-batch gradient descent). Finally, you are going to know what optimizing a neural network means and how to choose the best network among several possibilities.
-
-## Dataset Overview
-
-**Context**
-
-Fashion-MNIST is a dataset of Zalando's article images (consisting of a training set of 60000 examples and a test set of 10000 examples). Each example is a 28x28 grayscale image, associated with a label from 10 classes. Zalando intends Fashion-MNIST to serve as a direct drop-in replacement for the original MNIST dataset for benchmarking machine learning algorithms. It shares the same image size and structure of training and testing splits.
-
-The original MNIST dataset contains a lot of handwritten digits. Members of the AI/ML/Data Science community love this dataset and use it as a benchmark to validate their algorithms. In fact, MNIST is often the first dataset researchers try. "If it doesn't work on MNIST, it won't work at all", they said. "Well, if it does work on MNIST, it may still fail on others."
-Zalando seeks to replace the original MNIST dataset
-
-**Content**
-
-
-Each image is 28 pixels in height and 28 pixels in width, for a total of 784 pixels in total. Each pixel has a single pixel-value associated with it, indicating the lightness or darkness of that pixel, with higher numbers meaning darker. This pixel-value is an integer between 0 and 255. The training and test data sets have 785 columns. The first column consists of the class labels (see above), and represents the article of clothing. The rest of the columns contain the pixel-values of the associated image.
-
-To locate a pixel on the image, suppose that we have decomposed $x$ as $x = 28i + j$, where $i$ and $j$ are integers between 0 and 27. The pixel is located on row $i$ and column $j$ of a 28x28 matrix. 
-For example, pixel31 indicates the pixel that is in the fourth column from the left, and the second row from the top. 
-
-Each row of the dataset is a separate image. Column 1 is the class label. 
-Remaining columns are pixel numbers (784 total). Each value is the darkness of the pixel (1 to 255).
-
-**Labels**
-
-Each training and test example is assigned to one of the following labels:
-- 0 T-shirt/top
-- 1 Trouser
-- 2 Pullover
-- 3 Dress
-- 4 Coat
-- 5 Sandal
-- 6 Shirt
-- 7 Sneaker
-- 8 Bag
-- 9 Ankle boot 
-
-**Acknowledgements**
-
-Original dataset was downloaded from TensorFlow datasets catalog.
-
-**License**
-
-The MIT License (MIT) Copyright © [2017] Zalando SE, https://tech.zalando.com
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-## Libraries and Dataset Import
-
-This section contains the necessary libraries (such as tensorflow or pandas) you need to import to run the notebook.
-
 # This command install code from the tensorflow docs repository.
 # We need to use tensorflow_docs.modeling function when training our model.
 # This function will generate a report on the network's perfomances
@@ -122,11 +56,7 @@ sys.path.append('ADL-Book-2nd-Ed/modules/')
 
 from style_setting import set_style
 
-The following cells are needed to **download** the dataset.
-
 ((trainX, trainY), (testX, testY)) = fashion_mnist.load_data()
-
-## Helper Functions
 
 def get_label_name(idx):
   """Returns the corresponding label's name, given its numerical value."""
@@ -159,16 +89,10 @@ def get_random_element_with_label (data, lbls, lbl):
   subset = data[tmp.flatten(), :]
   return subset[randint(1, subset.shape[1]), :]
 
-Now you have all the necessary elements to successfully implement this tutorial. **Let's have a look at our data**:
-
 print('Dimensions of the training dataset: ', trainX.shape)
 print('Dimensions of the test dataset: ', testX.shape)
 print('Dimensions of the training labels: ', trainY.shape)
 print('Dimensions of the test labels: ', testY.shape)
-
-## Dataset Preparation
-
-We now one-hot encode the labels and change the images dimensions, to get easy to use data for later. To know more about one-hot encoding process see the [Further Readings](#fr) section or refer to the hands-on chapter 15 of the book.
 
 labels_train = np.zeros((60000, 10))
 labels_train[np.arange(60000), trainY] = 1
@@ -185,22 +109,14 @@ print('Dimensions of the test dataset: ', data_test.shape)
 print('Dimensions of the training labels: ', labels_train.shape)
 print('Dimensions of the test labels: ', labels_test.shape)
 
-## Data Normalization
-
-Let's normalize the training data dividing by 255.0 to get the values between 0 and 1.
-
 data_train_norm = np.array(data_train/255.0)
 data_test_norm = np.array(data_test/255.0)
-
-Let's plot an image as example.
 
 idx = 5
 plt.imshow(data_train_norm[idx, :].reshape(28, 28), cmap = matplotlib.cm.binary, interpolation = 'nearest')
 plt.axis("on")
 plt.title(get_label_name(trainY[idx]))
 plt.show()
-
-Now let's plot one example of each type (label).
 
 # The following code create a numpy array where in column 0 you will find 
 # an example of label 0, in column 1 of label 1 and so on.
@@ -221,10 +137,6 @@ for i in range(0, 10):
     plt.axis("off")
     pass
 
-## Feed-forward Network Model with One Hidden Layer 
-
-We will first use a feed-forward network model with one single hidden layer. Our model will be made of an input layer of 784 neurons, an hidden layer of 15 neurons and an output layer of 10 neurons with a softmax function as activation function. Softmax function here is needed since we one-hot encoded the labels. To have more details about this, see the [Further Readings](#fr) section of the notebook or refer to the hands-on chapter of the book about feed-forward neural networks.
-
 def build_model(opt):
   # create model
 	model = keras.Sequential()
@@ -238,8 +150,6 @@ model = build_model(tf.keras.optimizers.SGD(momentum = 0.0, learning_rate = 0.01
 
 model.summary()
 
-We now train the model.
-
 EPOCHS = 1000
 
 history = model.fit(
@@ -252,24 +162,8 @@ hist = pd.DataFrame(history.history)
 hist['epoch'] = history.epoch
 hist.tail()
 
-And we used the trained model on the test dataset.
-
 test_loss, test_accuracy = model.evaluate(data_test_norm, labels_test, verbose = 0)
 print('The accuracy on the test set is equal to: ', int(test_accuracy*100), '%.')
-
-Notice that, when training the model, we have set **`batch_size = data_train_norm.shape[0]`** inside Keras `fit` method. The reason for this choice is that we implemented the so-called *batch gradient descent* (i.e. the standard and most simple version of gradient descent). Since Keras set by default the batch size to 32 observations (see Keras `fit` method official documentation for more details, in the [Further Readings](#fr) section of the notebook), while the batch gradient descent updates weights and biases after all training observations have been seen by the network, we needed to change this parameter to obtain the basic version of gradient descent.
-
-In the same way, we needed to set the **`momentum = 0.0`** inside the method `tf.keras.optimizers.SGD`. Therefore, since Keras does not include a function to perform the standard gradient descent, we used the Stochastic Gradient Descent function, setting the momentum to zero and the batch size to the entire number of observations.
-
-We implemented this first feed-forward model to get an idea of what the final performances can be and which are the basic components of feed-forward neural networks in Keras. Now, let's see in more detail which kind of optimizers we can use to obtain the best performances and how they differ from each other.
-
-## Gradient Descent Variations
-
-We will compare three different variations of the gradient descent optimizer to see how much they are efficient.
-
-### Batch Gradient Descent
-
-As we just saw, the batch gradient descent can be defined by the Keras function `tf.keras.optimizers.SGD`, setting the `momentum = 0.0` and the `batch_size = data_train_norm.shape[0]`.
 
 start = time.time()
 
@@ -289,12 +183,6 @@ hist_bgd = pd.DataFrame(history_bgd.history)
 hist_bgd['epoch'] = history_bgd.epoch
 hist_bgd.tail()
 
-### Stochastic Gradient Descent
-
-The stochastic gradient descent, as the name suggests, selects a single observation from the dataset with a random probability distribution (which cannot be exactly predicted) and updates weights and biases based on that single observation. Then the process is repeated several times. 
-
-To implement stochastic gradient descent, we need to change the **momentum** parameter, setting it to a value which is **not zero** and we need to set the **mini-batch** size to **1** (in fact, stochastic gradient descent chooses one training sample at a time to update the weights and biases).
-
 start = time.time()
 
 model_sgd = build_model(tf.keras.optimizers.SGD(momentum = 0.9, learning_rate = 0.0001))
@@ -312,10 +200,6 @@ print('This took {:.2f} minutes.'.format((time.time() - start)/60))
 hist_sgd = pd.DataFrame(history_sgd.history)
 hist_sgd['epoch'] = history_sgd.epoch
 hist_sgd.tail()
-
-### Mini-batch Gradient Descent
-
-With this variation of the gradient descent, the dataset is split into a certain number of groups of observations (called batches) and weights are updated only after each batch has been fed to the model. This is by far the method most commonly used in the field of deep learning.
 
 start = time.time()
 
@@ -335,16 +219,6 @@ hist_mbgd = pd.DataFrame(history_mbgd.history)
 hist_mbgd['epoch'] = history_mbgd.epoch
 hist_mbgd.tail()
 
-As you can notice from the above results, the **batch gradient descent** is the fastest method in terms of learning phase execution, while the **stochastic gradient descent** is very slow. After 100 epochs, the batch gradient descent reaches an accuracy of only 43% on the training set, while the stochastic gradient descent performs increasingly better (91% accuracy), but it takes around 1 hour to train!!! In the first case the *entire training dataset* is presented to the net before the actual weights and biases update takes place, while in the second case *a single observation* is randomly picked up to perform update.
-
-The **mini-batch gradient descent**, on the contrary, is slightly slower than the batch gradient descent, but after only 100 epochs achieves an accuracy of 90% on the training dataset. In this case, groups of 50 training set observations are presented to the net before the actual weights and biases update takes place. Therefore, updates are more frequent with respect to the traditional gradient descent, leading to an overall increasing performance.
-
-The mini-batch gradient descent is definitely the best compromise in terms of execution time and classification performance. In fact, it is currently the preferred method to be used as optimizer in deep neural networks, among the different gradient descent types, since it can reach high performances, maintaining a good trade-off between performance and execution time.
-
-#### Comparison of Mini-batch Sizes
-
-We now define a function to easily try different mini-batch sizes and compare the relative performances.
-
 def mini_batch_gradient_descent(mb_size):
   # build model
   model_mbgd = build_model(tf.keras.optimizers.SGD(momentum = 0.9, learning_rate = 0.0001))
@@ -360,8 +234,6 @@ def mini_batch_gradient_descent(mb_size):
   hist_mbgd = pd.DataFrame(history_mbgd.history)
   hist_mbgd['epoch'] = history_mbgd.epoch  
   return hist_mbgd
-
-We also save the execution time associated to each mini-batch size.
 
 start = time.time()
 res_5 = mini_batch_gradient_descent(5)
@@ -387,14 +259,6 @@ start = time.time()
 res_300 = mini_batch_gradient_descent(300)
 time_300 = (time.time() - start)/60
 
-Have a look at the results. We compared the performance and the execution time of 6 different mini-batch sizes:
-- 5
-- 20
-- 50
-- 100
-- 200
-- 300
-
 # The following line contains the path to fonts that are used to plot result in
 # a uniform way.
 
@@ -418,10 +282,6 @@ plt.xlim(0, 100)
 plt.axis(True)
 plt.show()
 
-The above plot, which reports the decreasing cost function against the number of epochs for 4 of the 6 sizes that have been tested, shows that the smaller the mini-batch size, the lower the cost function. Before discussing about which can be the best solution, let's have a look at the time required to training the network for different mini-batch sizes.
-
-#### Time Needed by Different Batch Sizes
-
 time_mb = [time_5, time_20, time_50, time_100, time_200, time_300]
 cost_funct_100 = [res_5['loss'].values[-1], res_20['loss'].values[-1], res_50['loss'].values[-1],
                   res_100['loss'].values[-1], res_200['loss'].values[-1], res_300['loss'].values[-1]]
@@ -444,40 +304,18 @@ plt.xlim(0, 16)
 plt.axis(True)
 plt.show()
 
-As you can see, to choose which is the best value for the mini-batch size, we must always consider the trade-off between performance and execution time. In fact, with a very little mini-batch size (5) we obtain a very low cost function, but with a high execution time (around 14 minutes). Let's know recap what we have just seen.
-
-##### Final Tips
-
-So, how can we choose the size of mini-batches? 
-
-- As a general rule of thumb, small numbers (such as 30 of 50) are a good option.
-- In general, the lower the mini-batch size, the lower is the value achieved by the cost function.
-- However, you must always consider both running time and convergence speed (with respect to number of epochs).
-
-For example, as you can see in the last figure, after 100 epochs, a mini-batch size of 5 reaches a very low cost function value, but the running time is increasingly higher than a mini-batch size of 20. In this specific case, 20 is a better choice, since it takes into account both the performance and the running time.
-
-## Examples of Wrong Predictions
-
-It is instructive to inspect where the network got wrong results.
-
 pred_prob_test = model.predict(data_test_norm) # predictions
 pred_test = np.argmax(pred_prob_test, 1) # keep the highest probability returned by the softmax function
 
 corr_pred = pred_test == testY
 
-The `corr_pred` array contains True when the prediction on the test set is right and False when it is not.
-
 corr_pred[:50]
-
-Let's plot one example of wrong prediction.
 
 f = plt.figure(figsize = (8, 8));
 plt.imshow(data_test_norm[12, :].reshape(28, 28), cmap = matplotlib.cm.binary, interpolation = 'nearest')
 plt.title('True : ' + get_label_name(testY[12]) + ' - Pred.: '+str(get_label_name(pred_test[12])))
 plt.axis('on')
 plt.show()
-
-Let's get 10 random examples of wrongly classified images.
 
 lim = 70
 wrongly_classified_images = data_test_norm[0:lim, :]
@@ -499,14 +337,6 @@ for i in range(0, 10):
     plt.imshow(some_digit_image, cmap = matplotlib.cm.binary, interpolation = 'nearest')
     plt.axis('off')
     pass
-
-The question to ask yourself is: would I have done the same errors made by the network? For example, in the case reported left top, the answer is yes: it is difficult to say if that image is a coat or a shirt. So, the error may be acceptable.
-
-## Adding Many Layers Efficiently
-
-Until know we have changed the optimizer, but always working with the same architecture made of one single hidden layer. Let's try adding several layers and several numbers of neurons per layer.
-
-We first write a function to easily change and test different number of layers and neurons per layer of our model.
 
 def model_nlayers(num_neurons, num_layers):
     # build model
@@ -565,26 +395,11 @@ plt.xlim(0, 200)
 plt.axis(True)
 plt.show()
 
-In the above plot you can see the results of testing 5 different combinations of neurons and layers:
-- 1 layer and 10 neurons
-- 2 layers and 10 neurons
-- 3 layers and 10 neurons
-- 4 layers and 10 neurons
-- 4 layers and 100 neurons
-
-You can be forced to think that the last model is the best, but you first have to check overfitting (never forget overfitting). In fact, when the model is too complex, it can be too precise on the training dataset and not general on other datasets. Let's check it together.
-
 train_loss, train_accuracy = model_100_4.evaluate(data_train_norm, labels_train, verbose = 0)
 print('The accuracy on the train set is equal to: ', int(train_accuracy*100), '%.')
 
 test_loss, test_accuracy = model_100_4.evaluate(data_test_norm, labels_test, verbose = 0)
 print('The accuracy on the test set is equal to: ', int(test_accuracy*100), '%.')
-
-And in fact, as you can see from the performance of the last model in terms of accuracy on the training and test set, it is starting to go in overfitting regime.
-
-## Comparing Different Networks
-
-We now study how adding more  neurons in a network with one hidden layer changes the training phase of the network itself.
 
 res_1_1 = model_nlayers(1, 1)
 res_5_1 = model_nlayers(5, 1)
@@ -613,42 +428,5 @@ plt.xlim(0, 200)
 
 plt.axis(True)
 plt.show()
-
-As you can see from the above plot, one single neuron is too simple (and underfits the dataset), while at a certain point, adding so many neurons does not change the performance.
-
-### Final Tips
-
-The best way to get experience with feed-forward neural networks is to play with the models. As you can imagine, there is no one solution that fits all the cases and there is no specific rule. In each case you have to try different architectures (varying number of layers and number of neurons), parameters (learning rate), optimizers, .... Then you check the performance of your models on the training and test datasets to see which is the one that gives best values (without overfitting) and you inspect the plot of loss function vs number of epochs to understand if the model was well trained.
-
-General useful advice can be:
-- Always start with the less complex models (e.g. small number of neurons and layers) and move to more complex ones.
-- In case you cannot achieve good accuracy, check if any of your layers has a particularly low number of neurons. This may have killed the effective capacity of learning. Remember when we tried a model with just one neuron.
-- Remember that a low or high number of neurons is always relative to the number of features you have (the more the features the more the complexity of learning).
-
-## Exercises
-
-1. [*Easy Difficulty*] Try to build a multiclass classification model like the one we saw together in this notebook, but with a different dataset, the MNIST database of handwritten digits (http://yann.lecun.com/exdb/mnist/). To download the dataset from TensorFlow use the following lines of code:
-```
-from tensorflow import keras 
-(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
-```
-2. [*Medium Difficulty*] Try to apply He weights initialization (https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal) in the multiclass classification problem we saw in the notebook and see if you can speed up the learning phase. 
-3. [*Hard Difficulty*] Try to optimize the feed-forward neural network built in this notebook to reach the best possible accuracy (without overfitting the training dataset!). Tune the number of epochs, the learning rate, the optimizer, the number of neurons, layers and mini-batches. Hint: write a function like the one we used to test different numbers of layers and neurons and give it as inputs all the tunable parameters. 
-4. [*Hard Difficulty*] Consider the regression problem we solved with a model made by one single neuron in the notebook linked to Chapter 14 (predicting radon activity in U.S. houses). Try to build a feed-forward neural network to solve the same regression task. See if you can get better prediction performances. Hint: you will need to change the loss function and the metrics to evaluate your results, and one-hot encoding will not be necessary anymore. 
-
-## Further Readings <a name = "fr"></a>
-
-**Fashion-MNIST dataset**
-
-1. Xiao, Han, Kashif Rasul, and Roland Vollgraf. "Fashion-mnist: a novel image dataset for benchmarking machine learning algorithms." arXiv preprint arXiv:1708.07747 (2017)
-
-**One-hot encoding, integer encoding, softmax function**
-
-1. https://deepai.org/machine-learning-glossary-and-terms/one-hot-encoding (what one-hot encoding means)
-2. https://towardsdatascience.com/softmax-activation-function-how-it-actually-works-d292d335bd78 (why we need to use softmax function and the difference between one-hot encoding and integer encoding)
-
-**Keras fit method**
-1. https://keras.io/api/models/model_training_apis/#fit-method (official documentation)
-
 
 

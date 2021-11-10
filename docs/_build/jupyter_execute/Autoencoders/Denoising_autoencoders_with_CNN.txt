@@ -1,21 +1,3 @@
-# Denoising Images with Autoencoders based on Convolutional Neural Networks
-
-Version 1.1
-
-(C) 2020 - Umberto Michelucci, Michela Sperti
-
-This notebook is part of the book _Applied Deep Learning: a case based approach, **2nd edition**_ from APRESS by [U. Michelucci](mailto:umberto.michelucci@toelt.ai) and [M. Sperti](mailto:michela.sperti@toelt.ai).
-
-The purpose of this notebook is to give an example of Autoencoders implemented with convolutional neural networks applied to denoise images. The example dataset is taken from the real world.
-
-## Notebook Learning Goals
-
-At the end of the notebook you will be able to implement yourself an autoencoder to be applied in a denoising problem (with convolutional networks). It is very instructive to compare this notebook with *Denoising_autoencoders_with_FFNN.ipynb* since they both solve the same problem, but with a different autoencoder architecture.
-
-## Libraries and Dataset Import
-
-This section contains the necessary libraries (such as tensorflow or pandas) you need to import to run the notebook.
-
 # general libraries
 import matplotlib
 import matplotlib.pyplot as plt
@@ -30,10 +12,6 @@ from tensorflow.keras.layers import Conv2D, Conv2DTranspose
 from tensorflow.keras.constraints import max_norm
 from tensorflow.keras import backend as K
 from keras.utils.vis_utils import plot_model
-
-### MNIST Dataset
-
-For this notebook we will use the [MNIST Dataset](http://yann.lecun.com/exdb/mnist/). You can check the dataset with the previous link. It can be easily imported using Keras. Below you can see how easy it is to download it using [```tensorflow.keras.datasets```](https://www.tensorflow.org/api_docs/python/tf/keras/datasets).
 
 # Load MNIST dataset
 (input_train, target_train), (input_test, target_test) = mnist.load_data()
@@ -53,8 +31,6 @@ else:
     input_test = input_test.reshape(input_test.shape[0], img_width, img_height, 1)
     input_shape = (img_width, img_height, 1)
 
-As usual we will do the typical normalisation of the datasets as you can see below. At this point in the book you should be able to understand the code below easily.
-
 # Parse numbers as floats
 input_train = input_train.astype('float32')
 input_test = input_test.astype('float32')
@@ -62,8 +38,6 @@ input_test = input_test.astype('float32')
 # Normalize data
 input_train = input_train / 255
 input_test = input_test / 255
-
-Let's plot an image example for each possible class (i.e. digits from 0 to 9).
 
 def get_random_element_with_label (data, lbls, lbl):
   """Returns one numpy array (one column) with an example of a choosen label."""
@@ -96,10 +70,6 @@ for i in range(0, 10):
   plt.axis('off')
   pass
 
-## Adding Noise to the Dataset
-
-We know add a source of noise to the MNIST images (by means of np.random.normal function), since our objective will be to remove the same noise from them.
-
 noise_factor = 0.55
 pure = input_train
 pure_test = input_test
@@ -107,8 +77,6 @@ noise = np.random.normal(0, 1, pure.shape)
 noise_test = np.random.normal(0, 1, pure_test.shape)
 noisy_input = pure + noise_factor * noise
 noisy_input_test = pure_test + noise_factor * noise_test
-
-Now, let's plot some examples of images corrupted by noise (one for each class, as in the figure above).
 
 # The following line is needed to reshape the training dataset 
 # (to plot some image examples)
@@ -134,10 +102,6 @@ for i in range(0, 10):
   plt.axis('off')
   pass
 
-## Autoencoder with Convolutional Neural Networks
-
-Now we need to create the ```keras``` models. An autoencoder is made of two main parts: an _encoder_ and a _decoder_. The function below ```create_autoencoders()``` returns the model.
-
 def create_autoencoders(max_norm_value = 2.0):
   # Create the model
   model = Sequential()
@@ -152,8 +116,6 @@ model = create_autoencoders()
 
 plot_model(model, show_shapes = True)
 
-As for any Keras model we need to compile the model and then fit it to the data. As you can see we don't need any custom code to work with autoencoders. A simple model **definition** $\rightarrow$ **compile** $\rightarrow$ **fit** is enough.
-
 # Model configuration
 batch_size = 150
 no_epochs = 30
@@ -165,10 +127,6 @@ model.fit(noisy_input, pure,
           epochs = no_epochs,
           batch_size = batch_size,
           validation_split = validation_split)
-
-## Examples of Denoised Images
-
-Now we plot some examples of denoised images, comparing them with the original pure images, to see how well the built autoencoder behaves.
 
 # Generate denoised images
 number_of_visualizations = 6
@@ -203,7 +161,4 @@ for i in range(0, number_of_visualizations):
   fig.suptitle(f'MNIST target = {input_class}')
   plt.show()
 
-As you can see from the above figure, the model we built can reconstruct the original version of noisy digit images. If you have new noisy images of the same type you can apply the model to them and de-noise the same images.
-
-If you compare this last figure with the last figure of *Denoising_autoencoders_with_FFNN.ipynb* notebook, you can notice that CNNs are better suited to this kind of task. In fact, they are specifically designed for working with images, more than FFNNs.
 
