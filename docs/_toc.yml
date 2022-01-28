@@ -11,32 +11,36 @@ parts:
   - file: Introduction/Computational_graphs_exercises.ipynb
   - file: Introduction/Eager_execution_with_TF2.X.ipynb
   - file: Introduction/Overloading_of_operators_in_TF.ipynb
-- caption: Single Neuron
+- caption: I - Single Neuron
   chapters:
   - file: single_neuron/Introduction
   - file: single_neuron/Linear_regression_with_one_neuron.ipynb
   - file: single_neuron/Linear_regression_with_numpy.ipynb
   - file: single_neuron/Logistic_regression_with_one_neuron.ipynb
-- caption: Fully Connected Networks
+- caption: II - Fully Connected Networks
   chapters:
   - file: FFNN/Multiclass_classification_with_fully_connected_networks.ipynb
   - file: FFNN/Overfitting_example.ipynb
-- caption: Regularization Techniques
+- caption: III - Regularization Techniques
   chapters:
   - file: Regularization/Regularization_techniques.ipynb
   - file: Regularization/Regularization_decision_boundaries.ipynb
-- caption: Gradient Descent Optimizer
+- caption: IV - Gradient Descent Optimizer
   chapters:
   - file: gradientDescent/Gradient_descent_developed_from_scratch.ipynb
-- caption: Generative Adversarial Networks
+- caption: V - Advanced Optimizers
+  chapters:
+  - file: Optimizers/Custom_Training_Loop.ipynb
+  - file: Optimizers/Optimizers_comparison.ipynb
+- caption: VI - Generative Adversarial Networks
   chapters:
   - file: GAN/GAN_with_MNIST.ipynb
-- caption: Autoencoders
+- caption: VII - Autoencoders
   chapters:
   - file: Autoencoders/Your_first_autoencoder_with_Keras.ipynb
   - file: Autoencoders/Anomaly_detection_with_autoencoders.ipynb
   - file: Autoencoders/Denoising_autoencoders_with_FFNN.ipynb
   - file: Autoencoders/Denoising_autoencoders_with_CNN.ipynb
-- caption: Variational Autoencoders
+- caption: VIII - Variational Autoencoders
   chapters:
   - file: VAE/Variational_Autoencoders.ipynb
