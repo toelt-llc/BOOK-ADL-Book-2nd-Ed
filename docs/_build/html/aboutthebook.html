@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Neural Networks and deep learning: theory and applications &#8212; Applied Deep Learning - 2nd Edition</title>
+    <title>About the Book &#8212; Applied Deep Learning - 2nd Edition</title>
     
   <link href="_static/css/theme.css" rel="stylesheet" />
   <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -51,7 +51,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction" href="start/introduction.html" />
+    <link rel="next" title="Computational Graphs" href="Introduction/Computational_graphs_with_TF1.X.html" />
+    <link rel="prev" title="Frequently Asked Questions" href="start/faq.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -90,7 +91,7 @@
   Get started
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="start/introduction.html">
    Introduction
@@ -101,8 +102,8 @@
    Frequently Asked Questions
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="aboutthebook.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    About the Book
   </a>
  </li>
@@ -368,7 +369,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/landingpage.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/aboutthebook.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -388,7 +389,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/toelt-llc/ADL-Book-2nd-Ed/issues/new?title=Issue%20on%20page%20%2Flandingpage.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/toelt-llc/ADL-Book-2nd-Ed/issues/new?title=Issue%20on%20page%20%2Faboutthebook.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -415,31 +416,14 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-a-2nd-edition">
-   Why a 2nd Edition
+  <a class="reference internal nav-link" href="#table-of-contents-toc">
+   Table of Contents (TOC)
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#some-numbers-about-the-first-edition">
-   Some Numbers about the first edition
+  <a class="reference internal nav-link" href="#short-description-from-the-back-of-the-cover">
+   Short Description (from the back of the cover)
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-is-this-website-built">
-   How is this website built?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#download-the-material">
-   Download the material
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#last-build">
-     Last Build
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -452,88 +436,37 @@
         
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="neural-networks-and-deep-learning-theory-and-applications">
-<h1>Neural Networks and deep learning: theory and applications<a class="headerlink" href="#neural-networks-and-deep-learning-theory-and-applications" title="Permalink to this headline">¶</a></h1>
-<p>This is the online companion of the <em>Applied Deep Learning 2nd Edition</em> book
-published by APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">Umberto Michelucci</a> with code editing by <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">Michela Sperti</a>.</p>
-<p>The book will be published in 2022 by APRESS and will be available as a printed version
-and in an online form (PDF without any limitations) from the APRESS website. As
-soon as available the link will be posted here.</p>
-<div class="section" id="why-a-2nd-edition">
-<h2>Why a 2nd Edition<a class="headerlink" href="#why-a-2nd-edition" title="Permalink to this headline">¶</a></h2>
-<p>The first verision of Applied Deep Learning (ADL) has been published in 2018. At the time TensorFlow was still in its first version. Today (2022 as I write this) TensorFlow is in its 2.7 version and much has changed. Keras works differently, sessions have disappearead (you know what sessions are if you have been around when TensorFlow version was still 1.X) and developing neural networks have become much easier.</p>
-<p>The code in the book needed a complete rehaul. With the help of Michela Sperti we have udpated the code in the book to TensorFlow 2.X compeltely and created this online companion website for you. You can find here a lot of complete examples that are discussed in detail in the book.</p>
-<p>If you are intersted you can buy the first edition <a class="reference external" href="https://www.apress.com/gp/book/9781484237892">HERE</a>. Although at this point I would suggest you wait for the 2nd edition to come out. That should happen in Spring 2022.</p>
-</div>
-<div class="section" id="some-numbers-about-the-first-edition">
-<h2>Some Numbers about the first edition<a class="headerlink" href="#some-numbers-about-the-first-edition" title="Permalink to this headline">¶</a></h2>
-<div class="admonition-some-numbers-about-the-1st-edition admonition">
-<p class="admonition-title">Some Numbers about the 1st Edition</p>
+  <div class="tex2jax_ignore mathjax_ignore section" id="about-the-book">
+<h1>About the Book<a class="headerlink" href="#about-the-book" title="Permalink to this headline">¶</a></h1>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/Book_cover.png"><img alt="fishy" class="bg-primary mb-1 align-center" src="_images/Book_cover.png" style="width: 600px;" /></a>
+<div class="section" id="table-of-contents-toc">
+<h2>Table of Contents (TOC)<a class="headerlink" href="#table-of-contents-toc" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>The 1st edition of the book have been downloaded more than <strong>90000</strong> times</p></li>
-<li><p>The 1st edition of the book has been cited in more than 100 international peer reviewed papers</p></li>
-<li><p>The 1st edition of the book has been used in PATENT applications</p></li>
-<li><p>The 1st edition of the book has been cited in papers in a very large number of fields: medicine, drug testing, geology, market analysis, sales forecasting, construction, physics, water treatment systems, cosmology, and many more.</p></li>
+<li><p>Chapter 1: Optimisation and Neural Networks</p></li>
+<li><p>Chapter 2: Applications with one single neuron</p></li>
+<li><p>Chapter 3: Feed Forward Neural Networks</p></li>
+<li><p>Chapter 4: Regularisation</p></li>
+<li><p>Chapter 5: Optimizers</p></li>
+<li><p>Chapter 6: Hyperparameter Tuning</p></li>
+<li><p>Chapter 7: Convolutional Neural Networks</p></li>
+<li><p>Chapter 8: Recurrent Neural Networks</p></li>
+<li><p>Chapter 9: Autoencoders</p></li>
+<li><p>Chapter 10: Metric Analysis</p></li>
+<li><p>Chapter 11: Generative Adversarial Networks</p></li>
+<li><p>Appendix 1: Introduction to Keras</p></li>
+<li><p>Appendix 2: Customising Keras</p></li>
 </ul>
 </div>
-</div>
-<div class="section" id="how-is-this-website-built">
-<h2>How is this website built?<a class="headerlink" href="#how-is-this-website-built" title="Permalink to this headline">¶</a></h2>
-<p>This book is built using
-the <a class="reference external" href="https://jupyterbook.org/intro.html">jupyter-book wonderful open source project</a>.
-You can read this book using any modern browser (chrome and safari have been tested extensively
-but other browser should work too).</p>
-</div>
-<div class="section" id="download-the-material">
-<h2>Download the material<a class="headerlink" href="#download-the-material" title="Permalink to this headline">¶</a></h2>
-<p>You can read this book without dowloading any material. But if you prefer, you can
-download the material locally or open the code parts
-in <a class="reference external" href="https://colab.research.google.com">Google Colab</a>.</p>
-<p>You may notenice that on the top right of the page you will see
-typically four icons (they may be less in some cases)</p>
-<p><img alt="icons" src="_images/jb-icons.png" /></p>
-<ul class="simple">
-<li><p>The small rocket will allow you to open the code parts in an external environment
-(typically google colab)</p></li>
-<li><p>The square symbol will make the page full screen</p></li>
-<li><p>the GitHub logo will open the repository where the files are (in case you want to
-download all the notebooks directly)</p></li>
-<li><p>the download symbol will allow you to download the page you are reading in various
-formats.</p></li>
-</ul>
-<div class="section" id="last-build">
-<h3>Last Build<a class="headerlink" href="#last-build" title="Permalink to this headline">¶</a></h3>
-<p>This book has been built last time on
-Saturday 29th January 2022.</p>
-</div>
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
+<div class="section" id="short-description-from-the-back-of-the-cover">
+<h2>Short Description (from the back of the cover)<a class="headerlink" href="#short-description-from-the-back-of-the-cover" title="Permalink to this headline">¶</a></h2>
+<p>Understand how neural networks work and learn how to implement them using TensorFlow 2.0 and Keras. This new edition focuses on the fundamental concepts and at the same time on practical aspects of implementing neural networks and deep learning for your research projects.
+This book is designed so that you can focus on the parts you are interested in. You will explore topics as regularization, optimizers, optimization, metric analysis, and hyper-parameter tuning. In addition, you will learn the fundamentals ideas behind autoencoders and generative adversarial networks.
+All the code presented in the book will be available in the form of Jupyter notebooks which would allow you to try out all examples and extend them in interesting ways. A companion online book is available with the complete code for all examples discussed in the book and additional material more related to TensorFlow and Keras. All the code will be available in Jupyter notebook format and can be opened directly in Google Colab (no need to install anything locally) or downloaded on your own machine and tested locally.
+You will:
+•	Understand the fundamental concepts of how neural networks work
+•	Learn the fundamental ideas behind autoencoders and generative adversarial networks
+•	Be able to try all the examples with complete code examples that you can expand for your own projects
+•	Have available a complete online companion book with examples and tutorials.</p>
 </div>
 </div>
 
@@ -566,11 +499,20 @@ Saturday 29th January 2022.</p>
 
 <div class='prev-next-bottom'>
     
+    <div id="prev">
+        <a class="left-prev" href="start/faq.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Frequently Asked Questions</p>
+            </div>
+        </a>
+    </div>
      <div id="next">
-        <a class="right-next" href="start/introduction.html" title="next page">
+        <a class="right-next" href="Introduction/Computational_graphs_with_TF1.X.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title">Introduction</p>
+                <p class="prevnext-title">Computational Graphs</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

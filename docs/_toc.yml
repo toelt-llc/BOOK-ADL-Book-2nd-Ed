@@ -5,6 +5,7 @@ parts:
   chapters:
   - file: start/introduction
   - file: start/faq
+  - file: aboutthebook.md
 - caption: An Introduction to TensorFlow 2.x and 1.x
   chapters:
   - file: Introduction/Computational_graphs_with_TF1.X.ipynb
