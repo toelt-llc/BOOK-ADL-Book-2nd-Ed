@@ -8,14 +8,16 @@ repository:
   url: https://github.com/toelt-llc/ADL-Book-2nd-Ed
   path_to_book: docs
   branch: master  # Which branch of the repository should be used when creating links (optional)
-    
+
 
 launch_buttons:
   colab_url: "https://colab.research.google.com"
+  notebook_interface: "classic" # The interface interactive links will activate ["classic", "jupyterlab"]
 
 html:
-    home_page_in_navbar: true
+    home_page_in_navbar: false
     use_repository_button: true
+    use_issues_button: true
 
 latex:
   latex_documents:
