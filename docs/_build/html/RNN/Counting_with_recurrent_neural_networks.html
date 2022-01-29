@@ -1,0 +1,794 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counting with Recurrent Neural Networks &#8212; Applied Deep Learning - 2nd Edition</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Metric Analysis" href="../metric/Metric_analysis_with_MNIST_dataset.html" />
+    <link rel="prev" title="Multiclass Classification with Convolutional Neural Networks" href="../CNN/Multiclass_classification_with_convolutional_neural_networks.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_book_online.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Applied Deep Learning - 2nd Edition</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landingpage.html">
+   Neural Networks and deep learning: theory and applications
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  I - Single Neuron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  II - Fully Connected Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  III - Regularization Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IV - Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradientDescent/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  V - Advanced Optimizers
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Custom_Training_Loop.html">
+   Simple example of a custom training loop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Optimizers_comparison.html">
+   Comparison of Optimizers
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VI - Hyper-parameter Tuning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hyper/Hyperparameter_tuning_with_Zalando_dataset.html">
+   Hyperparameter Tuning with the Zalando Dataset
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VII - Convolutional Neural Networks (CNN)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../CNN/The_convolution_operator.html">
+   The Convolution Operator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../CNN/Multiclass_classification_with_convolutional_neural_networks.html">
+   Multiclass Classification with Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VIII - Recurrent Neural Networks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Counting with Recurrent Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Metric Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../metric/Metric_analysis_with_MNIST_dataset.html">
+   Metric Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Generative Adversarial Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html">
+   GAN Example in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  X - Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  XI - Variational Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../VAE/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/RNN/Counting_with_recurrent_neural_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/toelt-llc/ADL-Book-2nd-Ed"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/RNN/Counting_with_recurrent_neural_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/RNN/Counting_with_recurrent_neural_networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#libraries-import">
+   Libraries Import
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#explanation-of-data-preparation">
+   Explanation of Data Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-preparation">
+   Data Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#targets-preparation">
+   Targets Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-splitting">
+   Dataset Splitting
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#network-building">
+   Network Building
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#network-training">
+   Network Training
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="counting-with-recurrent-neural-networks">
+<h1>Counting with Recurrent Neural Networks<a class="headerlink" href="#counting-with-recurrent-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.0</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<p>The purpose of this notebook is to give you a very simple example of application of Recurrent Neural Networks (RNNs) and specifically a RNN which is able to count how many 1s there are in a vector containing both 0s and 1s.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the notebook you are going to know which is the most basic structure of a RNN. Moreover, you will be able to apply it in other similar problems that you may encounter further.</p>
+</div>
+<div class="section" id="libraries-import">
+<h2>Libraries Import<a class="headerlink" href="#libraries-import" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">shuffle</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will now create <span class="math notranslate nohighlight">\(10^5\)</span> vectors made of 15 elements each, containing only 1 and 0 values.</p>
+<p>We want to have all possible combination of 1 and 0. An easy way to do this is by taking all numbers up to <span class="math notranslate nohighlight">\(2^{15}\)</span> in binary format. To understand why, consider the following simpler example, in which we will generate every possible combination of four 0 and 1, so we will consider every number up to <span class="math notranslate nohighlight">\(2^4\)</span>.</p>
+</div>
+<div class="section" id="explanation-of-data-preparation">
+<h2>Explanation of Data Preparation<a class="headerlink" href="#explanation-of-data-preparation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{0:04b}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">4</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;0000&#39;,
+ &#39;0001&#39;,
+ &#39;0010&#39;,
+ &#39;0011&#39;,
+ &#39;0100&#39;,
+ &#39;0101&#39;,
+ &#39;0110&#39;,
+ &#39;0111&#39;,
+ &#39;1000&#39;,
+ &#39;1001&#39;,
+ &#39;1010&#39;,
+ &#39;1011&#39;,
+ &#39;1100&#39;,
+ &#39;1101&#39;,
+ &#39;1110&#39;,
+ &#39;1111&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The above code simply format all numbers that you get with the <code class="docutils literal notranslate"><span class="pre">range(2**4)</span></code> function from 0 to <code class="docutils literal notranslate"><span class="pre">2**4</span></code> in binary format with <code class="docutils literal notranslate"><span class="pre">{0:04b}</span></code>, limiting the number of digits to 4.</p>
+<p>For our example we will simply do it with 15 digits, that means we will do it with numbers up to <code class="docutils literal notranslate"><span class="pre">2**15</span></code>.</p>
+</div>
+<div class="section" id="data-preparation">
+<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">ll</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">15</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_input</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{0:015b}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ll</span><span class="p">)]</span> <span class="c1"># consider every number up to 2^15 in binary format</span>
+<span class="n">shuffle</span><span class="p">(</span><span class="n">train_input</span><span class="p">)</span> <span class="c1"># shuffle inputs</span>
+<span class="n">train_input</span> <span class="o">=</span> <span class="p">[</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">train_input</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ti</span>  <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">train_input</span><span class="p">:</span>
+  <span class="n">temp_list</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+    <span class="n">temp_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">j</span><span class="p">])</span>
+  <span class="n">ti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temp_list</span><span class="p">))</span>
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">ti</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code above is there to simply transform a string like ‘0100’ in a list [0,1,0,0] and then concatenate all the lists with all the possible combinations.</p>
+<p>Then we prepare the target variable, a one-hot encoded version of the counts. That means that if we have an input with four 1s in the vector our target vector will look like <code class="docutils literal notranslate"><span class="pre">[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]</span></code>.</p>
+</div>
+<div class="section" id="targets-preparation">
+<h2>Targets Preparation<a class="headerlink" href="#targets-preparation" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_output</span> <span class="o">=</span> <span class="p">[]</span>
+ 
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">train_input</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">temp_list</span> <span class="o">=</span> <span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">nn</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">temp_list</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">train_output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataset-splitting">
+<h2>Dataset Splitting<a class="headerlink" href="#dataset-splitting" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NUM_EXAMPLES</span> <span class="o">=</span> <span class="n">ll</span> <span class="o">-</span> <span class="mi">2000</span>
+<span class="n">test_input</span> <span class="o">=</span> <span class="n">train_input</span><span class="p">[</span><span class="n">NUM_EXAMPLES</span><span class="p">:]</span>
+<span class="n">test_output</span> <span class="o">=</span> <span class="n">train_output</span><span class="p">[</span><span class="n">NUM_EXAMPLES</span><span class="p">:]</span> <span class="c1"># everything beyond 10,000</span>
+ 
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">train_input</span><span class="p">[:</span><span class="n">NUM_EXAMPLES</span><span class="p">]</span>
+<span class="n">train_output</span> <span class="o">=</span> <span class="n">train_output</span><span class="p">[:</span><span class="n">NUM_EXAMPLES</span><span class="p">]</span> <span class="c1"># till 10,000</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="network-building">
+<h2>Network Building<a class="headerlink" href="#network-building" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">input_dim</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">output_dim</span> <span class="o">=</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="c1"># Add a LSTM layer with 128 internal units.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="n">input_dim</span> <span class="o">=</span> <span class="mi">15</span><span class="p">))</span>
+
+<span class="c1"># Add a Dense layer with 10 units.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;categorical_accuracy&#39;</span><span class="p">])</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+embedding (Embedding)        (None, None, 15)          225       
+_________________________________________________________________
+lstm (LSTM)                  (None, 24)                3840      
+_________________________________________________________________
+dense (Dense)                (None, 16)                400       
+=================================================================
+Total params: 4,465
+Trainable params: 4,465
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="network-training">
+<h2>Network Training<a class="headerlink" href="#network-training" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># we need to convert the input and output to numpy array to be used by the network</span>
+<span class="n">train_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_input</span><span class="p">)</span>
+<span class="n">train_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">train_output</span><span class="p">)</span>
+
+<span class="n">test_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+<span class="n">test_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">test_output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">train_output</span><span class="p">,</span> <span class="n">validation_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">test_output</span><span class="p">),</span> <span class="n">epochs</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+308/308 [==============================] - 4s 9ms/step - loss: 1.9441 - categorical_accuracy: 0.3063 - val_loss: 1.1784 - val_categorical_accuracy: 0.6840
+Epoch 2/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.7472 - categorical_accuracy: 0.8332 - val_loss: 0.4515 - val_categorical_accuracy: 0.9270
+Epoch 3/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.3311 - categorical_accuracy: 0.9554 - val_loss: 0.2360 - val_categorical_accuracy: 0.9630
+Epoch 4/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.1921 - categorical_accuracy: 0.9658 - val_loss: 0.1530 - val_categorical_accuracy: 0.9675
+Epoch 5/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.1306 - categorical_accuracy: 0.9760 - val_loss: 0.1071 - val_categorical_accuracy: 0.9775
+Epoch 6/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.0937 - categorical_accuracy: 0.9824 - val_loss: 0.0778 - val_categorical_accuracy: 0.9870
+Epoch 7/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.0696 - categorical_accuracy: 0.9905 - val_loss: 0.0586 - val_categorical_accuracy: 0.9930
+Epoch 8/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.0533 - categorical_accuracy: 0.9921 - val_loss: 0.0446 - val_categorical_accuracy: 0.9945
+Epoch 9/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.0422 - categorical_accuracy: 0.9924 - val_loss: 0.0367 - val_categorical_accuracy: 0.9960
+Epoch 10/10
+308/308 [==============================] - 2s 7ms/step - loss: 0.0346 - categorical_accuracy: 0.9943 - val_loss: 0.0301 - val_categorical_accuracy: 0.9955
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;tensorflow.python.keras.callbacks.History at 0x7f6b7b3bd990&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>After just 10 epochs the network is right in 99% of the cases. Just let it run for more epochs and you can reach incredible precision.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>[<em>Medium Difficulty</em>] Try to train a fully connected network (as the ones we have discussed so far) to count and compare it with the RNN we have seen during this Chapter. You will see how this is not possible.</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./RNN"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../CNN/Multiclass_classification_with_convolutional_neural_networks.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Multiclass Classification with Convolutional Neural Networks</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../metric/Metric_analysis_with_MNIST_dataset.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Metric Analysis</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci with code editing by Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2022).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,864 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiclass Classification with Convolutional Neural Networks &#8212; Applied Deep Learning - 2nd Edition</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Counting with Recurrent Neural Networks" href="../RNN/Counting_with_recurrent_neural_networks.html" />
+    <link rel="prev" title="The Convolution Operator" href="The_convolution_operator.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_book_online.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Applied Deep Learning - 2nd Edition</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landingpage.html">
+   Neural Networks and deep learning: theory and applications
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  I - Single Neuron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  II - Fully Connected Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  III - Regularization Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IV - Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradientDescent/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  V - Advanced Optimizers
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Custom_Training_Loop.html">
+   Simple example of a custom training loop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Optimizers_comparison.html">
+   Comparison of Optimizers
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VI - Hyper-parameter Tuning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hyper/Hyperparameter_tuning_with_Zalando_dataset.html">
+   Hyperparameter Tuning with the Zalando Dataset
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VII - Convolutional Neural Networks (CNN)
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="The_convolution_operator.html">
+   The Convolution Operator
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Multiclass Classification with Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VIII - Recurrent Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../RNN/Counting_with_recurrent_neural_networks.html">
+   Counting with Recurrent Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Metric Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../metric/Metric_analysis_with_MNIST_dataset.html">
+   Metric Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Generative Adversarial Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html">
+   GAN Example in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  X - Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  XI - Variational Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../VAE/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/CNN/Multiclass_classification_with_convolutional_neural_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/toelt-llc/ADL-Book-2nd-Ed"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/CNN/Multiclass_classification_with_convolutional_neural_networks.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/CNN/Multiclass_classification_with_convolutional_neural_networks.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-overview">
+   Dataset Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#libraries-and-dataset-import">
+   Libraries and Dataset Import
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-preparation">
+   Dataset Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-normalization">
+   Data Normalization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional-neural-network-model">
+   Convolutional Neural Network Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-readings">
+   Further Readings
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="multiclass-classification-with-convolutional-neural-networks">
+<h1>Multiclass Classification with Convolutional Neural Networks<a class="headerlink" href="#multiclass-classification-with-convolutional-neural-networks" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.0</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<p>The purpose of this notebook is to give a practical example (with a dataset taken from the real world) of a multiclass classification problem solved by means of a Convolutional Neural Network (CNN) architecture. It may be instructive to compare the results of this notebook with the ones of <em>Multiclass_classification_with_fully_connected_networks.ipynb</em> notebook, which solves the same problem, but with a simpler architecture.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the notebook you are going to know how to implement yourself a CNN architecture in Keras. Moreover, you will be able to to apply it to other image recognition problems.</p>
+</div>
+<div class="section" id="dataset-overview">
+<h2>Dataset Overview<a class="headerlink" href="#dataset-overview" title="Permalink to this headline">¶</a></h2>
+<p><strong>Context</strong></p>
+<p>Fashion-MNIST is a dataset of Zalando’s article images (consisting of a training set of 60000 examples and a test set of 10000 examples). Each example is a 28x28 grayscale image, associated with a label from 10 classes. Zalando intends Fashion-MNIST to serve as a direct drop-in replacement for the original MNIST dataset for benchmarking machine learning algorithms. It shares the same image size and structure of training and testing splits.</p>
+<p>The original MNIST dataset contains a lot of handwritten digits. Members of the AI/ML/Data Science community love this dataset and use it as a benchmark to validate their algorithms. In fact, MNIST is often the first dataset researchers try. “If it doesn’t work on MNIST, it won’t work at all”, they said. “Well, if it does work on MNIST, it may still fail on others.”
+Zalando seeks to replace the original MNIST dataset</p>
+<p><strong>Content</strong></p>
+<p>Each image is 28 pixels in height and 28 pixels in width, for a total of 784 pixels in total. Each pixel has a single pixel-value associated with it, indicating the lightness or darkness of that pixel, with higher numbers meaning darker. This pixel-value is an integer between 0 and 255. The training and test data sets have 785 columns. The first column consists of the class labels (see above), and represents the article of clothing. The rest of the columns contain the pixel-values of the associated image.</p>
+<p>To locate a pixel on the image, suppose that we have decomposed <span class="math notranslate nohighlight">\(x\)</span> as <span class="math notranslate nohighlight">\(x = 28i + j\)</span>, where <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are integers between 0 and 27. The pixel is located on row <span class="math notranslate nohighlight">\(i\)</span> and column <span class="math notranslate nohighlight">\(j\)</span> of a 28x28 matrix.
+For example, pixel31 indicates the pixel that is in the fourth column from the left, and the second row from the top.</p>
+<p>Each row of the dataset is a separate image. Column 1 is the class label.
+Remaining columns are pixel numbers (784 total). Each value is the darkness of the pixel (1 to 255).</p>
+<p><strong>Labels</strong></p>
+<p>Each training and test example is assigned to one of the following labels:</p>
+<ul class="simple">
+<li><p>0 T-shirt/top</p></li>
+<li><p>1 Trouser</p></li>
+<li><p>2 Pullover</p></li>
+<li><p>3 Dress</p></li>
+<li><p>4 Coat</p></li>
+<li><p>5 Sandal</p></li>
+<li><p>6 Shirt</p></li>
+<li><p>7 Sneaker</p></li>
+<li><p>8 Bag</p></li>
+<li><p>9 Ankle boot</p></li>
+</ul>
+<p><strong>Acknowledgements</strong></p>
+<p>Original dataset was downloaded from TensorFlow datasets catalog.</p>
+<p><strong>License</strong></p>
+<p>The MIT License (MIT) Copyright © [2017] Zalando SE, <a class="reference external" href="https://tech.zalando.com">https://tech.zalando.com</a></p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+</div>
+<div class="section" id="libraries-and-dataset-import">
+<h2>Libraries and Dataset Import<a class="headerlink" href="#libraries-and-dataset-import" title="Permalink to this headline">¶</a></h2>
+<p>This section contains the necessary libraries (such as tensorflow or pandas) you need to import to run the notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># general libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># tensorflow libraries</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">fashion_mnist</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_docs</span> <span class="k">as</span> <span class="nn">tfdocs</span>
+<span class="kn">import</span> <span class="nn">tensorflow_docs.modeling</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span><span class="p">,</span> <span class="n">models</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cells are needed to <strong>download</strong> the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">((</span><span class="n">trainX</span><span class="p">,</span> <span class="n">trainY</span><span class="p">),</span> <span class="p">(</span><span class="n">testX</span><span class="p">,</span> <span class="n">testY</span><span class="p">))</span> <span class="o">=</span> <span class="n">fashion_mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Let’s have a look at our data</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training dataset: &#39;</span><span class="p">,</span> <span class="n">trainX</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test dataset: &#39;</span><span class="p">,</span> <span class="n">testX</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training labels: &#39;</span><span class="p">,</span> <span class="n">trainY</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test labels: &#39;</span><span class="p">,</span> <span class="n">testY</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensions of the training dataset:  (60000, 28, 28)
+Dimensions of the test dataset:  (10000, 28, 28)
+Dimensions of the training labels:  (60000,)
+Dimensions of the test labels:  (10000,)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataset-preparation">
+<h2>Dataset Preparation<a class="headerlink" href="#dataset-preparation" title="Permalink to this headline">¶</a></h2>
+<p>We now one-hot encode the labels and change the images dimensions, to get easy to use data for later. To know more about one-hot encoding process see the <a class="reference external" href="#fr">Further Readings</a> section or refer to the hands-on chapter of the book about feed-forward neural networks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">labels_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">labels_train</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">60000</span><span class="p">),</span> <span class="n">trainY</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">data_train</span> <span class="o">=</span> <span class="n">trainX</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">labels_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">labels_test</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10000</span><span class="p">),</span> <span class="n">testY</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">data_test</span> <span class="o">=</span> <span class="n">testX</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training dataset: &#39;</span><span class="p">,</span> <span class="n">data_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test dataset: &#39;</span><span class="p">,</span> <span class="n">data_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training labels: &#39;</span><span class="p">,</span> <span class="n">labels_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test labels: &#39;</span><span class="p">,</span> <span class="n">labels_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensions of the training dataset:  (60000, 28, 28, 1)
+Dimensions of the test dataset:  (10000, 28, 28, 1)
+Dimensions of the training labels:  (60000, 10)
+Dimensions of the test labels:  (10000, 10)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-normalization">
+<h2>Data Normalization<a class="headerlink" href="#data-normalization" title="Permalink to this headline">¶</a></h2>
+<p>Let’s normalize the training data dividing by 255.0 to get the values between 0 and 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data_train_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_train</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+<span class="n">data_test_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_test</span><span class="o">/</span><span class="mf">255.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="convolutional-neural-network-model">
+<h2>Convolutional Neural Network Model<a class="headerlink" href="#convolutional-neural-network-model" title="Permalink to this headline">¶</a></h2>
+<p>Let us try to build one such a network to give you a feeling of how the process would work and how the code looks like. We will not do any hyperparameter tuning or optimization to keep the section understandable.</p>
+<p>Our CNN will be made of the following layers:</p>
+<ul class="simple">
+<li><p><strong>CONV1</strong>: 6 filters 5 x 5, stride <span class="math notranslate nohighlight">\(s=1\)</span></p></li>
+<li><p>We then apply <strong>ReLU</strong> to the output of the previous layer</p></li>
+<li><p><strong>POOL1</strong> with a window 2 × 2, stride <span class="math notranslate nohighlight">\(s=2\)</span></p></li>
+<li><p><strong>CONV2</strong>: 16 Filters 5 × 5, stride <span class="math notranslate nohighlight">\(s=1\)</span></p></li>
+<li><p>We then apply <strong>ReLU</strong> to the output of the previous layer</p></li>
+<li><p><strong>POOL2</strong> with a window 2 × 2, stride <span class="math notranslate nohighlight">\(s=2\)</span></p></li>
+<li><p><strong>Fully Connected Layer</strong> with 128 neurons with activation function ReLU</p></li>
+<li><p><strong>Fully Connected Layer</strong> with 10 neurons for classification of the Zalando dataset</p></li>
+<li><p><strong>Softmax</strong> output neuron</p></li>
+</ul>
+<p>Softmax function here is needed since we one-hot encoded the labels. To have more details about this, see the <a class="reference external" href="#fr">Further Readings</a> section of the notebook or refer to the hands-on chapter of the book about feed-forward neural networks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_model</span><span class="p">():</span>
+  <span class="c1"># create model</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">strides</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">strides</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">strides</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">strides</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Flatten</span><span class="p">())</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+  <span class="c1"># compile model</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span> <span class="o">=</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;categorical_accuracy&#39;</span><span class="p">])</span>
+  <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;sequential&quot;
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 24, 24, 6)         156       
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 12, 12, 6)         0         
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 8, 8, 16)          2416      
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 4, 4, 16)          0         
+_________________________________________________________________
+flatten (Flatten)            (None, 256)               0         
+_________________________________________________________________
+dense (Dense)                (None, 128)               32896     
+_________________________________________________________________
+dense_1 (Dense)              (None, 10)                1290      
+=================================================================
+Total params: 36,758
+Trainable params: 36,758
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now train the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">data_train_norm</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+600/600 [==============================] - 24s 39ms/step - loss: 0.6554 - categorical_accuracy: 0.7633
+Epoch 2/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.4381 - categorical_accuracy: 0.8409
+Epoch 3/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.3832 - categorical_accuracy: 0.8629
+Epoch 4/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.3515 - categorical_accuracy: 0.8742
+Epoch 5/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.3295 - categorical_accuracy: 0.8814
+Epoch 6/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.3117 - categorical_accuracy: 0.8872
+Epoch 7/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.2954 - categorical_accuracy: 0.8927
+Epoch 8/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.2817 - categorical_accuracy: 0.8978
+Epoch 9/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.2731 - categorical_accuracy: 0.9001
+Epoch 10/10
+600/600 [==============================] - 23s 38ms/step - loss: 0.2607 - categorical_accuracy: 0.9050
+</pre></div>
+</div>
+</div>
+</div>
+<p>And we used the trained model on the test dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">test_loss</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">data_test_norm</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The accuracy on the test set is equal to: &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the test set is equal to:  88 %.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>[<em>Easy Difficulty</em>] Try to build a multiclass classification model like the one we saw together in this notebook, but with a different dataset, the MNIST database of handwritten digits (<a class="reference external" href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a>). To download the dataset from TensorFlow use the following lines of code:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span> 
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p>[<em>Medium Difficulty</em>] Try to change the network’s parameters to see if you can get a higher accuracy. Change kernel size, stride, and padding.</p></li>
+</ol>
+</div>
+<div class="section" id="further-readings">
+<h2>Further Readings<a class="headerlink" href="#further-readings" title="Permalink to this headline">¶</a></h2>
+<p><strong>Fashion-MNIST dataset</strong></p>
+<ol class="simple">
+<li><p>Xiao, Han, Kashif Rasul, and Roland Vollgraf. “Fashion-mnist: a novel image dataset for benchmarking machine learning algorithms.” arXiv preprint arXiv:1708.07747 (2017)</p></li>
+</ol>
+<p><strong>One-hot encoding, integer encoding, softmax function</strong></p>
+<ol class="simple">
+<li><p><a class="reference external" href="https://deepai.org/machine-learning-glossary-and-terms/one-hot-encoding">https://deepai.org/machine-learning-glossary-and-terms/one-hot-encoding</a> (what one-hot encoding means)</p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/softmax-activation-function-how-it-actually-works-d292d335bd78">https://towardsdatascience.com/softmax-activation-function-how-it-actually-works-d292d335bd78</a> (why we need to use softmax function and the difference between one-hot encoding and integer encoding)</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./CNN"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="The_convolution_operator.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">The Convolution Operator</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../RNN/Counting_with_recurrent_neural_networks.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Counting with Recurrent Neural Networks</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci with code editing by Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2022).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

@@ -1,0 +1,1638 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Metric Analysis &#8212; Applied Deep Learning - 2nd Edition</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GAN Example in TensorFlow" href="../GAN/GAN_with_MNIST.html" />
+    <link rel="prev" title="Counting with Recurrent Neural Networks" href="../RNN/Counting_with_recurrent_neural_networks.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_book_online.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Applied Deep Learning - 2nd Edition</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landingpage.html">
+   Neural Networks and deep learning: theory and applications
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  I - Single Neuron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  II - Fully Connected Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  III - Regularization Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IV - Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradientDescent/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  V - Advanced Optimizers
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Custom_Training_Loop.html">
+   Simple example of a custom training loop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Optimizers_comparison.html">
+   Comparison of Optimizers
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VI - Hyper-parameter Tuning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hyper/Hyperparameter_tuning_with_Zalando_dataset.html">
+   Hyperparameter Tuning with the Zalando Dataset
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VII - Convolutional Neural Networks (CNN)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../CNN/The_convolution_operator.html">
+   The Convolution Operator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../CNN/Multiclass_classification_with_convolutional_neural_networks.html">
+   Multiclass Classification with Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VIII - Recurrent Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../RNN/Counting_with_recurrent_neural_networks.html">
+   Counting with Recurrent Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Metric Analysis
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Metric Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Generative Adversarial Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html">
+   GAN Example in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  X - Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  XI - Variational Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../VAE/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/metric/Metric_analysis_with_MNIST_dataset.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/toelt-llc/ADL-Book-2nd-Ed"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/metric/Metric_analysis_with_MNIST_dataset.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/metric/Metric_analysis_with_MNIST_dataset.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-overview">
+   Dataset Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#libraries-and-dataset-import">
+   Libraries and Dataset Import
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-analysis">
+   Dataset Analysis
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dataset-preparation">
+   Dataset Preparation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#model-building">
+   Model Building
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unbalanced-class-distribution">
+   Unbalanced Class Distribution
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datasets-with-different-distributions">
+   Datasets with Different Distributions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#k-fold-cross-validation">
+   K-fold cross-validation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references-a-name-rf-a">
+   References
+   <a name="rf">
+   </a>
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="metric-analysis">
+<h1>Metric Analysis<a class="headerlink" href="#metric-analysis" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.0</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<p>The purpose of this notebook is to show you a practical example (with a dataset taken from the real world) of metric analysis, very often called error analysis.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the notebook you are going to see how to obtain fundamental information on how your model is doing and on how good your data is. We will do this by evaluating your optimizing metric on a set of different datasets that you can derive from your data.</p>
+</div>
+<div class="section" id="dataset-overview">
+<h2>Dataset Overview<a class="headerlink" href="#dataset-overview" title="Permalink to this headline">¶</a></h2>
+<p>For our example, we will use the MNIST dataset. You can find more information in the <a class="reference external" href="#rf">References</a> section of the notebook.</p>
+<p>The MNIST database is a large database of handwritten digits that we can use to
+train our model. The MNIST database contains 70000 images.</p>
+<p>“The original black and white (bilevel) images from MNIST were normalized to fit in a 20x20 pixel box while preserving their aspect ratio. The resulting images contain grey levels as a result of the anti-aliasing technique used by the normalization algorithm. The images were centered in a 28x28 image by computing the center of mass of the pixels, and translating the
+image so as to position this point at the center of the 28x28 field” (see <a class="reference external" href="#rf">References</a>).</p>
+<p>Our features will be the gray value for each pixel, so we will have 28x28 = 784 features whose values will go from 0 to 255 (gray values).</p>
+<p>The dataset contains all ten digits, from 0 to 9. With the following code, you can prepare the data to use in the sections below.</p>
+</div>
+<div class="section" id="libraries-and-dataset-import">
+<h2>Libraries and Dataset Import<a class="headerlink" href="#libraries-and-dataset-import" title="Permalink to this headline">¶</a></h2>
+<p>This section contains the necessary libraries (such as tensorflow or pandas) you need to import to run the notebook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># This command install code from the tensorflow docs repository.
+# We need to use tensorflow_docs.modeling function when training our model.
+# This function will generate a report on the network&#39;s perfomances
+# step by step during the training phase (see Training Phase section of the
+# notebook). 
+
+# You can safely ignore this cell if you don&#39;t understand what it does.
+
+!pip install git+https://github.com/tensorflow/docs
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting git+https://github.com/tensorflow/docs
+  Cloning https://github.com/tensorflow/docs to /tmp/pip-req-build-kh5rq11p
+  Running command git clone -q https://github.com/tensorflow/docs /tmp/pip-req-build-kh5rq11p
+Requirement already satisfied: astor in /usr/local/lib/python3.7/dist-packages (from tensorflow-docs==0.0.0.dev0) (0.8.1)
+Requirement already satisfied: absl-py in /usr/local/lib/python3.7/dist-packages (from tensorflow-docs==0.0.0.dev0) (0.12.0)
+Requirement already satisfied: protobuf&gt;=3.14 in /usr/local/lib/python3.7/dist-packages (from tensorflow-docs==0.0.0.dev0) (3.17.3)
+Requirement already satisfied: pyyaml in /usr/local/lib/python3.7/dist-packages (from tensorflow-docs==0.0.0.dev0) (3.13)
+Requirement already satisfied: six&gt;=1.9 in /usr/local/lib/python3.7/dist-packages (from protobuf&gt;=3.14-&gt;tensorflow-docs==0.0.0.dev0) (1.15.0)
+Building wheels for collected packages: tensorflow-docs
+  Building wheel for tensorflow-docs (setup.py) ... ?25l?25hdone
+  Created wheel for tensorflow-docs: filename=tensorflow_docs-0.0.0.dev0-py3-none-any.whl size=155935 sha256=806964890cfafa4ca7983f5115878d8473b5d9695b3bfa92b4a69e68ddebdb7e
+  Stored in directory: /tmp/pip-ephem-wheel-cache-ysxh2i5z/wheels/cc/c4/d8/5341e93b6376c5c929c49469fce21155eb69cef1a4da4ce32c
+Successfully built tensorflow-docs
+Installing collected packages: tensorflow-docs
+Successfully installed tensorflow-docs-0.0.0.dev0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># general libraries</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.font_manager</span> <span class="k">as</span> <span class="nn">fm</span>
+
+<span class="c1"># sklearn libraries</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="c1"># tensorflow libraries</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras</span> <span class="kn">import</span> <span class="n">layers</span>
+<span class="kn">import</span> <span class="nn">tensorflow_docs</span> <span class="k">as</span> <span class="nn">tfdocs</span>
+<span class="kn">import</span> <span class="nn">tensorflow_docs.modeling</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Referring to the following cell, if you want to re-clone a repository</span>
+<span class="c1"># inside the google colab instance, you need to delete it first. </span>
+<span class="c1"># You can delete the repositories contained in this instance executing </span>
+<span class="c1"># the following two lines of code (deleting the # comment symbol).</span>
+
+<span class="c1"># !rm -rf ADL-Book-2nd-Ed</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># This command actually clone the repository of the book in the google colab
+# instance. In this way this notebook will have access to the modules
+# we have written for this book.
+
+# Please note that in case you have already run this cell, and you run it again
+# you may get the error message:
+#
+# fatal: destination path &#39;ADL-Book-2nd-Ed&#39; already exists and is not an empty directory.
+# 
+# In this case you can safely ignore the error message.
+
+!git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;ADL-Book-2nd-Ed&#39;...
+remote: Enumerating objects: 1880, done.
+remote: Counting objects: 100% (32/32), done.
+remote: Compressing objects: 100% (29/29), done.
+remote: Total 1880 (delta 4), reused 24 (delta 3), pack-reused 1848
+Receiving objects: 100% (1880/1880), 612.76 MiB | 35.43 MiB/s, done.
+Resolving deltas: 100% (933/933), done.
+Checking out files: 100% (591/591), done.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell imports some custom written functions that we have created to </span>
+<span class="c1"># make the plotting easier. You don&#39;t need to undertsand the details and </span>
+<span class="c1"># you can simply ignore this cell.</span>
+<span class="c1"># Simply run it with CMD+Enter (on Mac) or CTRL+Enter (Windows or Ubuntu) to</span>
+<span class="c1"># import the necessary functions.</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;ADL-Book-2nd-Ed/modules/&#39;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">style_setting</span> <span class="kn">import</span> <span class="n">set_style</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following cells are needed to <strong>download</strong> the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz
+11493376/11490434 [==============================] - 0s 0us/step
+11501568/11490434 [==============================] - 0s 0us/step
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now you have all the necessary elements to successfully implement this tutorial. <strong>Let’s have a look at our data</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training dataset: &#39;</span><span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test dataset: &#39;</span><span class="p">,</span> <span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the training labels: &#39;</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions of the test labels: &#39;</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dimensions of the training dataset:  (60000, 28, 28)
+Dimensions of the test dataset:  (10000, 28, 28)
+Dimensions of the training labels:  (60000,)
+Dimensions of the test labels:  (10000,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>It is useful to define a function to visualize the digits, to get an idea of how they look.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_digit</span><span class="p">(</span><span class="n">some_digit</span><span class="p">):</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">some_digit</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">binary</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;Figure10-7.png&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_digit</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="mi">36003</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Metric_analysis_with_MNIST_dataset_20_0.png" src="../_images/Metric_analysis_with_MNIST_dataset_20_0.png" />
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(36003^{rd}\)</span> digit in the training dataset. It is easly recognizable as a 7.</p>
+</div>
+<div class="section" id="dataset-analysis">
+<h2>Dataset Analysis<a class="headerlink" href="#dataset-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Now <code class="docutils literal notranslate"><span class="pre">x_train</span></code> and <code class="docutils literal notranslate"><span class="pre">x_test</span></code> contain the input images and <code class="docutils literal notranslate"><span class="pre">y_train</span></code> and <code class="docutils literal notranslate"><span class="pre">y_test</span></code> the target labels (remember that the value we want to predict is called target in machine-learning jargon). Just typing <code class="docutils literal notranslate"><span class="pre">x_train.shape</span></code> will give you the shape of <code class="docutils literal notranslate"><span class="pre">x_train</span></code>: <code class="docutils literal notranslate"><span class="pre">(60000,</span> <span class="pre">28,</span> <span class="pre">28)</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">x_train</span></code> has 60000 rows (each row is an image) made of 28x28 pixels (each pixel gray value is a feature).</p>
+<p>Let’s check how many digits we have in our training and test dataset.</p>
+<p><strong>Training dataset</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;digit&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;appears&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="n">i</span><span class="p">),</span> <span class="s2">&quot;times&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>digit 0 appears 5923 times
+digit 1 appears 6742 times
+digit 2 appears 5958 times
+digit 3 appears 6131 times
+digit 4 appears 5842 times
+digit 5 appears 5421 times
+digit 6 appears 5918 times
+digit 7 appears 6265 times
+digit 8 appears 5851 times
+digit 9 appears 5949 times
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;digit&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;makes&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_train</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="mf">60000.0</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">decimals</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="si">% o</span><span class="s2">f the 60000 observations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>digit 0 makes 9.9 % of the 60000 observations
+digit 1 makes 11.2 % of the 60000 observations
+digit 2 makes 9.9 % of the 60000 observations
+digit 3 makes 10.2 % of the 60000 observations
+digit 4 makes 9.7 % of the 60000 observations
+digit 5 makes 9.0 % of the 60000 observations
+digit 6 makes 9.9 % of the 60000 observations
+digit 7 makes 10.4 % of the 60000 observations
+digit 8 makes 9.8 % of the 60000 observations
+digit 9 makes 9.9 % of the 60000 observations
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Test dataset</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;digit&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;appears&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="n">i</span><span class="p">),</span> <span class="s2">&quot;times&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>digit 0 appears 980 times
+digit 1 appears 1135 times
+digit 2 appears 1032 times
+digit 3 appears 1010 times
+digit 4 appears 982 times
+digit 5 appears 892 times
+digit 6 appears 958 times
+digit 7 appears 1028 times
+digit 8 appears 974 times
+digit 9 appears 1009 times
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;digit&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;makes&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="mf">10000.0</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">decimals</span> <span class="o">=</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="si">% o</span><span class="s2">f the 10000 observations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>digit 0 makes 9.8 % of the 10000 observations
+digit 1 makes 11.4 % of the 10000 observations
+digit 2 makes 10.3 % of the 10000 observations
+digit 3 makes 10.1 % of the 10000 observations
+digit 4 makes 9.8 % of the 10000 observations
+digit 5 makes 8.9 % of the 10000 observations
+digit 6 makes 9.6 % of the 10000 observations
+digit 7 makes 10.3 % of the 10000 observations
+digit 8 makes 9.7 % of the 10000 observations
+digit 9 makes 10.1 % of the 10000 observations
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="dataset-preparation">
+<h2>Dataset Preparation<a class="headerlink" href="#dataset-preparation" title="Permalink to this headline">¶</a></h2>
+<p>We reshape and normalize the data. We need to reshape the data since the network requires specific dimensions as input (in particular, a flatten array where the 28x28 pixels are put into a single flat array of 784 pixels).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_reshaped</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">60000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">x_test_reshaped</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">784</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_normalised</span> <span class="o">=</span> <span class="n">x_train_reshaped</span><span class="o">/</span><span class="mf">255.0</span>
+<span class="n">x_test_normalised</span> <span class="o">=</span> <span class="n">x_test_reshaped</span><span class="o">/</span><span class="mf">255.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="model-building">
+<h2>Model Building<a class="headerlink" href="#model-building" title="Permalink to this headline">¶</a></h2>
+<p>Then we build our network with one single neuron.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">build_model</span><span class="p">():</span>
+
+  <span class="c1"># one unit as network&#39;s output</span>
+  <span class="c1"># sigmoid function as activation function</span>
+  <span class="c1"># sequential groups a linear stack of layers into a tf.keras.Model</span>
+  <span class="c1"># activation parameter: if you don&#39;t specify anything, no activation </span>
+  <span class="c1"># is applied (i.e. &quot;linear&quot; activation: a(x) = x).</span>
+  <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span> 
+    <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">[</span><span class="mi">784</span><span class="p">],</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+  <span class="p">])</span>
+
+  <span class="c1"># optimizer that implements the Gradient Descent algorithm</span>
+  <span class="n">optimizer</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">momentum</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.0001</span><span class="p">)</span>
+
+  <span class="c1"># the compile() method takes a metrics argument, which can be a list of metrics</span>
+  <span class="c1"># loss = cross-entropy, metrics = accuracy,</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
+                <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optimizer</span><span class="p">,</span>
+                <span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span><span class="s1">&#39;binary_accuracy&#39;</span><span class="p">])</span>
+  
+  <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="unbalanced-class-distribution">
+<h2>Unbalanced Class Distribution<a class="headerlink" href="#unbalanced-class-distribution" title="Permalink to this headline">¶</a></h2>
+<p>We now create a new label in this way: we assign to all observations for the digit zero the label 0, and to all other digits (1,2,3,4,5,6,7,8 and 9) the label 1 with the following code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_unbalanced</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_train_unbalanced</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_train</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y_train_unbalanced</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_train</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_test_unbalanced</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="n">y_test_unbalanced</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">y_test_unbalanced</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_test</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_train_unbalanced</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_train_unbalanced</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6742
+53258
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now the arrays <code class="docutils literal notranslate"><span class="pre">y_train_unbalanced</span></code> and <code class="docutils literal notranslate"><span class="pre">y_test_unbalanced</span></code> will contain the new labels. Note that now the dataset is heavily unbalanced. Label 0 appears roughly 10% of the cases, while label 1 appears 90% of the cases.</p>
+<p>We now run the model to see which performance we can get.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">x_train_normalised</span><span class="p">,</span> <span class="n">y_train_unbalanced</span><span class="p">,</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
+  <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, binary_accuracy:0.7599,  binary_crossentropy:0.5829,  loss:0.5829,  
+..................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="n">hist</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">epoch</span>
+<span class="n">hist</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loss</th>
+      <th>binary_crossentropy</th>
+      <th>binary_accuracy</th>
+      <th>epoch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>45</th>
+      <td>0.292092</td>
+      <td>0.292092</td>
+      <td>0.887617</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>0.290531</td>
+      <td>0.290531</td>
+      <td>0.887633</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>0.289016</td>
+      <td>0.289016</td>
+      <td>0.887633</td>
+      <td>47</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>0.287542</td>
+      <td>0.287542</td>
+      <td>0.887633</td>
+      <td>48</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>0.286109</td>
+      <td>0.286109</td>
+      <td>0.887633</td>
+      <td>49</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_normalised</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="mi">6742</span><span class="o">+</span><span class="mi">53258</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train_normalised</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_train_unbalanced</span><span class="p">,</span> <span class="n">train_predictions</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[    0,  6742],
+       [    0, 53258]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Should be easy to see now that our model predicts effectively almost all observations to be in class 1 (a total of 950+53869 = 54819).  The number of correct classified observations is 4973 (for class 0) and 53869 (for class 1), for a total of 58842 observations. Since we have a total of 60000 observations in our training set, we get an accuracy of 58842/60000 = 0.98, as our Keras code above told us. But not because our model is good, simply because it has effectively classified all observations in class 1. We don’t need a neural network in this case to reach this accuracy. What happens is that our model sees observations belonging to class 0 so rarely that they almost don’t influence the learning, that is dominated by the observations in class 1.</p>
+</div>
+<div class="section" id="datasets-with-different-distributions">
+<h2>Datasets with Different Distributions<a class="headerlink" href="#datasets-with-different-distributions" title="Permalink to this headline">¶</a></h2>
+<p>Let us consider the subset of the MNIST dataset made of the two digits: 1 and 2. We will build two different datasets coming from a different distribution, one taking the test set as it is and another one shifting the test set images 10 pixels to the right. We will train our model on the images as they are in the original dataset and apply the model to images shifted 10 pixels to the right as well as to the original ones and see what happens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_12</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_train</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">==</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">x_test_12</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">==</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">y_train_12</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_train</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">==</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="n">y_test_12</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">([</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">==</span> <span class="mi">2</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_normalised</span> <span class="o">=</span> <span class="n">x_train_12</span><span class="o">/</span><span class="mf">255.0</span>
+<span class="n">x_test_normalised</span> <span class="o">=</span> <span class="n">x_test_12</span><span class="o">/</span><span class="mf">255.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_normalised</span> <span class="o">=</span> <span class="n">x_train_normalised</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_train_normalised</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">784</span><span class="p">)</span>
+<span class="n">x_test_normalised</span> <span class="o">=</span> <span class="n">x_test_normalised</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_test_normalised</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">784</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We shift the labels to have 0 and 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_bin</span> <span class="o">=</span> <span class="n">y_train_12</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">y_test_bin</span> <span class="o">=</span> <span class="n">y_test_12</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code shifts each image of the test dataset to the right of 10 pixels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_test_shifted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x_test_normalised</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x_test_normalised</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">x_test_normalised</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">)</span>
+    <span class="n">tmp_shifted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+    <span class="n">tmp_shifted</span><span class="p">[:,</span><span class="mi">10</span><span class="p">:</span><span class="mi">28</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">18</span><span class="p">]</span>
+    <span class="n">x_test_shifted</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">tmp_shifted</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">784</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plot_digit</span><span class="p">(</span><span class="n">x_test_12</span><span class="p">[</span><span class="mi">2000</span><span class="p">])</span>
+<span class="n">plot_digit</span><span class="p">(</span><span class="n">x_test_shifted</span><span class="p">[</span><span class="mi">2000</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Metric_analysis_with_MNIST_dataset_58_0.png" src="../_images/Metric_analysis_with_MNIST_dataset_58_0.png" />
+<img alt="../_images/Metric_analysis_with_MNIST_dataset_58_1.png" src="../_images/Metric_analysis_with_MNIST_dataset_58_1.png" />
+</div>
+</div>
+<p>Now let us build a network with a single neuron and let us see what happens.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+  <span class="n">x_train_normalised</span><span class="p">,</span> <span class="n">y_train_bin</span><span class="p">,</span>
+  <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch: 0, binary_accuracy:0.5609,  binary_crossentropy:0.6886,  loss:0.6886,  
+....................................................................................................
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
+<span class="n">hist</span><span class="p">[</span><span class="s1">&#39;epoch&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">epoch</span>
+<span class="n">hist</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>loss</th>
+      <th>binary_crossentropy</th>
+      <th>binary_accuracy</th>
+      <th>epoch</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>95</th>
+      <td>0.125293</td>
+      <td>0.125293</td>
+      <td>0.977559</td>
+      <td>95</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>0.124628</td>
+      <td>0.124628</td>
+      <td>0.977559</td>
+      <td>96</td>
+    </tr>
+    <tr>
+      <th>97</th>
+      <td>0.123975</td>
+      <td>0.123975</td>
+      <td>0.977559</td>
+      <td>97</td>
+    </tr>
+    <tr>
+      <th>98</th>
+      <td>0.123333</td>
+      <td>0.123333</td>
+      <td>0.977717</td>
+      <td>98</td>
+    </tr>
+    <tr>
+      <th>99</th>
+      <td>0.122701</td>
+      <td>0.122701</td>
+      <td>0.977638</td>
+      <td>99</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_train_normalised</span><span class="p">,</span> <span class="n">y_train_bin</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">test_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test_normalised</span><span class="p">,</span> <span class="n">y_test_bin</span><span class="p">)</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">shifted_test_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test_shifted</span><span class="p">,</span> <span class="n">y_test_bin</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>397/397 [==============================] - 1s 2ms/step - loss: 0.1224 - binary_crossentropy: 0.1224 - binary_accuracy: 0.9778
+68/68 [==============================] - 0s 2ms/step - loss: 0.1209 - binary_crossentropy: 0.1209 - binary_accuracy: 0.9825
+68/68 [==============================] - 0s 1ms/step - loss: 0.7080 - binary_crossentropy: 0.7080 - binary_accuracy: 0.5427
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The accuracy on the training set is equal to: &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">train_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The accuracy on the test set is equal to: &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The accuracy on the shifted test set is equal to: &#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">shifted_test_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The accuracy on the training set is equal to:  97 %.
+The accuracy on the training set is equal to:  98 %.
+The accuracy on the training set is equal to:  54 %.
+</pre></div>
+</div>
+</div>
+</div>
+<p>We get the following results after 100 epochs</p>
+<ul class="simple">
+<li><p>For the training dataset we get 97%</p></li>
+<li><p>For the test dataset (as it is in the original dataset) we get 98%</p></li>
+<li><p>For the shifted test set we get 54%. A very bad result.</p></li>
+</ul>
+<p>What has happened is that the model has learned from a dataset where all images are centered in the box and therefore could not generalize well to images shifted and no more centered. When training a model on a dataset, you will get good results usually on observations that are like the ones in the training set.</p>
+<p>Therefore, <strong>you need to pay great attention to check if the data present in your training and test datasets comes from the same distribution</strong>.</p>
+</div>
+<div class="section" id="k-fold-cross-validation">
+<h2>K-fold cross-validation<a class="headerlink" href="#k-fold-cross-validation" title="Permalink to this headline">¶</a></h2>
+<p>We will now see another technique that is very powerful and should be known by any machine learning practitioner (not only in the deep learning world): <strong>k-fold cross validation</strong>. The technique is a way of finding a solution to the following two problems:</p>
+<ol class="simple">
+<li><p>What to do when your dataset is too small to split it in a train and dev/test set?</p></li>
+<li><p>How to get information on the variance of your metric?</p></li>
+</ol>
+<p>The technique pseudo-code is the following:</p>
+<ol class="simple">
+<li><p>Partition your complete dataset in <span class="math notranslate nohighlight">\(k\)</span> equally big subsets: <span class="math notranslate nohighlight">\(f_1\)</span>, <span class="math notranslate nohighlight">\(f_2\)</span>, …,<span class="math notranslate nohighlight">\(f_k\)</span>. The subsets are also called <em>folds</em>. Normally the subsets are not overlapping, that means that each observation appears in one and only one fold.</p></li>
+<li><p>For i going from 1 to <span class="math notranslate nohighlight">\(k\)</span>:</p></li>
+</ol>
+<ul class="simple">
+<li><p>Train your model on all the folds except <span class="math notranslate nohighlight">\(f_i\)</span></p></li>
+<li><p>Evaluate your metric on the fold <span class="math notranslate nohighlight">\(f_i\)</span>. The fold <span class="math notranslate nohighlight">\(f_i\)</span> will be the test set in iteration <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<ol class="simple">
+<li><p>Evaluate the average and variance of your metric on the <span class="math notranslate nohighlight">\(k\)</span> results</p></li>
+</ol>
+<p>Now let us create 10 arrays, each containing a list of indexes that we will use to select images. We will use the training dataset to perform k-fold crossvalidation (so we will divide the training dataset into 10 parts).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">foldnumber</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_train_12</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+<span class="n">al</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">foldnumber</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_reshaped</span> <span class="o">=</span> <span class="n">x_train_12</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x_train_12</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">784</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now let us create the arrays containing the images.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_inputfold</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">y_train_inputfold</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">foldnumber</span><span class="p">):</span>
+    <span class="n">tmp</span> <span class="o">=</span> <span class="n">x_train_reshaped</span><span class="p">[</span><span class="n">al</span><span class="p">[</span><span class="n">i</span><span class="p">],:]</span>
+    <span class="n">x_train_inputfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+    <span class="n">ytmp</span> <span class="o">=</span> <span class="n">y_train_bin</span><span class="p">[</span><span class="n">al</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+    <span class="n">y_train_inputfold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ytmp</span><span class="p">)</span>
+
+    
+<span class="n">x_train_inputfold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x_train_inputfold</span><span class="p">)</span>
+<span class="n">y_train_inputfold</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_train_inputfold</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let us check for fold 0 (you can do the same check for the others) how many 0 and 1 are contained in the fold itself.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;digit&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="s2">&quot;makes&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">y_train_inputfold</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span><span class="o">/</span><span class="mf">1270.0</span><span class="o">*</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;</span><span class="si">% o</span><span class="s2">f the 1270 observations&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>digit 0 makes 51.7 % of the 1270 observations
+digit 1 makes 48.3 % of the 1270 observations
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x_train_inputfold_normalized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x_train_inputfold</span><span class="p">,</span> <span class="n">dtype</span> <span class="o">=</span> <span class="nb">float</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="n">foldnumber</span><span class="p">):</span>
+    <span class="n">x_train_inputfold_normalized</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_train_inputfold</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mf">255.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span> <span class="o">=</span> <span class="n">x_train_inputfold_normalized</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train_inputfold</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we are ready to build our network. We will use a one-neuron network for logistic regression, with the sigmoid activation function. At this point we will need to iterate through the folds. Remember our pseudo code at the beginning? Select one fold as test set and train the model on all other folds concatenated. Proceed in this way for all the folds. The code could look like this (is a bit long, so take a few minutes to understand it).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">train_acc</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">dev_acc</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">foldnumber</span><span class="p">):</span> <span class="c1"># STEP 1</span>
+    
+    <span class="c1"># Prepare the folds - STEP 2</span>
+    <span class="n">lis</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">ylis</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">foldnumber</span><span class="p">),</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">lis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">ylis</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">X_train_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">lis</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">y_train_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">ylis</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">X_train_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_train_</span><span class="p">)</span>
+    <span class="n">y_train_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_train_</span><span class="p">)</span>
+    
+    <span class="n">X_dev_</span> <span class="o">=</span> <span class="n">X_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">y_dev_</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    
+    <span class="c1"># STEP 3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dev fold is&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">build_model</span><span class="p">()</span>
+
+    <span class="n">EPOCHS</span> <span class="o">=</span> <span class="mi">500</span>
+
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+      <span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">,</span>
+      <span class="n">epochs</span> <span class="o">=</span> <span class="n">EPOCHS</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">callbacks</span> <span class="o">=</span> <span class="p">[</span><span class="n">tfdocs</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">EpochDots</span><span class="p">()])</span>
+    
+    <span class="c1"># STEP 4</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">train_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_train_</span><span class="p">,</span> <span class="n">y_train_</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dev accuracy:&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">train_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+    <span class="n">train_acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">train_acc</span><span class="p">,</span> <span class="n">train_accuracy</span><span class="p">)</span>
+
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">dev_accuracy</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_dev_</span><span class="p">,</span> <span class="n">y_dev_</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dev accuracy:&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">dev_accuracy</span><span class="o">*</span><span class="mi">100</span><span class="p">),</span> <span class="s1">&#39;%.&#39;</span><span class="p">)</span>
+    <span class="n">dev_acc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dev_acc</span><span class="p">,</span> <span class="n">dev_accuracy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dev fold is 0
+
+Epoch: 0, binary_accuracy:0.7542,  binary_crossentropy:0.6009,  loss:0.6009,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9747,  binary_crossentropy:0.1298,  loss:0.1298,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9800,  binary_crossentropy:0.0937,  loss:0.0937,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9829,  binary_crossentropy:0.0786,  loss:0.0786,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9839,  binary_crossentropy:0.0700,  loss:0.0700,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0643 - binary_crossentropy: 0.0643 - binary_accuracy: 0.9844
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 2ms/step - loss: 0.0580 - binary_crossentropy: 0.0580 - binary_accuracy: 0.9874
+Dev accuracy: 98 %.
+Dev fold is 1
+
+Epoch: 0, binary_accuracy:0.5018,  binary_crossentropy:0.7002,  loss:0.7002,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9748,  binary_crossentropy:0.1285,  loss:0.1285,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9801,  binary_crossentropy:0.0922,  loss:0.0922,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9829,  binary_crossentropy:0.0772,  loss:0.0772,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9847,  binary_crossentropy:0.0687,  loss:0.0687,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0631 - binary_crossentropy: 0.0631 - binary_accuracy: 0.9855
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 1ms/step - loss: 0.0653 - binary_crossentropy: 0.0653 - binary_accuracy: 0.9827
+Dev accuracy: 98 %.
+Dev fold is 2
+
+Epoch: 0, binary_accuracy:0.6782,  binary_crossentropy:0.6574,  loss:0.6574,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9758,  binary_crossentropy:0.1296,  loss:0.1296,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9804,  binary_crossentropy:0.0931,  loss:0.0931,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9827,  binary_crossentropy:0.0780,  loss:0.0780,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9839,  binary_crossentropy:0.0693,  loss:0.0693,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0636 - binary_crossentropy: 0.0636 - binary_accuracy: 0.9847
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 2ms/step - loss: 0.0592 - binary_crossentropy: 0.0592 - binary_accuracy: 0.9874
+Dev accuracy: 98 %.
+Dev fold is 3
+
+Epoch: 0, binary_accuracy:0.8201,  binary_crossentropy:0.5976,  loss:0.5976,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9748,  binary_crossentropy:0.1286,  loss:0.1286,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9805,  binary_crossentropy:0.0920,  loss:0.0920,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9834,  binary_crossentropy:0.0768,  loss:0.0768,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9845,  binary_crossentropy:0.0681,  loss:0.0681,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0624 - binary_crossentropy: 0.0624 - binary_accuracy: 0.9853
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 1ms/step - loss: 0.0727 - binary_crossentropy: 0.0727 - binary_accuracy: 0.9803
+Dev accuracy: 98 %.
+Dev fold is 4
+
+Epoch: 0, binary_accuracy:0.6973,  binary_crossentropy:0.6263,  loss:0.6263,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9782,  binary_crossentropy:0.1251,  loss:0.1251,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9813,  binary_crossentropy:0.0907,  loss:0.0907,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9829,  binary_crossentropy:0.0764,  loss:0.0764,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9843,  binary_crossentropy:0.0682,  loss:0.0682,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0628 - binary_crossentropy: 0.0628 - binary_accuracy: 0.9851
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 1ms/step - loss: 0.0678 - binary_crossentropy: 0.0678 - binary_accuracy: 0.9827
+Dev accuracy: 98 %.
+Dev fold is 5
+
+Epoch: 0, binary_accuracy:0.4778,  binary_crossentropy:0.7276,  loss:0.7276,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9738,  binary_crossentropy:0.1320,  loss:0.1320,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9799,  binary_crossentropy:0.0932,  loss:0.0932,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9828,  binary_crossentropy:0.0776,  loss:0.0776,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9842,  binary_crossentropy:0.0689,  loss:0.0689,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0631 - binary_crossentropy: 0.0631 - binary_accuracy: 0.9850
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 2ms/step - loss: 0.0705 - binary_crossentropy: 0.0705 - binary_accuracy: 0.9795
+Dev accuracy: 97 %.
+Dev fold is 6
+
+Epoch: 0, binary_accuracy:0.5725,  binary_crossentropy:0.6803,  loss:0.6803,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9768,  binary_crossentropy:0.1272,  loss:0.1272,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9808,  binary_crossentropy:0.0913,  loss:0.0913,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9836,  binary_crossentropy:0.0765,  loss:0.0765,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9847,  binary_crossentropy:0.0681,  loss:0.0681,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0626 - binary_crossentropy: 0.0626 - binary_accuracy: 0.9853
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 2ms/step - loss: 0.0675 - binary_crossentropy: 0.0675 - binary_accuracy: 0.9803
+Dev accuracy: 98 %.
+Dev fold is 7
+
+Epoch: 0, binary_accuracy:0.5194,  binary_crossentropy:0.7062,  loss:0.7062,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9761,  binary_crossentropy:0.1310,  loss:0.1310,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9810,  binary_crossentropy:0.0934,  loss:0.0934,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9835,  binary_crossentropy:0.0780,  loss:0.0780,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9847,  binary_crossentropy:0.0693,  loss:0.0693,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0636 - binary_crossentropy: 0.0636 - binary_accuracy: 0.9854
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 1ms/step - loss: 0.0646 - binary_crossentropy: 0.0646 - binary_accuracy: 0.9850
+Dev accuracy: 98 %.
+Dev fold is 8
+
+Epoch: 0, binary_accuracy:0.6520,  binary_crossentropy:0.6451,  loss:0.6451,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9770,  binary_crossentropy:0.1265,  loss:0.1265,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9812,  binary_crossentropy:0.0912,  loss:0.0912,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9832,  binary_crossentropy:0.0767,  loss:0.0767,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9839,  binary_crossentropy:0.0685,  loss:0.0685,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0631 - binary_crossentropy: 0.0631 - binary_accuracy: 0.9847
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 1ms/step - loss: 0.0553 - binary_crossentropy: 0.0553 - binary_accuracy: 0.9898
+Dev accuracy: 98 %.
+Dev fold is 9
+
+Epoch: 0, binary_accuracy:0.5451,  binary_crossentropy:0.6600,  loss:0.6600,  
+....................................................................................................
+Epoch: 100, binary_accuracy:0.9756,  binary_crossentropy:0.1311,  loss:0.1311,  
+....................................................................................................
+Epoch: 200, binary_accuracy:0.9800,  binary_crossentropy:0.0937,  loss:0.0937,  
+....................................................................................................
+Epoch: 300, binary_accuracy:0.9822,  binary_crossentropy:0.0782,  loss:0.0782,  
+....................................................................................................
+Epoch: 400, binary_accuracy:0.9840,  binary_crossentropy:0.0695,  loss:0.0695,  
+358/358 [==============================] - 1s 1ms/step - loss: 0.0637 - binary_crossentropy: 0.0637 - binary_accuracy: 0.9847
+Dev accuracy: 98 %.
+40/40 [==============================] - 0s 2ms/step - loss: 0.0618 - binary_crossentropy: 0.0618 - binary_accuracy: 0.9882
+Dev accuracy: 98 %.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The code follows the steps:</p>
+<ol class="simple">
+<li><p>Do a loop over all the folds (in this case from 1 to 10) iterating with the variable <span class="math notranslate nohighlight">\(i\)</span> from 0 to 9</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(i\)</span> use the fold <span class="math notranslate nohighlight">\(i\)</span> as the dev set and concatenate all other folds and use the result as train set.</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(i\)</span> train the model</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(i\)</span> evaluate the accuracy on the two datasets (train and dev) and save the values in the two lists: <code class="docutils literal notranslate"><span class="pre">train_acc</span></code> and <code class="docutils literal notranslate"><span class="pre">dev_acc</span></code>.</p></li>
+</ol>
+<p>It is very instructive to study how the accuracy values are distributed. Since we have 10 folds, we have 10 values to study. Below you can see the distribution of the values for the train set (left plot) and for the dev set (right plot).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following line contains the path to fonts that are used to plot result in</span>
+<span class="c1"># a uniform way.</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">set_style</span><span class="p">()</span><span class="o">.</span><span class="n">set_general_style_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">train_acc</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.982</span><span class="p">,</span><span class="mf">0.991</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Train Accuracy&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.982</span><span class="p">,</span><span class="mf">0.991</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dev_acc</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Dev Accuracy&#39;</span><span class="p">,</span> <span class="n">fontproperties</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">FontProperties</span><span class="p">(</span><span class="n">fname</span> <span class="o">=</span> <span class="n">f</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./Figure10-9.png&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/Metric_analysis_with_MNIST_dataset_82_0.png" src="../_images/Metric_analysis_with_MNIST_dataset_82_0.png" />
+</div>
+</div>
+<p>The image is quite instructive. You can see that the accuracy values for the training set are quite concentrated around the average, while the ones evaluated on the dev set are much more spread! This shows how the model on new data behave less well than on the data it has trained on.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>[<em>Easy Difficulty</em>] Perform k-fold cross-validation using the built-in function of <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> library and compare results.</p></li>
+<li><p>[<em>Medium Difficulty</em>] Look at different performance metrics (for example sensitivity, specificity, ROC curve, etc.) and calculate them for the unbalanced class problem, trying to understand how these can help you in the evaluation of the models.</p></li>
+</ol>
+</div>
+<div class="section" id="references-a-name-rf-a">
+<h2>References <a name = "rf"></a><a class="headerlink" href="#references-a-name-rf-a" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a> (dataset explanation)</p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./metric"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../RNN/Counting_with_recurrent_neural_networks.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Counting with Recurrent Neural Networks</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="../GAN/GAN_with_MNIST.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">GAN Example in TensorFlow</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci with code editing by Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2022).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

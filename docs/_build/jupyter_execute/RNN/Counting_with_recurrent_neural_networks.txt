@@ -1,0 +1,63 @@
+import numpy as np
+import tensorflow as tf
+from random import shuffle
+from tensorflow import keras
+from tensorflow.keras import layers
+
+ ['{0:04b}'.format(i) for i in range(2**4)]
+
+nn = 15
+ll = 2**15
+
+train_input = ['{0:015b}'.format(i) for i in range(ll)] # consider every number up to 2^15 in binary format
+shuffle(train_input) # shuffle inputs
+train_input = [map(int, i) for i in train_input]
+
+ti  = []
+for i in train_input:
+  temp_list = []
+  for j in i:
+    temp_list.append([j])
+  ti.append(np.array(temp_list))
+train_input = ti
+
+train_output = []
+ 
+for i in train_input:
+    count = 0
+    for j in i:
+        if j[0] == 1:
+            count += 1
+    temp_list = ([0]*(nn + 1))
+    temp_list[count] = 1
+    train_output.append(temp_list)
+
+NUM_EXAMPLES = ll - 2000
+test_input = train_input[NUM_EXAMPLES:]
+test_output = train_output[NUM_EXAMPLES:] # everything beyond 10,000
+ 
+train_input = train_input[:NUM_EXAMPLES]
+train_output = train_output[:NUM_EXAMPLES] # till 10,000
+
+model = keras.Sequential()
+
+model.add(layers.Embedding(input_dim = 15, output_dim = 15))
+
+# Add a LSTM layer with 128 internal units.
+model.add(layers.LSTM(24, input_dim = 15))
+
+# Add a Dense layer with 10 units.
+model.add(layers.Dense(16, activation = 'softmax'))
+
+model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['categorical_accuracy'])
+
+model.summary()
+
+# we need to convert the input and output to numpy array to be used by the network
+train_input = np.array(train_input)
+train_output = np.array(train_output)
+
+test_input = np.array(test_input)
+test_output = np.array(test_output)
+
+model.fit(train_input, train_output, validation_data = (test_input, test_output), epochs = 10, batch_size = 100)

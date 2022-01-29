@@ -1,0 +1,114 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def conv_2d(A, kernel):
+
+    output = np.zeros([A.shape[0]-(kernel.shape[0]-1), A.shape[1]-(kernel.shape[0]-1)])
+    
+    for row in range(1, A.shape[0]-1):
+        for column in range(1, A.shape[1]-1):
+            output[row-1, column-1] = np.tensordot(A[row-1:row+2, column-1:column+2], kernel)
+    
+    return output
+
+A = np.array([[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]])
+K = np.array([[1,2,3],[4,5,6],[7,8,9]])
+print(conv_2d(A,K))
+
+chessboard = np.zeros([8*20, 8*20])
+for row in range(0, 8):
+    for column in range (0, 8):
+        if ((column+8*row) % 2 == 1) and (row % 2 == 0):
+            chessboard[row*20:row*20+20, column*20:column*20+20] = 1
+        elif ((column+8*row) % 2 == 0) and (row % 2 == 1):
+            chessboard[row*20:row*20+20, column*20:column*20+20] = 1
+
+chessboard.shape
+
+plt.figure(figsize = (6, 6))
+plt.imshow(chessboard, cmap = 'Greys', interpolation = 'nearest', extent = [0, 160, 0, 160])
+#plt.savefig('./Figure15-5', dpi = 300)
+plt.show()
+
+edgeh = np.matrix('1 1 1; 0 0 0; -1 -1 -1')
+outputh = conv_2d(chessboard, edgeh)
+
+outputh.shape
+
+plt.figure(figsize = (6, 6))
+plt.imshow(outputh, cmap = 'Greys', interpolation = 'nearest', extent = [0, 158, 0, 158])
+#plt.savefig('./Figure15-6', dpi = 300)
+plt.show()
+
+edgev = np.matrix('1 0 -1; 1 0 -1; 1 0 -1')
+outputv = conv_2d(chessboard, edgev)
+
+outputv.shape
+
+plt.figure(figsize = (6, 6))
+plt.imshow(outputv, cmap = 'Greys', interpolation = 'nearest', extent = [0, 158, 0, 158])
+#plt.savefig('./Figure15-7', dpi = 300)
+plt.show()
+
+edgel = np.matrix ('-1 -1 -1; -1 8 -1; -1 -1 -1')
+outputl = conv_2d(chessboard, edgel)
+
+outputl.shape
+
+plt.figure(figsize = (6, 6))
+plt.imshow(outputl, cmap = 'Greys', interpolation = 'nearest', extent = [0, 158, 0, 158])
+#plt.savefig('./Figure15-8', dpi = 300)
+plt.show()
+
+edge_blur = 1.0/9.0*np.matrix('1 1 1; 1 1 1; 1 1 1')
+output_blur = conv_2d(chessboard, edge_blur)
+
+output_blur.shape
+
+fig, (ax1, ax2) = plt.subplots(1, 2)
+ax1.imshow(output_blur[90:118, 40:70], cmap = 'Greys', interpolation = 'nearest', extent = [40, 70, 40, 70])
+ax2.imshow(chessboard[90:118, 40:70], cmap = 'Greys', interpolation = 'nearest', extent = [40, 70, 40, 70])
+#plt.savefig('./Figure15-9', dpi = 300)
+plt.show()
+
+ex_mat = np.matrix('10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0')
+
+ex_mat
+
+ex_out = conv_2d (ex_mat, edgev)
+
+ex_out
+
+fig, (ax1, ax2) = plt.subplots(1, 2)
+ax1.imshow(ex_mat, cmap = 'Greys', interpolation = 'nearest')
+ax2.imshow(ex_out, cmap = 'Greys', interpolation = 'nearest')
+
+# The following lines are needed to format the plots.
+# You can safely ignore them.
+# major ticks
+ax1.set_xticks(np.arange(0, 8, 1))
+ax1.set_yticks(np.arange(0, 8, 1))
+# labels for major ticks
+ax1.set_xticklabels(np.arange(0, 8, 1))
+ax1.set_yticklabels(np.arange(0, 8, 1))
+# minor ticks
+ax1.set_xticks(np.arange(-0.5, 7.5, 1), minor = True)
+ax1.set_yticks(np.arange(-0.5, 7.5, 1), minor = True)
+# gridlines based on minor ticks
+ax1.grid(which = 'minor', color = 'grey', linestyle = '-', linewidth = 1)
+# major ticks
+ax2.set_xticks(np.arange(0, 6, 1))
+ax2.set_yticks(np.arange(0, 6, 1))
+# labels for major ticks
+ax2.set_xticklabels(np.arange(0, 6, 1))
+ax2.set_yticklabels(np.arange(0, 6, 1))
+# minor ticks
+ax2.set_xticks(np.arange(-0.5, 5.5, 1), minor = True)
+ax2.set_yticks(np.arange(-0.5, 5.5, 1), minor = True)
+# gridlines based on minor ticks
+ax2.grid(which = 'minor', color = 'grey', linestyle = '-', linewidth = 1)
+
+#plt.savefig('./Figure15-10', dpi = 300)
+plt.show()
+
+

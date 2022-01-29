@@ -1,0 +1,282 @@
+# This command install code from the tensorflow docs repository.
+# We need to use tensorflow_docs.modeling function when training our model.
+# This function will generate a report on the network's perfomances
+# step by step during the training phase (see Training Phase section of the
+# notebook). 
+
+# You can safely ignore this cell if you don't understand what it does.
+
+!pip install git+https://github.com/tensorflow/docs
+
+# general libraries
+import pandas as pd
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+
+# sklearn libraries
+from sklearn.metrics import confusion_matrix
+
+# tensorflow libraries
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+import tensorflow_docs as tfdocs
+import tensorflow_docs.modeling
+
+# Referring to the following cell, if you want to re-clone a repository
+# inside the google colab instance, you need to delete it first. 
+# You can delete the repositories contained in this instance executing 
+# the following two lines of code (deleting the # comment symbol).
+
+# !rm -rf ADL-Book-2nd-Ed
+
+# This command actually clone the repository of the book in the google colab
+# instance. In this way this notebook will have access to the modules
+# we have written for this book.
+
+# Please note that in case you have already run this cell, and you run it again
+# you may get the error message:
+#
+# fatal: destination path 'ADL-Book-2nd-Ed' already exists and is not an empty directory.
+# 
+# In this case you can safely ignore the error message.
+
+!git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
+
+# This cell imports some custom written functions that we have created to 
+# make the plotting easier. You don't need to undertsand the details and 
+# you can simply ignore this cell.
+# Simply run it with CMD+Enter (on Mac) or CTRL+Enter (Windows or Ubuntu) to
+# import the necessary functions.
+
+import sys
+sys.path.append('ADL-Book-2nd-Ed/modules/')
+
+from style_setting import set_style
+
+(x_train, y_train), (x_test, y_test) = keras.datasets.mnist.load_data()
+
+print('Dimensions of the training dataset: ', x_train.shape)
+print('Dimensions of the test dataset: ', x_test.shape)
+print('Dimensions of the training labels: ', y_train.shape)
+print('Dimensions of the test labels: ', y_test.shape)
+
+def plot_digit(some_digit):
+  plt.imshow(some_digit, cmap = matplotlib.cm.binary, interpolation = "nearest")
+  plt.axis("off")
+  plt.savefig('Figure10-7.png', dpi = 300)
+  plt.show()
+
+plot_digit(x_train[36003])
+
+for i in range(10):
+  print("digit", i, "appears", np.count_nonzero(y_train == i), "times")
+
+for i in range(10):
+    print ("digit", i, "makes", np.around(np.count_nonzero(y_train == i)/60000.0*100.0, decimals = 1), "% of the 60000 observations")
+
+for i in range(10):
+  print("digit", i, "appears", np.count_nonzero(y_test == i), "times")
+
+for i in range(10):
+    print ("digit", i, "makes", np.around(np.count_nonzero(y_test == i)/10000.0*100.0, decimals = 1), "% of the 10000 observations")
+
+x_train_reshaped = x_train.reshape(60000, 784)
+x_test_reshaped = x_test.reshape(10000, 784)
+
+x_train_normalised = x_train_reshaped/255.0
+x_test_normalised = x_test_reshaped/255.0
+
+def build_model():
+
+  # one unit as network's output
+  # sigmoid function as activation function
+  # sequential groups a linear stack of layers into a tf.keras.Model
+  # activation parameter: if you don't specify anything, no activation 
+  # is applied (i.e. "linear" activation: a(x) = x).
+  model = keras.Sequential([ 
+    layers.Dense(1, input_shape = [784], activation = 'sigmoid')
+  ])
+
+  # optimizer that implements the Gradient Descent algorithm
+  optimizer = tf.keras.optimizers.SGD(momentum = 0.0, learning_rate = 0.0001)
+
+  # the compile() method takes a metrics argument, which can be a list of metrics
+  # loss = cross-entropy, metrics = accuracy,
+  model.compile(loss = 'binary_crossentropy',
+                optimizer = optimizer,
+                metrics = ['binary_crossentropy','binary_accuracy'])
+  
+  return model
+
+y_train_unbalanced = np.zeros_like(y_train)
+y_train_unbalanced[np.any([y_train == 1], axis = 0)] = 0
+y_train_unbalanced[np.any([y_train != 1], axis = 0)] = 1
+
+y_test_unbalanced = np.zeros_like(y_test)
+y_test_unbalanced[np.any([y_test == 1], axis = 0)] = 0
+y_test_unbalanced[np.any([y_test != 1], axis = 0)] = 1
+
+print(np.sum(y_train_unbalanced == 0))
+print(np.sum(y_train_unbalanced == 1))
+
+model = build_model()
+
+EPOCHS = 50
+
+history = model.fit(
+  x_train_normalised, y_train_unbalanced,
+  epochs = EPOCHS, verbose = 0, batch_size = 1000,
+  callbacks = [tfdocs.modeling.EpochDots()])
+
+hist = pd.DataFrame(history.history)
+hist['epoch'] = history.epoch
+hist.tail()
+
+x_train_normalised.shape
+
+print(6742+53258)
+
+train_predictions = model.predict(x_train_normalised).flatten()
+confusion_matrix(y_train_unbalanced, train_predictions > 0.5)
+
+x_train_12 = x_train[np.any([y_train == 1, y_train == 2], axis = 0)]
+x_test_12 = x_test[np.any([y_test == 1, y_test == 2], axis = 0)]
+y_train_12 = y_train[np.any([y_train == 1, y_train == 2], axis = 0)]
+y_test_12 = y_test[np.any([y_test == 1, y_test == 2], axis = 0)]
+
+x_train_normalised = x_train_12/255.0
+x_test_normalised = x_test_12/255.0
+
+x_train_normalised = x_train_normalised.reshape(x_train_normalised.shape[0], 784)
+x_test_normalised = x_test_normalised.reshape(x_test_normalised.shape[0], 784)
+
+y_train_bin = y_train_12 - 1
+y_test_bin = y_test_12 - 1
+
+x_test_shifted = np.zeros_like(x_test_normalised)
+for i in range(x_test_normalised.shape[0]):
+    tmp = x_test_normalised[i,:].reshape(28,28)
+    tmp_shifted = np.zeros_like(tmp)
+    tmp_shifted[:,10:28] = tmp[:,0:18]
+    x_test_shifted[i,:] = tmp_shifted.reshape(784)
+
+plot_digit(x_test_12[2000])
+plot_digit(x_test_shifted[2000].reshape(28,28))
+
+model = build_model()
+
+EPOCHS = 100
+
+history = model.fit(
+  x_train_normalised, y_train_bin,
+  epochs = EPOCHS, verbose = 0,
+  callbacks = [tfdocs.modeling.EpochDots()])
+
+hist = pd.DataFrame(history.history)
+hist['epoch'] = history.epoch
+hist.tail()
+
+_, _, train_accuracy = model.evaluate(x_train_normalised, y_train_bin)
+_, _, test_accuracy = model.evaluate(x_test_normalised, y_test_bin)
+_, _, shifted_test_accuracy = model.evaluate(x_test_shifted, y_test_bin)
+
+print('The accuracy on the training set is equal to: ', int(train_accuracy*100), '%.')
+print('The accuracy on the test set is equal to: ', int(test_accuracy*100), '%.')
+print('The accuracy on the shifted test set is equal to: ', int(shifted_test_accuracy*100), '%.')
+
+foldnumber = 10
+idx = np.arange(0, x_train_12.shape[0])
+np.random.shuffle(idx)
+al = np.array_split(idx, foldnumber)
+
+x_train_reshaped = x_train_12.reshape(x_train_12.shape[0], 784)
+
+x_train_inputfold = []
+y_train_inputfold = []
+for i in range(foldnumber):
+    tmp = x_train_reshaped[al[i],:]
+    x_train_inputfold.append(tmp)
+    ytmp = y_train_bin[al[i]]
+    y_train_inputfold.append(ytmp)
+
+    
+x_train_inputfold = np.asarray(x_train_inputfold)
+y_train_inputfold = np.asarray(y_train_inputfold)
+
+total = 0
+for i in range(0,2,1):
+    print ("digit", i, "makes", np.around(np.count_nonzero(y_train_inputfold[0] == i)/1270.0*100.0, decimals=1), "% of the 1270 observations")
+
+x_train_inputfold_normalized = np.zeros_like(x_train_inputfold, dtype = float)
+for i in range (foldnumber):
+    x_train_inputfold_normalized[i] = x_train_inputfold[i]/255.0
+
+X_train = x_train_inputfold_normalized
+y_train = y_train_inputfold
+
+train_acc = []
+dev_acc = []
+
+for i in range(foldnumber): # STEP 1
+    
+    # Prepare the folds - STEP 2
+    lis = []
+    ylis = []
+    for k in np.delete(np.arange(foldnumber), i):
+        lis.append(X_train[k])
+        ylis.append(y_train[k])
+        X_train_ = np.concatenate(lis, axis = 0)
+        y_train_ = np.concatenate(ylis, axis = 0)
+    X_train_ = np.asarray(X_train_)
+    y_train_ = np.asarray(y_train_)
+    
+    X_dev_ = X_train[i]
+    y_dev_ = y_train[i]
+    
+    # STEP 3
+    print('Dev fold is', i)
+
+    model = build_model()
+
+    EPOCHS = 500
+
+    history = model.fit(
+      X_train_, y_train_,
+      epochs = EPOCHS, verbose = 0,
+      callbacks = [tfdocs.modeling.EpochDots()])
+    
+    # STEP 4
+    _, _, train_accuracy = model.evaluate(X_train_, y_train_)
+    print('Dev accuracy:', int(train_accuracy*100), '%.')
+    train_acc = np.append(train_acc, train_accuracy)
+
+    _, _, dev_accuracy = model.evaluate(X_dev_, y_dev_)
+    print('Dev accuracy:', int(dev_accuracy*100), '%.')
+    dev_acc = np.append(dev_acc, dev_accuracy)
+
+# The following line contains the path to fonts that are used to plot result in
+# a uniform way.
+
+f = set_style().set_general_style_parameters()
+
+fig = plt.figure(figsize = (12, 5))
+ax = fig.add_subplot(121)
+plt.hist(train_acc, bins = 5, color = 'black', alpha = 0.5)
+ax.set_ylim(0,6)
+ax.set_xlim(0.982,0.991)
+ax.set_xlabel('Train Accuracy', fontproperties = fm.FontProperties(fname = f))
+ax.set_ylabel('Count', fontproperties = fm.FontProperties(fname = f))
+
+ax = fig.add_subplot(122)
+ax.set_ylim(0,6)
+ax.set_xlim(0.982,0.991)
+plt.hist(dev_acc, bins = 5, color = 'black', alpha = 0.5)
+ax.set_xlabel('Dev Accuracy', fontproperties = fm.FontProperties(fname = f))
+
+plt.savefig('./Figure10-9.png', dpi = 300)
+plt.show()
+
+

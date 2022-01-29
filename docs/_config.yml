@@ -5,15 +5,17 @@ copyright: "TOELT LLC (2020-2022)"
 logo: logo_book_online.png
 
 repository:
-  url                       : https://github.com/toelt-llc/ADL-Book-2nd-Ed
-  path_to_book              : docs
-  branch                    : master  # Which branch of the repository should be used when creating links (optional)
+  url: https://github.com/toelt-llc/ADL-Book-2nd-Ed
+  path_to_book: docs
+  branch: master  # Which branch of the repository should be used when creating links (optional)
+    
 
 launch_buttons:
   colab_url: "https://colab.research.google.com"
 
 html:
-    home_page_in_navbar: false
+    home_page_in_navbar: true
+    use_repository_button: true
 
 latex:
   latex_documents:

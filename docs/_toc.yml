@@ -32,15 +32,28 @@ parts:
   chapters:
   - file: Optimizers/Custom_Training_Loop.ipynb
   - file: Optimizers/Optimizers_comparison.ipynb
-- caption: VI - Generative Adversarial Networks
+- caption: VI - Hyper-parameter Tuning
+  chapters:
+  - file: hyper/Hyperparameter_tuning_with_Zalando_dataset.ipynb
+- caption: VII - Convolutional Neural Networks (CNN)
+  chapters:
+  - file: CNN/The_convolution_operator.ipynb
+  - file: CNN/Multiclass_classification_with_convolutional_neural_networks.ipynb
+- caption: VIII - Recurrent Neural Networks
+  chapters:
+  - file: RNN/Counting_with_recurrent_neural_networks.ipynb
+- caption: IX - Metric Analysis
+  chapters:
+  - file: metric/Metric_analysis_with_MNIST_dataset.ipynb
+- caption: IX - Generative Adversarial Networks
   chapters:
   - file: GAN/GAN_with_MNIST.ipynb
-- caption: VII - Autoencoders
+- caption: X - Autoencoders
   chapters:
   - file: Autoencoders/Your_first_autoencoder_with_Keras.ipynb
   - file: Autoencoders/Anomaly_detection_with_autoencoders.ipynb
   - file: Autoencoders/Denoising_autoencoders_with_FFNN.ipynb
   - file: Autoencoders/Denoising_autoencoders_with_CNN.ipynb
-- caption: VIII - Variational Autoencoders
+- caption: XI - Variational Autoencoders
   chapters:
   - file: VAE/Variational_Autoencoders.ipynb

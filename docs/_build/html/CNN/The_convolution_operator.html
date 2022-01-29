@@ -1,0 +1,1067 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Convolution Operator &#8212; Applied Deep Learning - 2nd Edition</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Multiclass Classification with Convolutional Neural Networks" href="Multiclass_classification_with_convolutional_neural_networks.html" />
+    <link rel="prev" title="Hyperparameter Tuning with the Zalando Dataset" href="../hyper/Hyperparameter_tuning_with_Zalando_dataset.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_book_online.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Applied Deep Learning - 2nd Edition</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landingpage.html">
+   Neural Networks and deep learning: theory and applications
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../start/faq.html">
+   Frequently Asked Questions
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  An Introduction to TensorFlow 2.x and 1.x
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_with_TF1.X.html">
+   Computational Graphs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Computational_graphs_exercises.html">
+   Computational Graphs - Exercises
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Eager_execution_with_TF2.X.html">
+   Eager Execution
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Introduction/Overloading_of_operators_in_TF.html">
+   Operator Overloading in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  I - Single Neuron
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Introduction.html">
+   Introduction
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_one_neuron.html">
+   Linear Regression with One Neuron
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Linear_regression_with_numpy.html">
+   Linear Regression with NumPy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../single_neuron/Logistic_regression_with_one_neuron.html">
+   Logistic Regression with One Neuron
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  II - Fully Connected Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Multiclass_classification_with_fully_connected_networks.html">
+   Multiclass Classification with Fully Connected Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../FFNN/Overfitting_example.html">
+   Overfitting Example
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  III - Regularization Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_techniques.html">
+   Regularization Techniques
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Regularization/Regularization_decision_boundaries.html">
+   Regularization Decision Boundaries
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IV - Gradient Descent Optimizer
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../gradientDescent/Gradient_descent_developed_from_scratch.html">
+   Gradient Descent
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  V - Advanced Optimizers
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Custom_Training_Loop.html">
+   Simple example of a custom training loop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Optimizers_comparison.html">
+   Comparison of Optimizers
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VI - Hyper-parameter Tuning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hyper/Hyperparameter_tuning_with_Zalando_dataset.html">
+   Hyperparameter Tuning with the Zalando Dataset
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VII - Convolutional Neural Networks (CNN)
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   The Convolution Operator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Multiclass_classification_with_convolutional_neural_networks.html">
+   Multiclass Classification with Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VIII - Recurrent Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../RNN/Counting_with_recurrent_neural_networks.html">
+   Counting with Recurrent Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Metric Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../metric/Metric_analysis_with_MNIST_dataset.html">
+   Metric Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Generative Adversarial Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../GAN/GAN_with_MNIST.html">
+   GAN Example in TensorFlow
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  X - Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Your_first_autoencoder_with_Keras.html">
+   Your First Autoencoder
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Anomaly_detection_with_autoencoders.html">
+   Anomaly Detection with Autoencoders
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_FFNN.html">
+   Denoising Images with Autoencoders based on Feed-Forward Neural Networks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Autoencoders/Denoising_autoencoders_with_CNN.html">
+   Denoising Images with Autoencoders based on Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  XI - Variational Autoencoders
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../VAE/Variational_Autoencoders.html">
+   Your first variational autoencoder
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/CNN/The_convolution_operator.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/toelt-llc/ADL-Book-2nd-Ed"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/toelt-llc/ADL-Book-2nd-Ed/master?urlpath=tree/docs/CNN/The_convolution_operator.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <a class="colab-button" href="https://colab.research.google.com/github/toelt-llc/ADL-Book-2nd-Ed/blob/master/docs/CNN/The_convolution_operator.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+                title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
+                    src="../_static/images/logo_colab.png"
+                    alt="Interact on Colab">Colab</button></a>
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#notebook-learning-goals">
+   Notebook Learning Goals
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolution-in-neural-networks">
+   Convolution in Neural Networks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#libraries-import">
+   Libraries Import
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples-of-convolution">
+     Examples of Convolution
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#horizontal-edges-detection-kernel">
+       Horizontal Edges Detection Kernel
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#vertical-edges-detection-kernel">
+       Vertical Edges Detection Kernel
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#luminosity-change-in-edges-detection-kernel">
+       Luminosity Change in Edges Detection Kernel
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#blurring-edges-kernel">
+       Blurring Edges Kernel
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-final-example">
+     A Final Example
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercises">
+   Exercises
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="the-convolution-operator">
+<h1>The Convolution Operator<a class="headerlink" href="#the-convolution-operator" title="Permalink to this headline">¶</a></h1>
+<p>Version 1.0</p>
+<p>(C) 2020 - Umberto Michelucci, Michela Sperti</p>
+<p>This notebook is part of the book <em>Applied Deep Learning: a case based approach, <strong>2nd edition</strong></em> from APRESS by <a class="reference external" href="mailto:umberto&#46;michelucci&#37;&#52;&#48;toelt&#46;ai">U<span>&#46;</span> Michelucci</a> and <a class="reference external" href="mailto:michela&#46;sperti&#37;&#52;&#48;toelt&#46;ai">M<span>&#46;</span> Sperti</a>.</p>
+<p>The purpose of this notebook is to show some basic examples to understand what convolution is.</p>
+<div class="section" id="notebook-learning-goals">
+<h2>Notebook Learning Goals<a class="headerlink" href="#notebook-learning-goals" title="Permalink to this headline">¶</a></h2>
+<p>At the end of the notebook you are going to know what convolution is and why it is the base upon which convolutional neural networks (CNNs) are built.</p>
+</div>
+<div class="section" id="convolution-in-neural-networks">
+<h2>Convolution in Neural Networks<a class="headerlink" href="#convolution-in-neural-networks" title="Permalink to this headline">¶</a></h2>
+<p>In the context of neural networks, and in particular CNNs, the convolution operation is performed between tensors. It gets two tensors as input and it produces a tensor as output and it is usually indicated with the operator *.</p>
+<p>Consider two tensors, both with dimensions 3 x 3. The convolution operation is done by applying the following formula:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+a_1 &amp; a_2 &amp; a_3\\
+a_4 &amp; a_5 &amp; a_6\\
+a_7 &amp; a_8 &amp; a_9\\
+\end{pmatrix} *
+\begin{pmatrix}
+k_1 &amp; k_2 &amp; k_3\\
+k_4 &amp; k_5 &amp; k_6\\
+k_7 &amp; k_8 &amp; k_9\\
+\end{pmatrix} =\sum_{i=1}^9 a_ik_i
+\end{split}\]</div>
+<p>In advanced applications, you normally perform convolution betweeen an image with high resolution (that we can call <span class="math notranslate nohighlight">\(A\)</span>, for example of dimensions 1024 x 1024 x 3 in the case of image recognition) and a smaller matrix, called <strong>kernel</strong> (that we can call <span class="math notranslate nohighlight">\(K\)</span>), typically of dimension 3 x 3 or 5 x 5. In this case, <span class="math notranslate nohighlight">\(K\)</span> slides on <span class="math notranslate nohighlight">\(A\)</span>. Let us see why. Given</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A =
+\begin{pmatrix}
+a_1 &amp; a_2 &amp; a_3 &amp; a_4\\
+a_5 &amp; a_6 &amp; a_7 &amp; a_8\\
+a_9 &amp; a_{10} &amp; a_{11} &amp; a_{12}\\
+a_{13} &amp; a_{14} &amp; a_{15} &amp; a_{16}
+\end{pmatrix}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K =
+\begin{pmatrix}
+k_1 &amp; k_2 &amp; k_3\\
+k_4 &amp; k_5 &amp; k_6\\
+k_7 &amp; k_8 &amp; k_9
+\end{pmatrix}
+\end{split}\]</div>
+<p>the convolution is first performed between <span class="math notranslate nohighlight">\(K\)</span> and the elements highlighted in bold, as followed</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+\mathbf{a_1} &amp; \mathbf{a_2} &amp; \mathbf{a_3} &amp; a_4\\
+\mathbf{a_5} &amp; \mathbf{a_6} &amp; \mathbf{a_7} &amp; a_8\\
+\mathbf{a_9} &amp; \mathbf{a_{10}} &amp; \mathbf{a_{11}} &amp; a_{12}\\
+a_{13} &amp; a_{14} &amp; a_{15} &amp; a_{16}
+\end{pmatrix}
+\end{split}\]</div>
+<p>The result can be indicated with <span class="math notranslate nohighlight">\(B_1\)</span>. Then, <span class="math notranslate nohighlight">\(K\)</span> shifts one column right, and convolution is again performed between <span class="math notranslate nohighlight">\(K\)</span> and the elements highlighted in bold, as followed</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+a_1 &amp; \mathbf{a_2} &amp; \mathbf{a_3} &amp; \mathbf{a_4}\\
+a_5 &amp; \mathbf{a_6} &amp; \mathbf{a_7} &amp; \mathbf{a_8}\\
+a_9 &amp; \mathbf{a_{10}} &amp; \mathbf{a_{11}} &amp; \mathbf{a_{12}}\\
+a_{13} &amp; a_{14} &amp; a_{15} &amp; a_{16}
+\end{pmatrix}
+\end{split}\]</div>
+<p>We obtain <span class="math notranslate nohighlight">\(B_2\)</span>. Then, since we cannot shift <span class="math notranslate nohighlight">\(K\)</span> anymore to the right, we shift it one row down and start again from the left side</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+a_1 &amp; a_2 &amp; a_3 &amp; a_4\\
+\mathbf{a_5} &amp; \mathbf{a_6} &amp; \mathbf{a_7} &amp; a_8\\
+\mathbf{a_9} &amp; \mathbf{a_{10}} &amp; \mathbf{a_{11}} &amp; a_{12}\\
+\mathbf{a_{13}} &amp; \mathbf{a_{14}} &amp; \mathbf{a_{15}} &amp; a_{16}
+\end{pmatrix}
+\end{split}\]</div>
+<p>And finally</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{pmatrix}
+a_1 &amp; a_2 &amp; a_3 &amp; a_4\\
+a_5 &amp; \mathbf{a_6} &amp; \mathbf{a_7} &amp; \mathbf{a_8}\\
+a_9 &amp; \mathbf{a_{10}} &amp; \mathbf{a_{11}} &amp; \mathbf{a_{12}}\\
+a_{13} &amp; \mathbf{a_{14}} &amp; \mathbf{a_{15}} &amp; \mathbf{a_{16}}
+\end{pmatrix}
+\end{split}\]</div>
+<p>In the end, the result will be the following matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+B =
+\begin{pmatrix}
+B_1 &amp; B_2\\
+B_3 &amp; B_4
+\end{pmatrix}
+\end{split}\]</div>
+<p>The number of columns and rows by which the kernel is shifted along the matrix is called <strong>stride</strong> (<span class="math notranslate nohighlight">\(s\)</span>).</p>
+</div>
+<div class="section" id="libraries-import">
+<h2>Libraries Import<a class="headerlink" href="#libraries-import" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following function can evaluate the convolution of two matrices for <span class="math notranslate nohighlight">\(s=1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">conv_2d</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="p">(</span><span class="n">kernel</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+    
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">output</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tensordot</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">row</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">row</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="n">column</span><span class="o">+</span><span class="mi">2</span><span class="p">],</span> <span class="n">kernel</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">output</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The previous example can be evaluated with the following code, as an example:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">],[</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">],[</span><span class="mi">13</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">]])</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],[</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">9</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">conv_2d</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">K</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[348. 393.]
+ [528. 573.]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="examples-of-convolution">
+<h3>Examples of Convolution<a class="headerlink" href="#examples-of-convolution" title="Permalink to this headline">¶</a></h3>
+<p>We will now perform some examples of convolution operations.</p>
+<p>Let us first build a chessboard of dimensions 160 x 160, which we will use to test several types of kernels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chessboard</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">8</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="o">*</span><span class="mi">20</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">column</span><span class="o">+</span><span class="mi">8</span><span class="o">*</span><span class="n">row</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">chessboard</span><span class="p">[</span><span class="n">row</span><span class="o">*</span><span class="mi">20</span><span class="p">:</span><span class="n">row</span><span class="o">*</span><span class="mi">20</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="n">column</span><span class="o">*</span><span class="mi">20</span><span class="p">:</span><span class="n">column</span><span class="o">*</span><span class="mi">20</span><span class="o">+</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="p">((</span><span class="n">column</span><span class="o">+</span><span class="mi">8</span><span class="o">*</span><span class="n">row</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">chessboard</span><span class="p">[</span><span class="n">row</span><span class="o">*</span><span class="mi">20</span><span class="p">:</span><span class="n">row</span><span class="o">*</span><span class="mi">20</span><span class="o">+</span><span class="mi">20</span><span class="p">,</span> <span class="n">column</span><span class="o">*</span><span class="mi">20</span><span class="p">:</span><span class="n">column</span><span class="o">*</span><span class="mi">20</span><span class="o">+</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">chessboard</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(160, 160)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">chessboard</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">160</span><span class="p">])</span>
+<span class="c1">#plt.savefig(&#39;./Figure15-5&#39;, dpi = 300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/The_convolution_operator_18_0.png" src="../_images/The_convolution_operator_18_0.png" />
+</div>
+</div>
+<div class="section" id="horizontal-edges-detection-kernel">
+<h4>Horizontal Edges Detection Kernel<a class="headerlink" href="#horizontal-edges-detection-kernel" title="Permalink to this headline">¶</a></h4>
+<p>The following kernel is able to detect horizontal edges inside images. Let us show an example using the above-built chessboard.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K_H =
+\begin{pmatrix}
+1 &amp; 1 &amp; 1\\
+0 &amp; 0 &amp; 0\\
+-1 &amp; -1 &amp; -1
+\end{pmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edgeh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="s1">&#39;1 1 1; 0 0 0; -1 -1 -1&#39;</span><span class="p">)</span>
+<span class="n">outputh</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">chessboard</span><span class="p">,</span> <span class="n">edgeh</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputh</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(158, 158)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The fact that the convolution operation’s result has a smaller shape than the original matrix depends on the matrix and kernel’s dimensions. To get more details, see the correspondent hands-on chapter of the book.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">outputh</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">158</span><span class="p">])</span>
+<span class="c1">#plt.savefig(&#39;./Figure15-6&#39;, dpi = 300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/The_convolution_operator_25_0.png" src="../_images/The_convolution_operator_25_0.png" />
+</div>
+</div>
+<p>You can observe the horizontal variations in the above figure. Additional, this kernel detects if you go from light to dark or vice versa.</p>
+</div>
+<div class="section" id="vertical-edges-detection-kernel">
+<h4>Vertical Edges Detection Kernel<a class="headerlink" href="#vertical-edges-detection-kernel" title="Permalink to this headline">¶</a></h4>
+<p>The following kernel is able to detect vertical edges inside images. Let us show an example using the above-built chessboard.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K_V =
+\begin{pmatrix}
+1 &amp; 0 &amp; -1\\
+1 &amp; 0 &amp; -1\\
+1 &amp; 0 &amp; -1
+\end{pmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edgev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="s1">&#39;1 0 -1; 1 0 -1; 1 0 -1&#39;</span><span class="p">)</span>
+<span class="n">outputv</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">chessboard</span><span class="p">,</span> <span class="n">edgev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputv</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(158, 158)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, the fact that the convolution operation’s result has a smaller shape than the original matrix depends on the matrix and kernel’s dimensions. To get more details, see the correspondent hands-on chapter of the book.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">outputv</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">158</span><span class="p">])</span>
+<span class="c1">#plt.savefig(&#39;./Figure15-7&#39;, dpi = 300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/The_convolution_operator_33_0.png" src="../_images/The_convolution_operator_33_0.png" />
+</div>
+</div>
+<p>You can observe the vertical variations in the above figure. Additional, this kernel detects if you go from light to dark or vice versa.</p>
+</div>
+<div class="section" id="luminosity-change-in-edges-detection-kernel">
+<h4>Luminosity Change in Edges Detection Kernel<a class="headerlink" href="#luminosity-change-in-edges-detection-kernel" title="Permalink to this headline">¶</a></h4>
+<p>The following kernel is able to detect if luminosity changes inside an image. Let us show an example using the above-built chessboard.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K_L =
+\begin{pmatrix}
+-1 &amp; -1 &amp; -1\\
+-1 &amp; 8 &amp; -1\\
+-1 &amp; -1 &amp; -1
+\end{pmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edgel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span> <span class="p">(</span><span class="s1">&#39;-1 -1 -1; -1 8 -1; -1 -1 -1&#39;</span><span class="p">)</span>
+<span class="n">outputl</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">chessboard</span><span class="p">,</span> <span class="n">edgel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">outputl</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(158, 158)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, the fact that the convolution operation’s result has a smaller shape than the original matrix depends on the matrix and kernel’s dimensions. To get more details, see the correspondent hands-on chapter of the book.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">outputl</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">158</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">158</span><span class="p">])</span>
+<span class="c1">#plt.savefig(&#39;./Figure15-8&#39;, dpi = 300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/The_convolution_operator_41_0.png" src="../_images/The_convolution_operator_41_0.png" />
+</div>
+</div>
+<p>You can observe the luminosity variations of each square in the above figure.</p>
+</div>
+<div class="section" id="blurring-edges-kernel">
+<h4>Blurring Edges Kernel<a class="headerlink" href="#blurring-edges-kernel" title="Permalink to this headline">¶</a></h4>
+<p>The following kernel is able to blur the edges of an image. Let us show an example using the above-built chessboard.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+K_B = \frac{1}{9}
+\begin{pmatrix}
+1 &amp; 1 &amp; 1\\
+1 &amp; 1 &amp; 1\\
+1 &amp; 1 &amp; 1
+\end{pmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">edge_blur</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="mf">9.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="s1">&#39;1 1 1; 1 1 1; 1 1 1&#39;</span><span class="p">)</span>
+<span class="n">output_blur</span> <span class="o">=</span> <span class="n">conv_2d</span><span class="p">(</span><span class="n">chessboard</span><span class="p">,</span> <span class="n">edge_blur</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">output_blur</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(158, 158)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Again, the fact that the convolution operation’s result has a smaller shape than the original matrix depends on the matrix and kernel’s dimensions. To get more details, see the correspondent hands-on chapter of the book.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">output_blur</span><span class="p">[</span><span class="mi">90</span><span class="p">:</span><span class="mi">118</span><span class="p">,</span> <span class="mi">40</span><span class="p">:</span><span class="mi">70</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">70</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">chessboard</span><span class="p">[</span><span class="mi">90</span><span class="p">:</span><span class="mi">118</span><span class="p">,</span> <span class="mi">40</span><span class="p">:</span><span class="mi">70</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">70</span><span class="p">])</span>
+<span class="c1">#plt.savefig(&#39;./Figure15-9&#39;, dpi = 300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/The_convolution_operator_49_0.png" src="../_images/The_convolution_operator_49_0.png" />
+</div>
+</div>
+<p>You can observe a zoomed part of the original (on the right) and the blurred (on the left) chessboard in the above figure.</p>
+</div>
+</div>
+<div class="section" id="a-final-example">
+<h3>A Final Example<a class="headerlink" href="#a-final-example" title="Permalink to this headline">¶</a></h3>
+<p>To fully understand how convolution works, we need to make a final example on how edges are practically detected.</p>
+<p>Let us consider a matrix with a sharp vertical transition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="s1">&#39;10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0; 10 10 10 10 0 0 0 0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex_mat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>matrix([[10, 10, 10, 10,  0,  0,  0,  0],
+        [10, 10, 10, 10,  0,  0,  0,  0],
+        [10, 10, 10, 10,  0,  0,  0,  0],
+        [10, 10, 10, 10,  0,  0,  0,  0],
+        [10, 10, 10, 10,  0,  0,  0,  0],
+        [10, 10, 10, 10,  0,  0,  0,  0],
+        [10, 10, 10, 10,  0,  0,  0,  0],
+        [10, 10, 10, 10,  0,  0,  0,  0]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, we have built the matrix so that its left part is all made by 10s, while its right part is all made by 0s.</p>
+<p>Now we perform a convolution with the vertical edges detector kernel.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex_out</span> <span class="o">=</span> <span class="n">conv_2d</span> <span class="p">(</span><span class="n">ex_mat</span><span class="p">,</span> <span class="n">edgev</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ex_out</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.,  0., 30., 30.,  0.,  0.],
+       [ 0.,  0., 30., 30.,  0.,  0.],
+       [ 0.,  0., 30., 30.,  0.,  0.],
+       [ 0.,  0., 30., 30.,  0.,  0.],
+       [ 0.,  0., 30., 30.,  0.,  0.],
+       [ 0.,  0., 30., 30.,  0.,  0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ex_mat</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ex_out</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys&#39;</span><span class="p">,</span> <span class="n">interpolation</span> <span class="o">=</span> <span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
+
+<span class="c1"># The following lines are needed to format the plots.</span>
+<span class="c1"># You can safely ignore them.</span>
+<span class="c1"># major ticks</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># labels for major ticks</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># minor ticks</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># gridlines based on minor ticks</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span> <span class="o">=</span> <span class="s1">&#39;minor&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># major ticks</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># labels for major ticks</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># minor ticks</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">minor</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># gridlines based on minor ticks</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span> <span class="o">=</span> <span class="s1">&#39;minor&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">#plt.savefig(&#39;./Figure15-10&#39;, dpi = 300)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/The_convolution_operator_59_0.png" src="../_images/The_convolution_operator_59_0.png" />
+</div>
+</div>
+<p>The convolution with the vertical edges detector kernel has clearly detected the sharp transition in the original matrix marking with a vertical black line where the transition from black to white happens, as you can notice from the above figure. This is possible thanks to the form of the kernel that, when multiplied by the original matrix, highlights the edge (resulting in a big number after the convolution) and ignores the parts where no change in colour happens (resulting in zero value).</p>
+</div>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>[<em>Easy Difficulty</em>] Try to apply the different convolution operators like the ones we saw together in this notebook, but to different images, like the handwritten digits of the MNIST database (<a class="reference external" href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a>). To download the dataset from TensorFlow use the following lines of code:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span> 
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./CNN"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="../hyper/Hyperparameter_tuning_with_Zalando_dataset.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">Hyperparameter Tuning with the Zalando Dataset</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="Multiclass_classification_with_convolutional_neural_networks.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Multiclass Classification with Convolutional Neural Networks</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Umberto Michelucci with code editing by Michela Sperti<br/>
+        
+            &copy; Copyright TOELT LLC (2020-2022).<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

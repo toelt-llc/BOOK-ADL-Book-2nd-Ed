@@ -88,7 +88,14 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <p class="caption" role="heading">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../landingpage.html">
+   Neural Networks and deep learning: theory and applications
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
  <span class="caption-text">
   Get started
  </span>
@@ -107,7 +114,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  I - An Introduction to TensorFlow 2.x and 1.x
+  An Introduction to TensorFlow 2.x and 1.x
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -134,7 +141,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  II - Single Neuron (ADL Chapter 2)
+  I - Single Neuron
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -161,7 +168,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  III - Fully Connected Networks (ADL Chapter 3)
+  II - Fully Connected Networks
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -178,7 +185,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Regularization Techniques
+  III - Regularization Techniques
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -195,7 +202,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Gradient Descent Optimizer
+  IV - Gradient Descent Optimizer
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -207,7 +214,77 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Generative Adversarial Networks
+  V - Advanced Optimizers
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Custom_Training_Loop.html">
+   Simple example of a custom training loop
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Optimizers/Optimizers_comparison.html">
+   Comparison of Optimizers
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VI - Hyper-parameter Tuning
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../hyper/Hyperparameter_tuning_with_Zalando_dataset.html">
+   Hyperparameter Tuning with the Zalando Dataset
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VII - Convolutional Neural Networks (CNN)
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../CNN/The_convolution_operator.html">
+   The Convolution Operator
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../CNN/Multiclass_classification_with_convolutional_neural_networks.html">
+   Multiclass Classification with Convolutional Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  VIII - Recurrent Neural Networks
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../RNN/Counting_with_recurrent_neural_networks.html">
+   Counting with Recurrent Neural Networks
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Metric Analysis
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../metric/Metric_analysis_with_MNIST_dataset.html">
+   Metric Analysis
+  </a>
+ </li>
+</ul>
+<p class="caption" role="heading">
+ <span class="caption-text">
+  IX - Generative Adversarial Networks
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -219,7 +296,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Autoencoders
+  X - Autoencoders
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -246,7 +323,7 @@
 </ul>
 <p class="caption" role="heading">
  <span class="caption-text">
-  Variational Autoencoders
+  XI - Variational Autoencoders
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -306,6 +383,19 @@
 </div>
 
             <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/toelt-llc/ADL-Book-2nd-Ed"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
 
             <!-- Full screen (wrap in <a> to have style consistency -->
 

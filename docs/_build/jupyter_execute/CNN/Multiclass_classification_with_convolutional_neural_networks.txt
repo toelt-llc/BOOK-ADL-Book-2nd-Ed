@@ -1,0 +1,66 @@
+# general libraries
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# tensorflow libraries
+from tensorflow.keras.datasets import fashion_mnist
+import tensorflow as tf
+import tensorflow_docs as tfdocs
+import tensorflow_docs.modeling
+from tensorflow.keras import layers, models
+
+((trainX, trainY), (testX, testY)) = fashion_mnist.load_data()
+
+print('Dimensions of the training dataset: ', trainX.shape)
+print('Dimensions of the test dataset: ', testX.shape)
+print('Dimensions of the training labels: ', trainY.shape)
+print('Dimensions of the test labels: ', testY.shape)
+
+labels_train = np.zeros((60000, 10))
+labels_train[np.arange(60000), trainY] = 1
+
+data_train = trainX.reshape(60000, 28, 28, 1)
+
+labels_test = np.zeros((10000, 10))
+labels_test[np.arange(10000), testY] = 1
+
+data_test = testX.reshape(10000, 28, 28, 1)
+
+print('Dimensions of the training dataset: ', data_train.shape)
+print('Dimensions of the test dataset: ', data_test.shape)
+print('Dimensions of the training labels: ', labels_train.shape)
+print('Dimensions of the test labels: ', labels_test.shape)
+
+data_train_norm = np.array(data_train/255.0)
+data_test_norm = np.array(data_test/255.0)
+
+def build_model():
+  # create model
+  model = models.Sequential()
+  model.add(layers.Conv2D(6, (5, 5), strides = (1, 1), activation = 'relu', input_shape = (28, 28, 1)))
+  model.add(layers.MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
+  model.add(layers.Conv2D(16, (5, 5), strides = (1, 1), activation = 'relu'))
+  model.add(layers.MaxPooling2D(pool_size = (2, 2), strides = (2, 2)))
+  model.add(layers.Flatten())
+  model.add(layers.Dense(128, activation = 'relu'))
+  model.add(layers.Dense(10, activation = 'softmax'))
+  # compile model
+  model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['categorical_accuracy'])
+  return model
+
+model = build_model()
+
+model.summary()
+
+EPOCHS = 10
+
+history = model.fit(
+  data_train_norm, labels_train,
+  epochs = EPOCHS, verbose = 1,
+  batch_size = 100)
+
+test_loss, test_accuracy = model.evaluate(data_test_norm, labels_test, verbose = 0)
+print('The accuracy on the test set is equal to: ', int(test_accuracy*100), '%.')
+
+

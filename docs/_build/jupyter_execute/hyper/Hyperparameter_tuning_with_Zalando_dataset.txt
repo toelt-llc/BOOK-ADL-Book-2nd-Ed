@@ -1,0 +1,210 @@
+# This command install code from the tensorflow docs repository.
+# We need to use tensorflow_docs.modeling function when training our model.
+# This function will generate a report on the network's perfomances
+# step by step during the training phase (see Training Phase section of the
+# notebook). 
+
+# You can safely ignore this cell if you don't understand what it does.
+
+!pip install git+https://github.com/tensorflow/docs
+
+# general libraries
+import pandas as pd
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+from random import *
+import time
+
+# tensorflow libraries
+from tensorflow.keras.datasets import fashion_mnist
+import tensorflow as tf
+from tensorflow import keras
+from tensorflow.keras import layers
+import tensorflow_docs as tfdocs
+import tensorflow_docs.modeling
+
+# Referring to the following cell, if you want to re-clone a repository
+# inside the google colab instance, you need to delete it first. 
+# You can delete the repositories contained in this instance executing 
+# the following two lines of code (deleting the # comment symbol).
+
+# !rm -rf ADL-Book-2nd-Ed
+
+# This command actually clone the repository of the book in the google colab
+# instance. In this way this notebook will have access to the modules
+# we have written for this book.
+
+# Please note that in case you have already run this cell, and you run it again
+# you may get the error message:
+#
+# fatal: destination path 'ADL-Book-2nd-Ed' already exists and is not an empty directory.
+# 
+# In this case you can safely ignore the error message.
+
+!git clone https://github.com/toelt-llc/ADL-Book-2nd-Ed.git
+
+# This cell imports some custom written functions that we have created to 
+# make the plotting easier. You don't need to undertsand the details and 
+# you can simply ignore this cell.
+# Simply run it with CMD+Enter (on Mac) or CTRL+Enter (Windows or Ubuntu) to
+# import the necessary functions.
+
+import sys
+sys.path.append('ADL-Book-2nd-Ed/modules/')
+
+from style_setting import set_style
+
+((trainX, trainY), (testX, testY)) = fashion_mnist.load_data()
+
+def get_label_name(idx):
+  """Returns the corresponding label's name, given its numerical value."""
+  
+  if (idx == 0):
+      return '(0) T-shirt/top'
+  elif (idx == 1):
+      return '(1) Trouser'
+  elif (idx == 2):
+      return '(2) Pullover'
+  elif (idx == 3):
+      return '(3) Dress'
+  elif (idx == 4):
+      return '(4) Coat'
+  elif (idx == 5):
+      return '(5) Sandal'
+  elif (idx == 6):
+      return '(6) Shirt'
+  elif (idx == 7):
+      return '(7) Sneaker'
+  elif (idx == 8):
+      return '(8) Bag'
+  elif (idx == 9):
+      return '(9) Ankle boot'
+
+def get_random_element_with_label (data, lbls, lbl):
+  """Returns one numpy array (one column) with an example of a choosen label."""
+  
+  tmp = lbls == lbl
+  subset = data[tmp.flatten(), :]
+  return subset[randint(1, subset.shape[1]), :]
+
+print('Dimensions of the training dataset: ', trainX.shape)
+print('Dimensions of the test dataset: ', testX.shape)
+print('Dimensions of the training labels: ', trainY.shape)
+print('Dimensions of the test labels: ', testY.shape)
+
+labels_train = np.zeros((60000, 10))
+labels_train[np.arange(60000), trainY] = 1
+
+data_train = trainX.reshape(60000, 784)
+
+labels_test = np.zeros((10000, 10))
+labels_test[np.arange(10000), testY] = 1
+
+data_test = testX.reshape(10000, 784)
+
+print('Dimensions of the training dataset: ', data_train.shape)
+print('Dimensions of the test dataset: ', data_test.shape)
+print('Dimensions of the training labels: ', labels_train.shape)
+print('Dimensions of the test labels: ', labels_test.shape)
+
+data_train_norm = np.array(data_train/255.0)
+data_test_norm = np.array(data_test/255.0)
+
+idx = 5
+plt.imshow(data_train_norm[idx, :].reshape(28, 28), cmap = matplotlib.cm.binary, interpolation = 'nearest')
+plt.axis("on")
+plt.title(get_label_name(trainY[idx]))
+plt.show()
+
+# The following code create a numpy array where in column 0 you will find 
+# an example of label 0, in column 1 of label 1 and so on.
+labels_overview = np.empty([784, 10])
+for i in range (0, 10):
+    col = get_random_element_with_label(data_train_norm, trainY, i)
+    labels_overview[:,i] = col
+
+f = plt.figure(figsize = (15, 15))
+count = 1
+for i in range(0, 10):
+    plt.subplot(5, 2, count)
+    count = count + 1
+    plt.subplots_adjust(hspace = 0.5)
+    plt.title(get_label_name(i))
+    some_digit_image = labels_overview[:, i].reshape(28, 28)
+    plt.imshow(some_digit_image, cmap = matplotlib.cm.binary, interpolation = "nearest")
+    plt.axis("off")
+    pass
+
+def build_model(number_neurons, learning_rate):
+  # create model
+	model = keras.Sequential()
+	model.add(layers.Dense(number_neurons, input_dim = 784, activation = 'relu')) # add first hidden layer and set input dimensions
+	model.add(layers.Dense(10, activation = 'softmax')) # add output layer
+	# compile model
+	model.compile(loss = 'categorical_crossentropy', optimizer = tf.keras.optimizers.SGD(learning_rate = learning_rate), metrics = ['categorical_accuracy'])
+	return model
+
+def train_model(number_neurons, learning_rate, number_epochs, mb_size):
+  # build model
+  model = build_model(number_neurons, learning_rate)
+  # train model
+  history = model.fit(
+    data_train_norm, labels_train,
+    epochs = number_epochs, verbose = 0,
+    batch_size = mb_size,
+    callbacks = [tfdocs.modeling.EpochDots()])
+  # test model
+  train_loss, train_accuracy = model.evaluate(data_train_norm, labels_train, verbose = 0)
+  test_loss, test_accuracy = model.evaluate(data_test_norm, labels_test, verbose = 0)
+  return train_accuracy, test_accuracy
+
+train_accuracy, test_accuracy = train_model(15, 0.001, 100, 50)
+
+print(train_accuracy)
+print(test_accuracy)
+
+nn = [1, 5, 10, 15, 25, 30, 50, 150, 300, 1000, 3000]
+accuracy_list = []
+for nn_ in nn:
+    train_accuracy, test_accuracy = train_model(nn_, 0.001, 100, 50)
+    print()
+    print('Number of neurons:', nn_, 'Training accuracy:', train_accuracy, 'Test accuracy', test_accuracy)
+    accuracy_list.append(test_accuracy)
+
+
+# The following line contains the path to fonts that are used to plot result in
+# a uniform way.
+
+f = set_style().set_general_style_parameters()
+
+fig = plt.figure()
+ax = fig.add_subplot(111)
+
+ax.plot(nn, accuracy_list, color = 'black')
+
+plt.ylabel('Accuracy on the test dataset', fontproperties = fm.FontProperties(fname = f))
+plt.xlabel('Number of neurons in the hidden layer', fontproperties = fm.FontProperties(fname = f))
+
+plt.ylim(0,1)
+
+plt.axis(True)
+plt.xscale('log')
+
+#fig.savefig('Figure8-26.png', dpi = 300, bbox_inches = 'tight')
+plt.show()
+
+neurons_ = np.random.randint(low = 35, high = 60.0, size = (10))
+r = - np.random.random([10])*3.0 - 1
+learning_ = 10**r
+mb_size_ = np.random.randint(low = 20, high = 80, size = 10)
+epochs_ = np.random.randint(low = 40, high = 100, size = (10))
+
+for i in range(len(neurons_)):
+    train_accuracy, test_accuracy = train_model(neurons_[i], learning_[i], epochs_[i], mb_size_[i])
+    print()
+    print('Epochs:', epochs_[i], 'Number of neurons:', neurons_[i], 'Learning rate:', learning_[i], 'Minibatch size', mb_size_[i],
+          'Training accuracy:', train_accuracy, 'Test Accuracy', test_accuracy)
+
+
