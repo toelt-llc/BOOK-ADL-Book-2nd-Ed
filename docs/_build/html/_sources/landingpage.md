@@ -7,6 +7,10 @@ The book will be published in 2022 by APRESS and will be available as a printed 
 and in an online form (PDF without any limitations) from the APRESS website. As
 soon as available the link will be posted here.
 
+## About the Book
+
+You can find more information on the new book [at this page](aboutthebook.md).
+
 ## Why a 2nd Edition
 
 The first verision of Applied Deep Learning (ADL) has been published in 2018. At the time TensorFlow was still in its first version. Today (2022 as I write this) TensorFlow is in its 2.7 version and much has changed. Keras works differently, sessions have disappearead (you know what sessions are if you have been around when TensorFlow version was still 1.X) and developing neural networks have become much easier.
