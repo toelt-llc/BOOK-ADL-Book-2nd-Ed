@@ -353,6 +353,8 @@ plt.show()
 
 
 # The algorithm does not really converges and simply oscillates around the minimum (indicated by the black dot).
+# 
+# Below you can see another example with a larger value of $\alpha = 0.3$.
 
 # In[10]:
 
@@ -406,6 +408,8 @@ plt.show()
 
 
 # # Gradients 
+# 
+# Now we can try to update the weights in a random manner (meaning not in the same order). This small change in how we update the weights disrupt completely the output of what happens in parameter space. You can see below what happens: **Fractals appears**!!
 
 # In[41]:
 
@@ -452,6 +456,8 @@ plt.show()
 
 w1Path, w2Path = generate_path_2(0,0,0.65,10**7)
 
+
+# You can see below in the zommed out region that this is a fractal. The zoom looks exactly how the entire image! Note that this is not the definition of a fractal but is an amazing property of such structures!
 
 # In[47]:
 
@@ -504,6 +510,8 @@ plt.tight_layout()
 fig.savefig('fractl2.png', dpi = 300)
 plt.show()
 
+
+# By changing the parameters you can see the differences in output and how the resulting structures change.
 
 # In[59]:
 
@@ -676,6 +684,8 @@ fig.savefig('fractals4.png', dpi = 300)
 plt.show()
 
 
+# By reducing the parameter the fractal nature of the structure disappears suddenly and a cloud of points just appear as you can see in the images above and below.
+
 # In[15]:
 
 
@@ -768,6 +778,8 @@ w1Path, w2Path = generate_path_2(0,0,0.1,N)
 plt.plot(w1Path)
 
 
+# ## Evolution of parameters vs. Iteration Number
+
 # In[18]:
 
 
@@ -779,12 +791,6 @@ plt.ylabel('$w_1$', fontsize = 16)
 w1Path, w2Path = generate_path_2(0,0,0.001,N)
 plt.axhline(2.0, ls = '--', lw = 3, color = 'black')
 plt.plot(w1Path)
-
-
-# In[63]:
-
-
-N
 
 
 # In[70]:

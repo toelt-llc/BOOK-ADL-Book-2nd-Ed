@@ -490,6 +490,13 @@
   <a class="reference internal nav-link" href="#gradients">
    Gradients
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#evolution-of-parameters-vs-iteration-number">
+     Evolution of parameters vs. Iteration Number
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -863,6 +870,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 <p>The algorithm does not really converges and simply oscillates around the minimum (indicated by the black dot).</p>
+<p>Below you can see another example with a larger value of <span class="math notranslate nohighlight">\(\alpha = 0.3\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="mf">0.7</span>
@@ -923,6 +931,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="gradients">
 <h1>Gradients<a class="headerlink" href="#gradients" title="Permalink to this headline">¶</a></h1>
+<p>Now we can try to update the weights in a random manner (meaning not in the same order). This small change in how we update the weights disrupt completely the output of what happens in parameter space. You can see below what happens: <strong>Fractals appears</strong>!!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
@@ -977,6 +986,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 </div>
 </div>
+<p>You can see below in the zommed out region that this is a fractal. The zoom looks exactly how the entire image! Note that this is not the definition of a fractal but is an amazing property of such structures!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="mf">0.7</span>
@@ -1032,9 +1042,10 @@ $<span class="math notranslate nohighlight">\(
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No handles with labels found to put in legend.
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_22_1.png" src="../_images/Fractal_nature_of_GD_22_1.png" />
+<img alt="../_images/Fractal_nature_of_GD_23_1.png" src="../_images/Fractal_nature_of_GD_23_1.png" />
 </div>
 </div>
+<p>By changing the parameters you can see the differences in output and how the resulting structures change.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span>
@@ -1126,7 +1137,7 @@ No handles with labels found to put in legend.
 No handles with labels found to put in legend.
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_23_1.png" src="../_images/Fractal_nature_of_GD_23_1.png" />
+<img alt="../_images/Fractal_nature_of_GD_25_1.png" src="../_images/Fractal_nature_of_GD_25_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1221,9 +1232,10 @@ No handles with labels found to put in legend.
 No handles with labels found to put in legend.
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_24_1.png" src="../_images/Fractal_nature_of_GD_24_1.png" />
+<img alt="../_images/Fractal_nature_of_GD_26_1.png" src="../_images/Fractal_nature_of_GD_26_1.png" />
 </div>
 </div>
+<p>By reducing the parameter the fractal nature of the structure disappears suddenly and a cloud of points just appear as you can see in the images above and below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">5</span>
@@ -1308,7 +1320,7 @@ No handles with labels found to put in legend.
 No handles with labels found to put in legend.
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_25_1.png" src="../_images/Fractal_nature_of_GD_25_1.png" />
+<img alt="../_images/Fractal_nature_of_GD_28_1.png" src="../_images/Fractal_nature_of_GD_28_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1322,7 +1334,7 @@ No handles with labels found to put in legend.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7faa968a7650&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_26_1.png" src="../_images/Fractal_nature_of_GD_26_1.png" />
+<img alt="../_images/Fractal_nature_of_GD_29_1.png" src="../_images/Fractal_nature_of_GD_29_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1336,9 +1348,11 @@ No handles with labels found to put in legend.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7faa96837890&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_27_1.png" src="../_images/Fractal_nature_of_GD_27_1.png" />
+<img alt="../_images/Fractal_nature_of_GD_30_1.png" src="../_images/Fractal_nature_of_GD_30_1.png" />
 </div>
 </div>
+<div class="section" id="evolution-of-parameters-vs-iteration-number">
+<h2>Evolution of parameters vs. Iteration Number<a class="headerlink" href="#evolution-of-parameters-vs-iteration-number" title="Permalink to this headline">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
@@ -1356,19 +1370,7 @@ No handles with labels found to put in legend.
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7faa968ff6d0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_28_1.png" src="../_images/Fractal_nature_of_GD_28_1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1000000
-</pre></div>
-</div>
+<img alt="../_images/Fractal_nature_of_GD_32_1.png" src="../_images/Fractal_nature_of_GD_32_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1435,7 +1437,8 @@ No handles with labels found to put in legend.
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No handles with labels found to put in legend.
 </pre></div>
 </div>
-<img alt="../_images/Fractal_nature_of_GD_31_1.png" src="../_images/Fractal_nature_of_GD_31_1.png" />
+<img alt="../_images/Fractal_nature_of_GD_34_1.png" src="../_images/Fractal_nature_of_GD_34_1.png" />
+</div>
 </div>
 </div>
 </div>
